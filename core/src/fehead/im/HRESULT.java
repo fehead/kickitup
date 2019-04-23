@@ -1,0 +1,6 @@
+package fehead.im;
+
+public enum HRESULT {
+	DD_OK, DDERR_SURFACELOST, DDERR_WASSTILLDRAWING, DD_ERROR
+
+}
