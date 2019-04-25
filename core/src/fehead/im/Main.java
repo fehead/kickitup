@@ -260,7 +260,7 @@ public class Main {
 	static private LPDIRECTSOUNDBUFFER				g_dsBeat		= null;
 	static private LPDIRECTSOUNDBUFFER				g_dsSelectSong	= null;
 
-	static private SONG []				CSONG = new SONG[512];
+	static private Song []				CSONG = new Song[512];
 
 	static private boolean	SongFlag;
 	static private boolean	IntroFlag;

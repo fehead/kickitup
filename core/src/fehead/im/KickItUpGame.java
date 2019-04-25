@@ -1,5 +1,9 @@
 package fehead.im;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -7,7 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import lombok.extern.java.Log;
+
+@Log
 public class KickItUpGame extends ApplicationAdapter {
+	
+	List<Song>	songList = new ArrayList<Song>();
+	
 	SpriteBatch batch;
 	Texture img;
 	Texture background;
@@ -63,15 +73,14 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture	ResultBack		= null;
 	private Texture	StageCount		= null;
 	
-	private void displayMessage(final int x, final int y, final String msg) {
+	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
 		final int FONT_HEIGHT	= 16;
 
-		int i = 0;
-		for(char aChar : msg.toCharArray()) {		
-			final char aUpperChar = Character.toUpperCase(aChar);
-			batch.draw(SmallFont, x+i*FONT_WIDTH, y, FONT_WIDTH * (aUpperChar-' '), 0, FONT_WIDTH, FONT_HEIGHT);
-			++i;
+		String	upppercaseMsg = msg.toUpperCase();
+		for(int i = 0 ; i < upppercaseMsg.length() ; ++i) { 
+			int fontIndex = upppercaseMsg.charAt(i) -' ';
+			batch.draw(SmallFont, x+i*FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
 		}
 	}
 	
@@ -132,6 +141,15 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	// C void Read()
 	private void readSongs() {
+		final String songPath="assets/song";
+		File songDir = new File(songPath);
+		for(File f : songDir.listFiles()) {
+			if(f.isDirectory()) {
+				Song song = new Song();
+				song.readStepFiles(f.getAbsolutePath());
+				songList.add(song);
+			}
+		}
 	}
 
 	@Override
@@ -165,6 +183,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		// img.dispose();
 	}
 }

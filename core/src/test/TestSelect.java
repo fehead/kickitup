@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,6 +10,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import lombok.extern.java.Log;
+
+@Log
 public class TestSelect {
 	static final private	String path="assets/song";
 	static final private	String testSong = "Test Song";
@@ -52,8 +55,18 @@ public class TestSelect {
 		System.out.println(songDir.getAbsolutePath());
 		assertTrue(songDir.isDirectory());
 		for(File f : songDir.listFiles()) {
-			if(f.isDirectory()) {				
+			if(f.isDirectory()) {
+				readStepFiles(f);
 			}
+		}
+	}
+	
+	private void readStepFiles(File path) {
+		for(String sf : stepFiles) {
+			File stepFile = new File(path, sf);
+			if (stepFile.exists()) {
+				log.info(stepFile.getName());
+			}		       
 		}
 	}
 }
