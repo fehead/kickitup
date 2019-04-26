@@ -16,7 +16,7 @@ public class StepNew {
 	public final int	MAX_STEPS = 2048;
 
 	String	name;
-	float	bpm;
+	float	bpm;		// 1Hz = 60BPM, 60BPM = 1분
 	float	bpm2;
 	float	bpm3;
 	int		madi;
@@ -37,38 +37,40 @@ public class StepNew {
 			String line;
 			while((line = br.readLine()) != null) {
 				line = line.trim();
-				if(line.charAt(0) == '#') {
-					String[] prop = line.split("[#:;]");
+				if(line.charAt(0) != '#')
+					continue;
 
-					String key = prop[1].toUpperCase();
-					if(key.equals("TITLE")) {
-						name = prop[2];
-					} else if(key.equals("TICKCOUNT")) {
-						tick = Integer.parseInt(prop[2]);
-					} else if(key.equals("BUNKI")) {
-						bunki = Integer.parseInt(prop[2]);
-					} else if(key.equals("BUNKI2")) {
-						bunki2 = Integer.parseInt(prop[2]);
-					} else if(key.equals("BPM")) {
-						bpm = Float.parseFloat(prop[2]);
-					} else if(key.equals("BPM2")) {
-						bpm2 = Float.parseFloat(prop[2]);
-					} else if(key.equals("BPM3")) {
-						bpm3 = Float.parseFloat(prop[2]);
-					} else if(key.equals("DIFFCULTY")) {
-						_dummy = Integer.parseInt(prop[2]);
-					} else if(key.equals("MADI")) {
-						madi = Integer.parseInt(prop[2]);
-					} else if(key.equals("STARTTIME")) {
-						start = Integer.parseInt(prop[2]);
-					} else if(key.equals("STARTTIME2")) {
-						start2 = Integer.parseInt(prop[2]);
-					} else if(key.equals("STARTTIME3")) {
-						start3 = Integer.parseInt(prop[2]);
-					} else if(key.equals("STEP")) {
-						while((line = br.readLine()) != null) {
-							tempStep.add(line.trim());
-						}
+				String[] prop = line.split("[#:;]");
+
+				final String key = prop[1].toUpperCase();
+				final String value = prop[2];
+				if(key.equals("TITLE")) {
+					name = value;
+				} else if(key.equals("TICKCOUNT")) {
+					tick = Integer.parseInt(value);
+				} else if(key.equals("BUNKI")) {
+					bunki = Integer.parseInt(value);
+				} else if(key.equals("BUNKI2")) {
+					bunki2 = Integer.parseInt(value);
+				} else if(key.equals("BPM")) {
+					bpm = Float.parseFloat(value);
+				} else if(key.equals("BPM2")) {
+					bpm2 = Float.parseFloat(value);
+				} else if(key.equals("BPM3")) {
+					bpm3 = Float.parseFloat(value);
+				} else if(key.equals("DIFFCULTY")) {
+					_dummy = Integer.parseInt(value);
+				} else if(key.equals("MADI")) {
+					madi = Integer.parseInt(value);
+				} else if(key.equals("STARTTIME")) {
+					start = Integer.parseInt(value);
+				} else if(key.equals("STARTTIME2")) {
+					start2 = Integer.parseInt(value);
+				} else if(key.equals("STARTTIME3")) {
+					start3 = Integer.parseInt(value);
+				} else if(key.equals("STEP")) {
+					while((line = br.readLine()) != null) {
+						tempStep.add(line.trim());
 					}
 				}
 			}
@@ -77,10 +79,10 @@ public class StepNew {
 			return false;
 		}
 
-		double bpmcount = 60.0 / bpm * 100;
+		final double bpmcount = 60.0 / bpm * 100;
 		double tempStart = start;
 		if(tick == 2 || tick == 4) {
-			while(tempStart >= bpmcount) {
+			while(bpmcount <= tempStart) {
 				tempStart -= bpmcount;
 				IntStream.range(0, tick)
 					.forEach((i) -> step.add("0000000000000"));
