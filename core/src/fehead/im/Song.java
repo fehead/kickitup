@@ -1,7 +1,6 @@
 package fehead.im;
 
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
