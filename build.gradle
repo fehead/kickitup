@@ -1,5 +1,5 @@
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -10,7 +10,7 @@ buildscript {
         google()
     }
     dependencies {
-        
+
 
     }
 }
@@ -49,7 +49,6 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
-        
     }
 }
 
@@ -61,7 +60,9 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        
+        testCompile "junit:junit:4.12"
+        testCompile "org.assertj:assertj-core:3.12.2"
+        compileOnly "org.projectlombok:lombok:1.18.6"
     }
 }
 
