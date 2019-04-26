@@ -34,7 +34,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture	JudgeFont		= null;
 	private Texture	NumberFont		= null;
 	private Texture	ComboFont		= null;
-	private Texture NoDISC			= null;
+	public static Texture NoDISC			= null;
 	private Texture	ShiftLeft		= null;
 	private Texture	ShiftRight		= null;
 	private Texture	GaugeWaku		= null;
