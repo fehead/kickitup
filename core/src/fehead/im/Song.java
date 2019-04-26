@@ -38,7 +38,9 @@ public class Song {
 	private	int	Crazy_Start2;
 	private	int	Crazy_Start3;
 	private	int	Crazy_Tick;
-	private	List<String>	Data_Crazy;
+	private	List<String>	Data_Crazy;		// Crazy single step
+
+	private	List<String>	Data_Crazy1;	// Crazy couple step
 
 	private	boolean	haveEasy;
 	private	int	Easy_Diff;
@@ -46,10 +48,10 @@ public class Song {
 	private	int	Easy_Start2;
 	private	int	Easy_Start3;
 	private	int	Easy_Tick;
-	private	List<String>	Data_Easy;
+	private	List<String>	Data_Easy;		// Easy single step
 
 	private	boolean	haveCouple = true;
-	private	List<String>	Data_Easy1;
+	private	List<String>	Data_Easy1;		// Easy couple step
 
 	public void readStepFiles(File path) {
 		for(File f : path.listFiles()) {
@@ -81,6 +83,41 @@ public class Song {
 
 		haveCrazy = true;
 		Data_Crazy = step.step;
+
+		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
+		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
+		PlayWavPath  = new File(stepFile.getParentFile(), "song.wav");
+		PlayMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
+		PlayMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
+		IntroWavPath = new File(stepFile.getParentFile(), "intro.wav");
+		IntroMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
+
+		File disc = new File(stepFile.getParentFile(), "disc.png");
+		if(disc.exists())
+			DiskImage = new Texture(disc.getAbsolutePath());
+		else
+			DiskImage = KickItUpGame.NoDISC;
+	}
+
+	private void readCrazy2KSF(File stepFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stepFile);
+
+		bpm = step.bpm;
+		bpm2 = step.bpm2;
+		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
+
+		Crazy_Diff = step._dummy;
+		Crazy_Start = step.start;
+		Crazy_Start2 = step.start2;
+		Crazy_Start3 = step.start3;
+		Crazy_Tick = step.tick;
+
+		haveCouple = true;
+		Data_Crazy1 = step.step;
 
 		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
 		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
@@ -131,7 +168,6 @@ public class Song {
 		else
 			DiskImage = KickItUpGame.NoDISC;
 	}
-
 
 	private void readEasy2KSF(File stepFile) {
 		StepNew step = new StepNew();
