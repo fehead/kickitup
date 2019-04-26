@@ -250,5 +250,39 @@ public class Song {
 			DiskImage = KickItUpGame.NoDISC;
 	}
 
+	private void readHard2KSF(File stepFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stepFile);
+
+		bpm = step.bpm;
+		bpm2 = step.bpm2;
+		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
+
+		Hard_Diff = step._dummy;
+		Hard_Start = step.start;
+		Hard_Start2 = step.start2;
+		Hard_Start3 = step.start3;
+		Hard_Tick = step.tick;
+
+		haveCouple = true;
+		Data_Hard1 = step.step;
+
+		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
+		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
+		PlayWavPath  = new File(stepFile.getParentFile(), "song.wav");
+		PlayMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
+		PlayMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
+		IntroWavPath = new File(stepFile.getParentFile(), "intro.wav");
+		IntroMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
+
+		File disc = new File(stepFile.getParentFile(), "disc.png");
+		if(disc.exists())
+			DiskImage = new Texture(disc.getAbsolutePath());
+		else
+			DiskImage = KickItUpGame.NoDISC;
+	}
 
 }
