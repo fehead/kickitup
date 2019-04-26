@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -73,6 +74,15 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture	ResultBack		= null;
 	private Texture	StageCount		= null;
 
+	private	Sound	g_dsOpening;
+	private	Sound	g_dsDead;
+	private	Sound	g_dsMode;
+	private	Sound	g_dsCancel;
+	private	Sound	g_dsMove;
+	private	Sound	g_dsBeat;
+	private	Sound	g_dsSelectSong;
+
+
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
 		final int FONT_HEIGHT	= 16;
@@ -137,6 +147,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 		kloadImage();
 		readSongs();
+		waveSetLoading();
 	}
 
 	// C void Read()
@@ -150,6 +161,26 @@ public class KickItUpGame extends ApplicationAdapter {
 				songList.add(song);
 			}
 		}
+	}
+
+	private void waveSetLoading() {
+		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/Opening.wav"));
+		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/Dead.wav"));
+		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/Mode.wav"));
+		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/Cancel.wav"));
+		g_dsMove = Gdx.audio.newSound(Gdx.files.internal("wave/Move.wav"));
+		g_dsBeat = Gdx.audio.newSound(Gdx.files.internal("wave/Beat.wav"));
+		g_dsSelectSong = Gdx.audio.newSound(Gdx.files.internal("wave/MusicSelect.wav"));
+	}
+
+	private void waveSetUnLoading() {
+		g_dsOpening.dispose();
+		g_dsDead.dispose();
+		g_dsMode.dispose();
+		g_dsCancel.dispose();
+		g_dsMove.dispose();
+		g_dsBeat.dispose();
+		g_dsSelectSong.dispose();
 	}
 
 	@Override
@@ -184,5 +215,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		// img.dispose();
+		waveSetUnLoading();
 	}
 }
