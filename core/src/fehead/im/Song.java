@@ -63,13 +63,35 @@ public class Song {
 	private	List<String>	Data_Hard;
 	private	List<String>	Data_Hard1;
 
+	private	boolean	haveDouble;
+
+	private	int	Double_Diff;
+	private	int	Double_Start;
+	private	int	Double_Start2;
+	private	int	Double_Start3;
+	private	int	Double_Tick;
+
+	private	List<String>	Data_Double;
+
 	public void readStepFiles(File path) {
 		for(File f : path.listFiles()) {
 			if(f.isDirectory())
 				continue;
 			String fileName = f.getName().toLowerCase();
-			if(fileName.equals("crazy_1.ksf")) {
+			if(fileName.equals("easy_1.ksf")) {
+				readEasy1KSF(f);
+			} else if(fileName.equals("easy_2.ksf")) {
+				readEasy2KSF(f);
+			} else if(fileName.equals("hard_1.ksf")) {
+				readHard1KSF(f);
+			} else if(fileName.equals("hard_2.ksf")) {
+				readHard2KSF(f);
+			} else if(fileName.equals("crazy_1.ksf")) {
 				readCrazy1KSF(f);
+			} else if(fileName.equals("crazy_2.ksf")) {
+				readCrazy2KSF(f);
+			} else if(fileName.equals("double.ksf")) {
+				readDoubleKSF(f);
 			}
 		}
 	}
@@ -250,5 +272,73 @@ public class Song {
 			DiskImage = KickItUpGame.NoDISC;
 	}
 
+	private void readHard2KSF(File stepFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stepFile);
 
+		bpm = step.bpm;
+		bpm2 = step.bpm2;
+		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
+
+		Hard_Diff = step._dummy;
+		Hard_Start = step.start;
+		Hard_Start2 = step.start2;
+		Hard_Start3 = step.start3;
+		Hard_Tick = step.tick;
+
+		haveCouple = true;
+		Data_Hard1 = step.step;
+
+		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
+		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
+		PlayWavPath  = new File(stepFile.getParentFile(), "song.wav");
+		PlayMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
+		PlayMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
+		IntroWavPath = new File(stepFile.getParentFile(), "intro.wav");
+		IntroMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
+
+		File disc = new File(stepFile.getParentFile(), "disc.png");
+		if(disc.exists())
+			DiskImage = new Texture(disc.getAbsolutePath());
+		else
+			DiskImage = KickItUpGame.NoDISC;
+	}
+
+	private void readDoubleKSF(File stepFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stepFile);
+
+		bpm = step.bpm;
+		bpm2 = step.bpm2;
+		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
+
+		Double_Diff = step._dummy;
+		Double_Start = step.start;
+		Double_Start2 = step.start2;
+		Double_Start3 = step.start3;
+		Double_Tick = step.tick;
+
+		haveDouble = true;
+		Data_Double = step.step;
+
+		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
+		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
+		PlayWavPath  = new File(stepFile.getParentFile(), "song.wav");
+		PlayMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
+		PlayMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
+		IntroWavPath = new File(stepFile.getParentFile(), "intro.wav");
+		IntroMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
+
+		File disc = new File(stepFile.getParentFile(), "disc.png");
+		if(disc.exists())
+			DiskImage = new Texture(disc.getAbsolutePath());
+		else
+			DiskImage = KickItUpGame.NoDISC;
+	}
 }
