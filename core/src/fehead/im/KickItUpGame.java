@@ -15,9 +15,9 @@ import lombok.extern.java.Log;
 
 @Log
 public class KickItUpGame extends ApplicationAdapter {
-	
+
 	List<Song>	songList = new ArrayList<Song>();
-	
+
 	SpriteBatch batch;
 	Texture img;
 	Texture background;
@@ -25,7 +25,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	TextureRegion groundTextureRegion;
 	float backgroundPos = 0;
 	CharacterProcessor inputProcessor;
-	
+
 	private Texture	GameTITLE		= null;
 	private Texture	Background		= null;
 	private Texture	SongTitle 		= null;
@@ -72,18 +72,18 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture	ResultFont		= null;
 	private Texture	ResultBack		= null;
 	private Texture	StageCount		= null;
-	
+
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
 		final int FONT_HEIGHT	= 16;
 
 		String	upppercaseMsg = msg.toUpperCase();
-		for(int i = 0 ; i < upppercaseMsg.length() ; ++i) { 
+		for(int i = 0 ; i < upppercaseMsg.length() ; ++i) {
 			int fontIndex = upppercaseMsg.charAt(i) -' ';
 			batch.draw(SmallFont, x+i*FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
 		}
 	}
-	
+
 	private void kloadImage() {
 		SmallFont = new Texture("images/sfont.png");
 		GameTITLE = new Texture("images/title.png");
@@ -124,7 +124,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		EasyIcon=new Texture("images/easyicon.png");
 		HardIcon=new Texture("images/hardicon.png");
 	}
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -134,7 +134,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		groundTextureRegion = new TextureRegion(terrain);
 		inputProcessor = new CharacterProcessor();
 		Gdx.input.setInputProcessor(inputProcessor);
-		
+
 		kloadImage();
 		readSongs();
 	}
@@ -146,7 +146,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		for(File f : songDir.listFiles()) {
 			if(f.isDirectory()) {
 				Song song = new Song();
-				song.readStepFiles(f.getAbsolutePath());
+				song.readStepFiles(f);
 				songList.add(song);
 			}
 		}
@@ -155,7 +155,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		// batch.draw(img, 0, 0);
 		batch.disableBlending();
@@ -163,7 +163,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		batch.enableBlending();
 		// draw ground image
 		batch.draw(groundTextureRegion, backgroundPos, 0, 800, 100);
-		if(backgroundPos + 800 > 0 && backgroundPos + 800 < 800) 
+		if(backgroundPos + 800 > 0 && backgroundPos + 800 < 800)
 			batch.draw(groundTextureRegion, backgroundPos + 800, 0, 800, 100);
 		// draw player
 		// batch.draw(smallFont, 0, 0);
@@ -172,7 +172,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		batch.end();
 		updateScene();
 	}
-	
+
 	private void updateScene() {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		backgroundPos -= 200 * deltaTime;

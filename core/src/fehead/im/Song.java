@@ -1,26 +1,33 @@
 package fehead.im;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Song {
 	static final private	String [] ksfFiles = {
-			"Crazy_2.ksf", "Crazy_1.ksf", "Hard_2.ksf", "Hard_1.ksf", "Easy_2.ksf", "Easy_1.ksf", "Double.ksf" };
+			"crazy_2.ksf", "crazy_1.ksf", "hard_2.ksf", "hard_1.ksf", "easy_2.ksf", "easy_1.ksf", "double.ksf" };
 
 	static final private	String [] stfFiles = {
-			"Crazy_2.stf", "Crazy_1.stf", "Hard_2.stf", "Hard_1.stf", "Easy_2.stf", "Easy_1.stf", "Double.stf" };
+			"crazy_2.stf", "crazy_1.stf", "hard_2.stf", "hard_1.stf", "easy_2.stf", "easy_1.stf", "double.stf" };
 
 	public LPDIRECTSOUNDBUFFER Int_Song;
-	
-	public void readStepFiles(String path) {
-		if(Files.exists(Paths.get(path, "crazy_2.stf"))) {
-			readCrazy2STF(Paths.get(path, "crazy_2.stf"));
+
+	public void readStepFiles(File path) {
+		for(File f : path.listFiles()) {
+			if(f.isDirectory())
+				continue;
+			String fileName = f.getName().toLowerCase();
+			if(fileName.equals("crazy_2.ksf")) {
+				readCrazy2KSF(f);
+			}
 		}
 	}
 
-	private void readCrazy2STF(Path path) {
-		Step stp = Step.readSTF(path);
+	private void readCrazy2KSF(File stfFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stfFile);
 		/*
 		HaveCouple=TRUE;
 		bpm=STP.BPM;
@@ -43,5 +50,5 @@ public class Song {
 		else DiskImage=NoDISC;
 		*/
 	}
-	
+
 }
