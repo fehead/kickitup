@@ -48,6 +48,9 @@ public class Song {
 	private	int	Easy_Tick;
 	private	List<String>	Data_Easy;
 
+	private	boolean	haveCouple = true;
+	private	List<String>	Data_Easy1;
+
 	public void readStepFiles(File path) {
 		for(File f : path.listFiles()) {
 			if(f.isDirectory())
@@ -63,10 +66,12 @@ public class Song {
 		StepNew step = new StepNew();
 		step.readKSF(stepFile);
 
-		haveCrazy = true;
 		bpm = step.bpm;
 		bpm2 = step.bpm2;
 		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
 
 		Crazy_Diff = step._dummy;
 		Crazy_Start = step.start;
@@ -74,11 +79,7 @@ public class Song {
 		Crazy_Start3 = step.start3;
 		Crazy_Tick = step.tick;
 
-		Bunki = step.bunki;
-		Bunki2 = step.bunki2;
-
-		songTitle = step.name;
-
+		haveCrazy = true;
 		Data_Crazy = step.step;
 
 		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
@@ -100,10 +101,12 @@ public class Song {
 		StepNew step = new StepNew();
 		step.readKSF(stepFile);
 
-		haveEasy = true;
 		bpm = step.bpm;
 		bpm2 = step.bpm2;
 		bpm3 = step.bpm3;
+		Bunki = step.bunki;
+		Bunki2 = step.bunki2;
+		songTitle = step.name;
 
 		Easy_Diff = step._dummy;
 		Easy_Start = step.start;
@@ -111,12 +114,44 @@ public class Song {
 		Easy_Start3 = step.start3;
 		Easy_Tick = step.tick;
 
+		haveEasy = true;
+		Data_Easy = step.step;
+
+		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
+		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
+		PlayWavPath  = new File(stepFile.getParentFile(), "song.wav");
+		PlayMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
+		PlayMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
+		IntroWavPath = new File(stepFile.getParentFile(), "intro.wav");
+		IntroMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
+
+		File disc = new File(stepFile.getParentFile(), "disc.png");
+		if(disc.exists())
+			DiskImage = new Texture(disc.getAbsolutePath());
+		else
+			DiskImage = KickItUpGame.NoDISC;
+	}
+
+
+	private void readEasy2KSF(File stepFile) {
+		StepNew step = new StepNew();
+		step.readKSF(stepFile);
+
+		bpm = step.bpm;
+		bpm2 = step.bpm2;
+		bpm3 = step.bpm3;
 		Bunki = step.bunki;
 		Bunki2 = step.bunki2;
-
 		songTitle = step.name;
 
-		Data_Easy = step.step;
+		Easy_Diff = step._dummy;
+		Easy_Start = step.start;
+		Easy_Start2 = step.start2;
+		Easy_Start3 = step.start3;
+		Easy_Tick = step.tick;
+
+		haveCouple = true;
+		Data_Easy1 = step.step;
 
 		TitleImgPath = new File(stepFile.getParentFile(), "title.png");
 		BgImgPath    = new File(stepFile.getParentFile(), "back.png");
