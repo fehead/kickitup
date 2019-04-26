@@ -53,8 +53,6 @@ public class Song {
 	private	boolean	haveCouple;
 	private	List<String>	Data_Easy1;		// Easy couple step
 
-
-
 	private	int	Hard_Diff;
 	private	int	Hard_Start;
 	private	int	Hard_Start2;
