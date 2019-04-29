@@ -70,6 +70,8 @@ public class StepNew {
 					start3 = Integer.parseInt(value);
 				} else if(key.equals("STEP")) {
 					while((line = br.readLine()) != null) {
+						if(line.startsWith("2222222222222"))
+							break;
 						tempStep.add(line.trim());
 					}
 				}
