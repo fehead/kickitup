@@ -58,7 +58,7 @@ public class KIUConfig {
 		}
 	}
 
-	public void writeData(DataOutputStream out) throws IOException {
+	private void writeData(DataOutputStream out) throws IOException {
 		out.writeInt(bcDead ? 1 : 0);
 		out.writeInt(auto1_1p ? 1 : 0);
 		out.writeInt(auto3_1p ? 1 : 0);
@@ -75,7 +75,7 @@ public class KIUConfig {
 		out.writeInt(joySet);
 	}
 
-	public void readData(DataInputStream in) throws IOException {
+	private void readData(DataInputStream in) throws IOException {
 		bcDead = in.readInt() == 1 ? true : false;
 		auto1_1p = in.readInt() == 1 ? true : false;
 		auto3_1p = in.readInt() == 1 ? true : false;
