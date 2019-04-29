@@ -7,12 +7,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.java.Log;
 
 @Log
-@NoArgsConstructor
 @ToString
 public class KIUConfig {
 	// keySet
@@ -38,6 +36,8 @@ public class KIUConfig {
 	public boolean	optJudge = false;
 	public int		joySet = DDR;
 
+	private KIUConfig() {
+	}
 
 	public static KIUConfig of(File configFile) {
 		try(DataInputStream is = new DataInputStream(new FileInputStream(configFile))) {
