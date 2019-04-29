@@ -84,6 +84,8 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private	KIUConfig	kcfg;
 
+	private	GameStage	g_ProgramState = GameStage.GAMETITLE;
+
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
 		final int FONT_HEIGHT	= 16;
@@ -210,7 +212,11 @@ public class KickItUpGame extends ApplicationAdapter {
 		inputProcessor.getPlayer().getCharacterSprite().draw(batch);
 		batch.end();
 		updateScene();
+
+		// kiu code
+		updateFrame();
 	}
+
 
 	private void updateScene() {
 		float deltaTime = Gdx.graphics.getDeltaTime();
@@ -225,4 +231,68 @@ public class KickItUpGame extends ApplicationAdapter {
 		// img.dispose();
 		waveSetUnLoading();
 	}
+
+
+	private static long lastTime, fpsTime, framesRendered, fps;
+	private void updateFrame() {
+		// FPS count start
+		long	cur = System.currentTimeMillis();
+		long	deltaTime = cur - lastTime;
+		lastTime = cur;
+
+		fpsTime += deltaTime;
+
+		++framesRendered;
+
+		if(fpsTime > 1000) {
+			fps = framesRendered;
+			framesRendered = 0;
+			fpsTime = 0;
+		}
+
+		// FPS count & print end
+		displayMessage(583, 463, String.format("FPS:%3d", fps));
+
+		switch(g_ProgramState) {
+			case GAMETITLE:
+				stageTitle();
+				break;
+		/*
+			case SELECTSONG:
+				SelectSong();
+				break;
+			case STAGE1:
+				KIU_STAGE();
+				break;
+			case DOUBLE:
+				KIU_STAGE_DOUBLE();
+				break;
+			case COUPLE:
+				KIU_STAGE();
+				break;
+			case DEAD:
+				Dead();
+				break;
+			case CONFIG:
+				Configuration();
+				break;
+			case RESULT:
+				Result();
+				break;
+			case GAMEOVER:
+				GameOver1();
+				break;
+			case END:
+				PostMessage(hWnd, WM_CLOSE, 0, 0);
+				break;
+		*/
+			default:
+				break;
+		}
+	}
+
+	private void stageTitle() {
+		batch.draw(GameTITLE, 0, 0);		// 타이틀
+	}
+
 }
