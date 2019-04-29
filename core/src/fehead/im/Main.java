@@ -326,7 +326,7 @@ public class Main {
 	static private long	cMaxCombo2p;
 
 	// Data of configuration
-	static private KIUCONFIG	KCFG;
+	static private KIUConfig	KCFG;
 
 	static private long		dwGameCount;
 
@@ -5038,13 +5038,13 @@ public class Main {
 
 		if(Start1p)
 		{
-			if(KCFG.OptJudge)DrawJudge1p();
+			if(KCFG.optJudge)DrawJudge1p();
 			DrawGauge1p();
 			DrawScore1p();
 		}
 		if(Start2p)
 		{
-			if(KCFG.OptJudge)DrawJudge2p();
+			if(KCFG.optJudge)DrawJudge2p();
 			DrawGauge2p();
 			DrawScore2p();
 		}

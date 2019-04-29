@@ -82,6 +82,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	private	Sound	g_dsBeat;
 	private	Sound	g_dsSelectSong;
 
+	private	KIUConfig	kcfg;
 
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
@@ -148,6 +149,13 @@ public class KickItUpGame extends ApplicationAdapter {
 		kloadImage();
 		readSongs();
 		waveSetLoading();
+		cfgInitialize();
+	}
+
+	private void cfgInitialize() {
+		final String configPath = "kiu.cfg";
+		File configFile = new File(configPath);
+		kcfg = KIUConfig.of(configFile);
 	}
 
 	// C void Read()
