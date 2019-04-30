@@ -233,8 +233,9 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 
-	private static long lastTime, fpsTime, framesRendered, fps;
+	// private static long lastTime, fpsTime, framesRendered, fps;
 	private void updateFrame() {
+		/*
 		// FPS count start
 		long	cur = System.currentTimeMillis();
 		long	deltaTime = cur - lastTime;
@@ -248,10 +249,12 @@ public class KickItUpGame extends ApplicationAdapter {
 			fps = framesRendered;
 			framesRendered = 0;
 			fpsTime = 0;
+
 		}
+		*/
 
 		// FPS count & print end
-		displayMessage(583, 463, String.format("FPS:%3d", fps));
+		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
 
 		switch(g_ProgramState) {
 			case GAMETITLE:

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fehead.im.KIUConfig;
+import fehead.im.KickItUpGame;
 import lombok.extern.java.Log;
 
 @Log
@@ -31,4 +32,11 @@ public class KIUConfigTest {
 
 	}
 
+	@Test
+	public void rootDirTest() {
+		log.info("KickItUpGame root:" + KickItUpGame.class.getResource("/").toString());
+		log.info("default Path:" + new File(".").getAbsolutePath());
+		log.info("File root Path:" + new File("/").getAbsolutePath());
+		log.info("assert Path:" + new File("assets").getAbsolutePath());
+	}
 }
