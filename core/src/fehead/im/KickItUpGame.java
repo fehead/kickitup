@@ -27,7 +27,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	float backgroundPos = 0;
 	CharacterProcessor inputProcessor;
 
-	private Texture	GameTITLE		= null;
+	private Texture	gameTitle		= null;
 	private Texture	Background		= null;
 	private Texture	SongTitle 		= null;
 	private Texture	SongBack 		= null;
@@ -99,7 +99,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private void kloadImage() {
 		SmallFont = new Texture("images/sfont.png");
-		GameTITLE = new Texture("images/title.png");
+		gameTitle = new Texture("images/title.png");
 		Background = new Texture("images/back.png");
 		SelectBack = new Texture("images/selectback.png");
 		JudgeFont = new Texture("images/judgement.png");
@@ -295,7 +295,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void stageTitle() {
-		batch.draw(GameTITLE, 0, 0);		// 타이틀
+		batch.draw(gameTitle, 0, 0);		// 타이틀
 	}
 
 }
