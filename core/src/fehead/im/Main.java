@@ -160,7 +160,7 @@ public class Main {
 
 	static private char []				Title	= new char[MAX_PATH+1];
 
-	static private int					g_ProgramState=GAMETITLE;
+	static private int					g_programState=GAMETITLE;
 	static private char []				ArrowState1p	= new char[10];
 	static private char []				ArrowState2p	= new char[10];
 
@@ -412,7 +412,7 @@ public class Main {
 		g_pDDSBack.BltFast(0,0, GameOver, null, DDBLTFAST_NOCOLORKEY);
 		if(GameOver1_count==60){
 			First=0;
-			g_ProgramState=GAMETITLE;
+			g_programState=GAMETITLE;
 		}
 		Flipp();
 	}
@@ -618,7 +618,7 @@ public class Main {
 			x=0;
 		}
 
-		if(g_ProgramState==DOUBLE) {
+		if(g_programState==DOUBLE) {
 			if(bModeVanish1p || bModeVanish2p) {
 				if(y<150) {
 					srect = new RECT(ClpBlt_sRect);
@@ -748,7 +748,7 @@ public class Main {
 			PressedKey2p[0]=0;
 
 			// Change ProgramState to SelectSong Stage
-			g_ProgramState=SELECTSONG;
+			g_programState=SELECTSONG;
 		}
 
 		// Draw to screen "FREE PLAY!"
@@ -1774,7 +1774,7 @@ public class Main {
 						song = null;
 						SongFlag=false;
 					}
-					g_ProgramState=DEAD;
+					g_programState=DEAD;
 				}
 			}
 			else
@@ -1787,7 +1787,7 @@ public class Main {
 						song = null;
 						SongFlag=false;
 					}
-					g_ProgramState=DEAD;
+					g_programState=DEAD;
 				}
 			}
 		}
@@ -2579,7 +2579,7 @@ public class Main {
 						song = null;
 						SongFlag=false;
 					}
-					g_ProgramState=DEAD;
+					g_programState=DEAD;
 				}
 			}
 			else
@@ -2592,7 +2592,7 @@ public class Main {
 						song = null;
 						SongFlag=false;
 					}
-					g_ProgramState=DEAD;
+					g_programState=DEAD;
 				}
 			}
 		}
@@ -3016,7 +3016,7 @@ public class Main {
 		// FPS count & print end
 		DisplayMessage(583,463,String.format("FPS:%3d",UpdateFrame_fps));
 
-		switch(g_ProgramState)
+		switch(g_programState)
 		{
 			case GAMETITLE:
 				StageTitle();
@@ -3087,18 +3087,18 @@ public class Main {
 	   */
 					case VK_F2:
 						First=0;
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case GAMETITLE:
 								First=0;
 								if(g_dsOpening != null)
 									g_dsOpening.Stop();
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 
 								break;
 
 							case SELECTSONG:
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 								if(IntroFlag){
 									intro.OnMediaStop();
 									intro = null;
@@ -3116,7 +3116,7 @@ public class Main {
 									song = null;
 									SongFlag=false;
 								}
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 								break;
 							case DOUBLE:
 								if(SongFlag)
@@ -3125,7 +3125,7 @@ public class Main {
 									song = null;
 									SongFlag=false;
 								}
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 								break;
 							case COUPLE:
 								if(SongFlag)
@@ -3134,16 +3134,16 @@ public class Main {
 									song = null;
 									SongFlag=false;
 								}
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 								break;
 							case CONFIG:
-								g_ProgramState=CONFIG;
+								g_programState=CONFIG;
 								break;
 						}
 						break;
 
 					case VK_UP:
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case GAMETITLE:
 								PressedKey2p[0]=8;
@@ -3157,7 +3157,7 @@ public class Main {
 						}
 						break;
 					case VK_DOWN:
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case GAMETITLE:
 								PressedKey2p[0]=2;
@@ -3171,7 +3171,7 @@ public class Main {
 						break;
 
 					case VK_LEFT:
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case SELECTSONG:
 								PressedKey2p[0]=4;
@@ -3182,7 +3182,7 @@ public class Main {
 						}
 						break;
 					case VK_RIGHT:
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case SELECTSONG:
 								PressedKey2p[0]=6;
@@ -3194,7 +3194,7 @@ public class Main {
 						break;
 
 					case VK_RETURN:
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case SELECTSONG:
 								PressedKey2p[0]=3;
@@ -3209,7 +3209,7 @@ public class Main {
 
 					case VK_ESCAPE:
 					{
-						switch(g_ProgramState)
+						switch(g_programState)
 						{
 							case GAMETITLE:
 								CFGWrite();
@@ -3217,7 +3217,7 @@ public class Main {
 								return 0L;
 
 							case SELECTSONG:
-								g_ProgramState=GAMETITLE;
+								g_programState=GAMETITLE;
 								if(IntroFlag){
 									intro.OnMediaStop();
 									intro = null;
@@ -3235,7 +3235,7 @@ public class Main {
 									SongFlag=false;
 								}
 								First=0;
-								g_ProgramState=RESULT;
+								g_programState=RESULT;
 								break;
 							case DOUBLE:
 								if(SongFlag) {
@@ -3244,7 +3244,7 @@ public class Main {
 									SongFlag=false;
 								}
 								First=0;
-								g_ProgramState=RESULT;
+								g_programState=RESULT;
 								break;
 							case COUPLE:
 								if(SongFlag)
@@ -3254,16 +3254,16 @@ public class Main {
 									SongFlag=false;
 								}
 								First=0;
-								g_ProgramState=RESULT;
+								g_programState=RESULT;
 								break;
 							case CONFIG:
 								First=0;
 								CFGWrite();
-								g_ProgramState=GAMETITLE;
+								g_programState=GAMETITLE;
 								break;
 							case RESULT:
 								First=0;
-								g_ProgramState=SELECTSONG;
+								g_programState=SELECTSONG;
 								break;
 						}
 					}
@@ -4528,7 +4528,7 @@ public class Main {
 					song = null;
 					SongFlag=false;
 				}
-				g_ProgramState=RESULT;
+				g_programState=RESULT;
 
 				First=0;
 			}
@@ -4788,7 +4788,7 @@ public class Main {
 					song = null;
 					SongFlag=false;
 				}
-				g_ProgramState=RESULT;
+				g_programState=RESULT;
 
 				First=0;
 			}

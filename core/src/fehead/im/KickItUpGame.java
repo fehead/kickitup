@@ -84,7 +84,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private	KIUConfig	kcfg;
 
-	private	GameStage	g_ProgramState = GameStage.GAMETITLE;
+	private	GameStage	g_programState = GameStage.GAMETITLE;
 
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH	= 8;
@@ -256,7 +256,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		// FPS count & print end
 		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
 
-		switch(g_ProgramState) {
+		switch(g_programState) {
 			case GAMETITLE:
 				stageTitle();
 				break;
