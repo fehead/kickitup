@@ -28,31 +28,31 @@ public class KickItUpGame extends ApplicationAdapter {
 	CharacterProcessor inputProcessor;
 
 	private Texture	gameTitle		= null;
-	private Texture	Background		= null;
-	private Texture	SongTitle 		= null;
-	private Texture	SongBack 		= null;
-	private Texture	SelectBack		= null;
-	private Texture	JudgeFont		= null;
-	private Texture	NumberFont		= null;
-	private Texture	ComboFont		= null;
-	public static Texture NoDISC			= null;
-	private Texture	ShiftLeft		= null;
-	private Texture	ShiftRight		= null;
-	private Texture	GaugeWaku		= null;
-	private Texture Gauge			= null;
-	private Texture Score			= null;
-	private Texture DeadScreen		= null;
-	private Texture GameOver		= null;
-	private Texture Logo			= null;
-	private Texture	Diff			= null;
-	private Texture	DoubleIcon		= null;
-	private Texture	CrazyIcon		= null;
-	private Texture	EasyIcon		= null;
-	private Texture	HardIcon		= null;
+	private Texture background		= null;
+	private Texture	songTitle 		= null;
+	private Texture	songBack 		= null;
+	private Texture	selectBack		= null;
+	private Texture	judgeFont		= null;
+	private Texture	nmberFont		= null;
+	private Texture	comboFont		= null;
+	public static Texture noDisc			= null;
+	private Texture	shiftLeft		= null;
+	private Texture	shiftRight		= null;
+	private Texture	gaugeWaku		= null;
+	private Texture gauge			= null;
+	private Texture score			= null;
+	private Texture deadScreen		= null;
+	private Texture gameOver		= null;
+	private Texture logo			= null;
+	private Texture	diff			= null;
+	private Texture	doubleIcon		= null;
+	private Texture	crazyIcon		= null;
+	private Texture	easyIcon		= null;
+	private Texture	hardIcon		= null;
 
-	private Texture	SmallFont		= null;
-	private Texture	Arrow1			= null;
-	private Texture	Arrow2			= null;
+	private Texture	smallFont		= null;
+	private Texture	arrow1			= null;
+	private Texture	arrow2			= null;
 	private Texture	wArrow			= null;
 
 	private Texture	pArrow1			= null;
@@ -67,12 +67,12 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture	cArrow7			= null;
 	private Texture	cArrow9			= null;
 
-	private Texture	ModeIcon		= null;
+	private Texture	modeIcon		= null;
 	private Texture	g_cFont			= null;
 
-	private Texture	ResultFont		= null;
-	private Texture	ResultBack		= null;
-	private Texture	StageCount		= null;
+	private Texture	resultFont		= null;
+	private Texture	resultBack		= null;
+	private Texture	stageCount		= null;
 
 	private	Sound	g_dsOpening;
 	private	Sound	g_dsDead;
@@ -93,24 +93,24 @@ public class KickItUpGame extends ApplicationAdapter {
 		String	upppercaseMsg = msg.toUpperCase();
 		for(int i = 0 ; i < upppercaseMsg.length() ; ++i) {
 			int fontIndex = upppercaseMsg.charAt(i) -' ';
-			batch.draw(SmallFont, x+i*FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
+			batch.draw(smallFont, x+i*FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
 		}
 	}
 
 	private void kloadImage() {
-		SmallFont = new Texture("images/sfont.png");
+		smallFont = new Texture("images/sfont.png");
 		gameTitle = new Texture("images/title.png");
-		Background = new Texture("images/back.png");
-		SelectBack = new Texture("images/selectback.png");
-		JudgeFont = new Texture("images/judgement.png");
-		NumberFont = new Texture("images/number.png");
-		ComboFont = new Texture("images/combo.png");
-		NoDISC=new Texture("images/nodisc.png");
-		ShiftLeft=new Texture("images/shiftl.png");
-		ShiftRight=new Texture("images/shiftr.png");
-		GaugeWaku=new Texture("images/gaugewaku.png");
-		Gauge=new Texture("images/gauge.png");
-		Arrow2=new Texture("images/arrow2.png");
+		background = new Texture("images/back.png");
+		selectBack = new Texture("images/selectback.png");
+		judgeFont = new Texture("images/judgement.png");
+		nmberFont = new Texture("images/number.png");
+		comboFont = new Texture("images/combo.png");
+		noDisc=new Texture("images/nodisc.png");
+		shiftLeft=new Texture("images/shiftl.png");
+		shiftRight=new Texture("images/shiftr.png");
+		gaugeWaku=new Texture("images/gaugewaku.png");
+		gauge=new Texture("images/gauge.png");
+		arrow2=new Texture("images/arrow2.png");
 		wArrow=new Texture("images/arrow.png");
 		pArrow1=new Texture("images/parrow1.png");
 		pArrow3=new Texture("images/parrow3.png");
@@ -122,20 +122,20 @@ public class KickItUpGame extends ApplicationAdapter {
 		cArrow5=new Texture("images/carrow5.png");
 		cArrow7=new Texture("images/carrow7.png");
 		cArrow9=new Texture("images/carrow9.png");
-		ModeIcon=new Texture("images/modeicon.png");
+		modeIcon=new Texture("images/modeicon.png");
 		g_cFont=new Texture("images/cfont.png");
-		ResultFont=new Texture("images/resfont.png");
-		ResultBack=new Texture("images/resback.png");
-		StageCount=new Texture("images/stagecount.png");
-		Score=new Texture("images/score.png");
-		DeadScreen=new Texture("images/dead.png");
-		GameOver=new Texture("images/gameover.png");
-		Logo=new Texture("images/Logo.png");
-		Diff=new Texture("images/diff.png");
-		DoubleIcon=new Texture("images/doubleicon.png");
-		CrazyIcon=new Texture("images/crazyicon.png");
-		EasyIcon=new Texture("images/easyicon.png");
-		HardIcon=new Texture("images/hardicon.png");
+		resultFont=new Texture("images/resfont.png");
+		resultBack=new Texture("images/resback.png");
+		stageCount=new Texture("images/stagecount.png");
+		score=new Texture("images/score.png");
+		deadScreen=new Texture("images/dead.png");
+		gameOver=new Texture("images/gameover.png");
+		logo=new Texture("images/logo.png");
+		diff=new Texture("images/diff.png");
+		doubleIcon=new Texture("images/doubleicon.png");
+		crazyIcon=new Texture("images/crazyicon.png");
+		easyIcon=new Texture("images/easyicon.png");
+		hardIcon=new Texture("images/hardicon.png");
 	}
 
 	@Override

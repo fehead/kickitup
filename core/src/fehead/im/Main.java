@@ -203,9 +203,9 @@ public class Main {
 	static public	LPDIRECTDRAWSURFACE g_pDDSBack    = null;
 
 	static private LPDIRECTDRAWSURFACE	GameTITLE		= null;
-	static private LPDIRECTDRAWSURFACE	Background		= null;
-	static private LPDIRECTDRAWSURFACE	SongTitle 		= null;
-	static private LPDIRECTDRAWSURFACE	SongBack 		= null;
+	static private LPDIRECTDRAWSURFACE	background		= null;
+	static private LPDIRECTDRAWSURFACE	songTitle 		= null;
+	static private LPDIRECTDRAWSURFACE	songBack 		= null;
 	static private LPDIRECTDRAWSURFACE	SelectBack		= null;
 	static private LPDIRECTDRAWSURFACE	JudgeFont		= null;
 	static private LPDIRECTDRAWSURFACE	NumberFont		= null;
@@ -419,7 +419,7 @@ public class Main {
 	
 	// void DrawBackground(char[][14] Data, long i, int temp)
 	static private void DrawBackground(char[][] Data, long i, int temp)	{
-		g_pDDSBack.BltFast(0,0,SongBack,null, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
+		g_pDDSBack.BltFast(0,0,songBack,null, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 	}
 	
 	static private void DrawScore1p() {
@@ -721,7 +721,7 @@ public class Main {
 		if(PressedKey2p[5]==1)
 			Start2p=true;
 		
-		// Draw Background image. "KICK IT UP"
+		// Draw background image. "KICK IT UP"
 		g_pDDSBack.BltFast(0,0,GameTITLE, null, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
 		// Check Start.
@@ -2784,21 +2784,21 @@ public class Main {
 				GameTITLE.Release();
 				GameTITLE = null;
 			}
-			if (Background != null)
+			if (background != null)
 			{
-				Background.Release();
-				Background = null;
+				background.Release();
+				background = null;
 			}
-			if (SongTitle != null)
+			if (songTitle != null)
 			{
-				SongTitle.Release();
-				SongTitle = null;
+				songTitle.Release();
+				songTitle = null;
 			}
 
-			if (SongBack != null)
+			if (songBack != null)
 			{
-				SongBack.Release();
-				SongBack = null;
+				songBack.Release();
+				songBack = null;
 			}
 			if (SelectBack != null)
 			{
@@ -3469,17 +3469,17 @@ public class Main {
 			return HRESULT.DD_ERROR;
 		}
 
-		Background = DDLoadBitmap(g_pDD,"images\\back.bmp",0,0);
-		if(Background==null)
+		background = DDLoadBitmap(g_pDD,"images\\back.bmp",0,0);
+		if(background==null)
 		{
-			MessageBox(hWnd,"Cannot Load Background.","ERROR",0);
+			MessageBox(hWnd,"Cannot Load background.","ERROR",0);
 			return HRESULT.DD_ERROR;
 		}
 
 		SelectBack = DDLoadBitmap(g_pDD,"images\\SelectBack.bmp",0,0);
 		if(SelectBack==null)
 		{
-			MessageBox(hWnd,"Cannot Load Select Background.","ERROR",0);
+			MessageBox(hWnd,"Cannot Load Select background.","ERROR",0);
 			return HRESULT.DD_ERROR;
 		}
 
@@ -4424,8 +4424,8 @@ public class Main {
 				}
 			}
 
-			//FadeToSurface(SongBack);
-			g_pDDSBack.BltFast(0,0, SongBack, null, DDBLTFAST_NOCOLORKEY);
+			//FadeToSurface(songBack);
+			g_pDDSBack.BltFast(0,0, songBack, null, DDBLTFAST_NOCOLORKEY);
 
 			if(SongFlag==true)
 				song.OnMediaPlay();
