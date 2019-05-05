@@ -21,7 +21,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	SpriteBatch batch;
 	Texture img;
-	Texture background;
+	// Texture background;
 	Texture terrain;
 	TextureRegion groundTextureRegion;
 	float backgroundPos = 0;
