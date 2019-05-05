@@ -125,7 +125,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 	private void readCrazy2KSF(File stepFile) {
@@ -160,7 +160,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 	private void readEasy1KSF(File stepFile) {
@@ -195,7 +195,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 	private void readEasy2KSF(File stepFile) {
@@ -230,7 +230,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 
@@ -266,7 +266,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 	private void readHard2KSF(File stepFile) {
@@ -301,7 +301,7 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 
 	private void readDoubleKSF(File stepFile) {
@@ -336,6 +336,6 @@ public class Song {
 		if(disc.exists())
 			diskImage = new Texture(disc.getAbsolutePath());
 		else
-			diskImage = KickItUpGame.NoDISC;
+			diskImage = KickItUpGame.noDisc;
 	}
 }
