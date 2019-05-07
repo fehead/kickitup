@@ -255,9 +255,6 @@ public class KickItUpGame extends ApplicationAdapter {
 		}
 		*/
 
-		// FPS count & print end
-		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
-
 		switch (g_programState) {
 		case GAMETITLE:
 			stageTitle();
@@ -294,6 +291,9 @@ public class KickItUpGame extends ApplicationAdapter {
 		default:
 			break;
 		}
+
+		// FPS count & print end
+		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
 	}
 
 	private void stageTitle() {
