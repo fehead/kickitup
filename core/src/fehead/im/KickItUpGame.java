@@ -7,6 +7,7 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -162,7 +163,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	// C void Read()
 	private void readSongs() {
-		final String songPath="assets/song";
+		final String songPath="song";
 		File songDir = new File(songPath);
 		for(File f : songDir.listFiles()) {
 			if(f.isDirectory()) {
@@ -174,13 +175,15 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void soundSetLoading() {
-		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/Opening.wav"));
-		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/Dead.wav"));
-		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/Mode.wav"));
-		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/Cancel.wav"));
-		g_dsMove = Gdx.audio.newSound(Gdx.files.internal("wave/Move.wav"));
-		g_dsBeat = Gdx.audio.newSound(Gdx.files.internal("wave/Beat.wav"));
-		g_dsSelectSong = Gdx.audio.newSound(Gdx.files.internal("wave/MusicSelect.wav"));
+		FileHandle fh = Gdx.files.internal("wave/opening.wav");
+		log.info(fh.file().getAbsolutePath());
+		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/opening.wav"));
+		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/dead.wav"));
+		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/mode.wav"));
+		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/cancel.wav"));
+		g_dsMove = Gdx.audio.newSound(Gdx.files.internal("wave/move.wav"));
+		g_dsBeat = Gdx.audio.newSound(Gdx.files.internal("wave/select_eff.wav"));
+		g_dsSelectSong = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.wav"));
 	}
 
 	private void waveSetUnLoading() {
@@ -295,6 +298,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void stageTitle() {
+		Gdx.graphics.setTitle("KIUP stageTitle");
 		batch.draw(gameTitle, 0, 0); // 타이틀
 	}
 }

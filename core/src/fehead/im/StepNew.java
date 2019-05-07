@@ -43,7 +43,7 @@ public class StepNew {
 				String[] prop = line.split("[#:;]");
 
 				final String key = prop[1].toUpperCase();
-				final String value = prop[2];
+				final String value = prop.length < 3 ? null : prop[2];
 				if(key.equals("TITLE")) {
 					name = value;
 				} else if(key.equals("TICKCOUNT")) {
