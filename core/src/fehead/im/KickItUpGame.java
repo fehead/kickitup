@@ -175,9 +175,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void soundSetLoading() {
-		FileHandle fh = Gdx.files.internal("wave/opening.wav");
-		log.info(fh.file().getAbsolutePath());
-		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/opening.wav"));
+		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/dead.wav"));
 		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/mode.wav"));
 		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/cancel.wav"));
