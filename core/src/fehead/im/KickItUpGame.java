@@ -150,11 +150,11 @@ public class KickItUpGame extends ApplicationAdapter {
 
 		kloadImage();
 		readSongs();
-		waveSetLoading();
-		cfgInitialize();
+		soundSetLoading();
+		configLoading();
 	}
 
-	private void cfgInitialize() {
+	private void configLoading() {
 		final String configPath = "kiu.cfg";
 		File configFile = new File(configPath);
 		kcfg = KIUConfig.of(configFile);
@@ -173,7 +173,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		}
 	}
 
-	private void waveSetLoading() {
+	private void soundSetLoading() {
 		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/Opening.wav"));
 		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/Dead.wav"));
 		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/Mode.wav"));
