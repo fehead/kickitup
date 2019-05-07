@@ -176,12 +176,12 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private void soundSetLoading() {
 		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
-		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/dead.wav"));
-		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/mode.wav"));
-		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/cancel.wav"));
-		g_dsMove = Gdx.audio.newSound(Gdx.files.internal("wave/move.wav"));
-		g_dsBeat = Gdx.audio.newSound(Gdx.files.internal("wave/select_eff.wav"));
-		g_dsSelectSong = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.wav"));
+		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/dead.mp3"));
+		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/mode.mp3"));
+		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/cancel.mp3"));
+		g_dsMove = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
+		g_dsBeat = Gdx.audio.newSound(Gdx.files.internal("wave/select_eff.mp3"));
+		g_dsSelectSong = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
 	}
 
 	private void waveSetUnLoading() {
@@ -211,11 +211,12 @@ public class KickItUpGame extends ApplicationAdapter {
 		// batch.draw(smallFont, 0, 0);
 		displayMessage(0, 0, "Loading Image....");
 		inputProcessor.getPlayer().getCharacterSprite().draw(batch);
+		// kiu code
+		updateFrame();
+
 		batch.end();
 		updateScene();
 
-		// kiu code
-		updateFrame();
 	}
 
 
