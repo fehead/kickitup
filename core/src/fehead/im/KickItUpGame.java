@@ -87,6 +87,55 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private GameStage g_programState = GameStage.GAMETITLE;
 
+
+	private boolean	SongFlag;
+	private boolean	IntroFlag;
+
+	private int		HighSpeed1p=1;
+	private int		HighSpeed2p=1;
+
+	private int		HighSpeed1p_1;
+	private int		HighSpeed1p_3;
+	private int		HighSpeed1p_5;
+	private int		HighSpeed1p_7;
+	private int		HighSpeed1p_9;
+
+	private int		HighSpeed2p_1;
+	private int		HighSpeed2p_3;
+	private int		HighSpeed2p_5;
+	private int		HighSpeed2p_7;
+	private int		HighSpeed2p_9;
+
+	private int		MaxSpeed;
+	private int		MinSpeed;
+
+	private boolean	bModeMirror1p;
+	private boolean	bModeNonstep1p;
+	private boolean	bModeSynchro;
+	private boolean	bModeUnion1p;
+	private boolean	bModeRandom1p;
+	private boolean	b4dMix1p;			// 1p 4DMIX mode.
+	private boolean	bModeVanish1p;
+	private boolean	bModeCrazy1p;
+	private boolean	bModeSuddenR1p;
+	private boolean	bModeRandomS1p;
+
+	private boolean	bModeMirror2p;
+	private boolean	bModeNonstep2p;
+	private boolean	bModeUnion2p;
+	private boolean	bModeRandom2p;
+	private boolean	b4dMix2p;
+	private boolean	bModeVanish2p;
+	private boolean	bModeCrazy2p;
+	private boolean	bModeSuddenR2p;
+	private boolean	bModeRandomS2p;
+
+	private boolean Couple = false;
+	private boolean Double = false;
+
+	private boolean Start1p = false;
+	private boolean Start2p = false;
+
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH = 8;
 		final int FONT_HEIGHT = 16;
@@ -153,6 +202,8 @@ public class KickItUpGame extends ApplicationAdapter {
 		readSongs();
 		soundSetLoading();
 		configLoading();
+		clearMode();
+		g_dsOpening.play();
 	}
 
 	private void configLoading() {
@@ -299,5 +350,39 @@ public class KickItUpGame extends ApplicationAdapter {
 	private void stageTitle() {
 		Gdx.graphics.setTitle("KIUP stageTitle");
 		batch.draw(gameTitle, 0, 0); // 타이틀
+	}
+
+	private void clearMode() {
+		HighSpeed1p = 1;
+		bModeMirror1p = false;
+		bModeNonstep1p = false;
+		bModeSynchro = false;
+		bModeUnion1p = false;
+		bModeRandom1p = false;
+		b4dMix1p = false;
+		HighSpeed1p_1 = 1;
+		HighSpeed1p_3 = 1;
+		HighSpeed1p_5 = 1;
+		HighSpeed1p_7 = 1;
+		HighSpeed1p_9 = 1;
+		bModeVanish1p = false;
+		bModeRandomS1p = false;
+		bModeSuddenR1p = false;
+
+		HighSpeed2p = 1;
+		bModeMirror2p = false;
+		bModeNonstep2p = false;
+		bModeUnion2p = false;
+		bModeRandom2p = false;
+		b4dMix2p = false;
+		HighSpeed2p_1 = 1;
+		HighSpeed2p_3 = 1;
+		HighSpeed2p_5 = 1;
+		HighSpeed2p_7 = 1;
+		HighSpeed2p_9 = 1;
+		bModeVanish2p = false;
+		Double = false;
+		bModeRandomS2p = false;
+		bModeSuddenR2p = false;
 	}
 }
