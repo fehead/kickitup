@@ -350,6 +350,15 @@ public class KickItUpGame extends ApplicationAdapter {
 	private void stageTitle() {
 		Gdx.graphics.setTitle("KIUP stageTitle");
 		batch.draw(gameTitle, 0, 0); // 타이틀
+
+		// Draw to screen "FREE PLAY!"
+		batch.draw(g_cFont, 210, 450, 46, 0, 220, 69);
+
+		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
+		batch.draw(g_cFont, 10, 450, 0, 0, 220, 23);
+
+		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
+		batch.draw(g_cFont, 410, 450, 0, 0, 220, 23);
 	}
 
 	private void clearMode() {
