@@ -7,9 +7,9 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -203,7 +203,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		soundSetLoading();
 		configLoading();
 		clearMode();
-		g_dsOpening.play();
+		g_dsOpening.loop();
 	}
 
 	private void configLoading() {
@@ -249,11 +249,10 @@ public class KickItUpGame extends ApplicationAdapter {
 	public void render() {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
 		// batch.draw(img, 0, 0);
-		batch.disableBlending();
-		batch.draw(background, 0, 0, 800, 400);
 		batch.enableBlending();
+
+		batch.begin();
 		// draw ground image
 		batch.draw(groundTextureRegion, backgroundPos, 0, 800, 100);
 		if (backgroundPos + 800 > 0 && backgroundPos + 800 < 800)
@@ -347,18 +346,23 @@ public class KickItUpGame extends ApplicationAdapter {
 		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
 	}
 
-	private void stageTitle() {
+	private void stageTitle() {		
 		Gdx.graphics.setTitle("KIUP stageTitle");
 		batch.draw(gameTitle, 0, 0); // 타이틀
 
 		// Draw to screen "FREE PLAY!"
-		batch.draw(g_cFont, 210, 450, 46, 0, 220, 69);
+		Sprite sprite = new Sprite(g_cFont, 0, 48, 220, 23);
+		sprite.setPosition(220, 30);
+		sprite.draw(batch, 0.5f);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
-		batch.draw(g_cFont, 10, 450, 0, 0, 220, 23);
-
+		Sprite pressCenter = new Sprite(g_cFont, 0, 0, 220, 23);
+		pressCenter.setPosition(10, 30);
+		pressCenter.draw(batch, 0.5f);
+		
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
-		batch.draw(g_cFont, 410, 450, 0, 0, 220, 23);
+		pressCenter.setPosition(410, 30);
+		pressCenter.draw(batch, 0.5f);
 	}
 
 	private void clearMode() {
