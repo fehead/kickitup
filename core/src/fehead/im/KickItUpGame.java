@@ -91,20 +91,20 @@ public class KickItUpGame extends ApplicationAdapter {
 	private boolean	SongFlag;
 	private boolean	IntroFlag;
 
-	private int		HighSpeed1p=1;
-	private int		HighSpeed2p=1;
+	private int		highSpeed1p=1;
+	private int		highSpeed2p=1;
 
-	private int		HighSpeed1p_1;
-	private int		HighSpeed1p_3;
-	private int		HighSpeed1p_5;
-	private int		HighSpeed1p_7;
-	private int		HighSpeed1p_9;
+	private int		highSpeed1p_1;
+	private int		highSpeed1p_3;
+	private int		highSpeed1p_5;
+	private int		highSpeed1p_7;
+	private int		highSpeed1p_9;
 
-	private int		HighSpeed2p_1;
-	private int		HighSpeed2p_3;
-	private int		HighSpeed2p_5;
-	private int		HighSpeed2p_7;
-	private int		HighSpeed2p_9;
+	private int		highSpeed2p_1;
+	private int		highSpeed2p_3;
+	private int		highSpeed2p_5;
+	private int		highSpeed2p_7;
+	private int		highSpeed2p_9;
 
 	private int		MaxSpeed;
 	private int		MinSpeed;
@@ -131,7 +131,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	private boolean	bModeRandomS2p;
 
 	private boolean Couple = false;
-	private boolean Double = false;
+	private boolean bDouble = false;
 
 	private boolean Start1p = false;
 	private boolean Start2p = false;
@@ -366,35 +366,35 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void clearMode() {
-		HighSpeed1p = 1;
+		highSpeed1p = 1;
 		bModeMirror1p = false;
 		bModeNonstep1p = false;
 		bModeSynchro = false;
 		bModeUnion1p = false;
 		bModeRandom1p = false;
 		b4dMix1p = false;
-		HighSpeed1p_1 = 1;
-		HighSpeed1p_3 = 1;
-		HighSpeed1p_5 = 1;
-		HighSpeed1p_7 = 1;
-		HighSpeed1p_9 = 1;
+		highSpeed1p_1 = 1;
+		highSpeed1p_3 = 1;
+		highSpeed1p_5 = 1;
+		highSpeed1p_7 = 1;
+		highSpeed1p_9 = 1;
 		bModeVanish1p = false;
 		bModeRandomS1p = false;
 		bModeSuddenR1p = false;
 
-		HighSpeed2p = 1;
+		highSpeed2p = 1;
 		bModeMirror2p = false;
 		bModeNonstep2p = false;
 		bModeUnion2p = false;
 		bModeRandom2p = false;
 		b4dMix2p = false;
-		HighSpeed2p_1 = 1;
-		HighSpeed2p_3 = 1;
-		HighSpeed2p_5 = 1;
-		HighSpeed2p_7 = 1;
-		HighSpeed2p_9 = 1;
+		highSpeed2p_1 = 1;
+		highSpeed2p_3 = 1;
+		highSpeed2p_5 = 1;
+		highSpeed2p_7 = 1;
+		highSpeed2p_9 = 1;
 		bModeVanish2p = false;
-		Double = false;
+		bDouble = false;
 		bModeRandomS2p = false;
 		bModeSuddenR2p = false;
 	}
