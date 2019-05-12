@@ -88,8 +88,8 @@ public class KickItUpGame extends ApplicationAdapter {
 	private GameStage g_programState = GameStage.GAMETITLE;
 
 
-	private boolean	SongFlag;
-	private boolean	IntroFlag;
+	private boolean	songFlag;
+	private boolean	introFlag;
 
 	private int		highSpeed1p=1;
 	private int		highSpeed2p=1;
@@ -135,6 +135,9 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private boolean Start1p = false;
 	private boolean Start2p = false;
+	
+	private	float	alpha = 1.0f;
+	private	float	alphaDir = -1.0f;
 
 	private void displayMessage(int x, int y, String msg) {
 		final int FONT_WIDTH = 8;
@@ -305,6 +308,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		}
 		*/
 
+		updateAlpha();
 		switch (g_programState) {
 		case GAMETITLE:
 			stageTitle();
@@ -353,16 +357,16 @@ public class KickItUpGame extends ApplicationAdapter {
 		// Draw to screen "FREE PLAY!"
 		Sprite sprite = new Sprite(g_cFont, 0, 48, 220, 23);
 		sprite.setPosition(220, 30);
-		sprite.draw(batch, 0.5f);
+		sprite.draw(batch, alpha);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		Sprite pressCenter = new Sprite(g_cFont, 0, 0, 220, 23);
 		pressCenter.setPosition(10, 30);
-		pressCenter.draw(batch, 0.5f);
+		pressCenter.draw(batch, alpha);
 		
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		pressCenter.setPosition(410, 30);
-		pressCenter.draw(batch, 0.5f);
+		pressCenter.draw(batch, alpha);
 	}
 
 	private void clearMode() {
@@ -397,5 +401,18 @@ public class KickItUpGame extends ApplicationAdapter {
 		bDouble = false;
 		bModeRandomS2p = false;
 		bModeSuddenR2p = false;
+	}
+	
+	private void updateAlpha() {
+		int fps = Math.max(Gdx.graphics.getFramesPerSecond(), 20);
+		float alphaInc = 2.0f / fps;	// 2초에 한번씩
+		alpha += (alphaDir * alphaInc);
+		if(alpha < 0.0f) {
+			alpha = 0.0f;
+			alphaDir = 1.0f;
+		} else if (1.0f < alpha) {
+			alpha = 1.0f;
+			alphaDir = -1.0f;
+		}
 	}
 }
