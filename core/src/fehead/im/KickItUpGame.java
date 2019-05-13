@@ -34,7 +34,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	float backgroundPos = 0;
 	CharacterProcessor inputProcessor;
 
-	private Texture gameTitle = null;
 	private Texture background = null;
 	private Texture songTitle = null;
 	private Texture songBack = null;
@@ -81,7 +80,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	private Texture resultBack = null;
 	private Texture stageCount = null;
 
-	private Sound g_dsOpening;
 	private Sound g_dsDead;
 	private Sound g_dsMode;
 	private Sound g_dsCancel;
@@ -158,7 +156,6 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private void kloadImage() {
 		smallFont = new Texture("images/sfont.png");
-		gameTitle = new Texture("images/title.png");
 		background = new Texture("images/back.png");
 		selectBack = new Texture("images/selectback.png");
 		judgeFont = new Texture("images/judgement.png");
@@ -238,7 +235,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void soundSetLoading() {
-		g_dsOpening = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		g_dsDead = Gdx.audio.newSound(Gdx.files.internal("wave/dead.mp3"));
 		g_dsMode = Gdx.audio.newSound(Gdx.files.internal("wave/mode.mp3"));
 		g_dsCancel = Gdx.audio.newSound(Gdx.files.internal("wave/cancel.mp3"));
@@ -248,7 +244,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	private void waveSetUnLoading() {
-		g_dsOpening.dispose();
 		g_dsDead.dispose();
 		g_dsMode.dispose();
 		g_dsCancel.dispose();
@@ -320,10 +315,10 @@ public class KickItUpGame extends ApplicationAdapter {
 
 		updateAlpha();
 		switch (g_programState) {
+		/*
 		case GAMETITLE:
 			stageTitle();
 			break;
-		/*
 			case SELECTSONG:
 				SelectSong();
 				break;
@@ -358,25 +353,6 @@ public class KickItUpGame extends ApplicationAdapter {
 
 		// FPS count & print end
 		displayMessage(583, 463, String.format("FPS:%3d", Gdx.graphics.getFramesPerSecond()));
-	}
-
-	private void stageTitle() {		
-		Gdx.graphics.setTitle("KIUP stageTitle");
-		batch.draw(gameTitle, 0, 0); // 타이틀
-
-		// Draw to screen "FREE PLAY!"
-		Sprite sprite = new Sprite(g_cFont, 0, 48, 220, 23);
-		sprite.setPosition(220, 30);
-		sprite.draw(batch, alpha);
-
-		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
-		Sprite pressCenter = new Sprite(g_cFont, 0, 0, 220, 23);
-		pressCenter.setPosition(10, 30);
-		pressCenter.draw(batch, alpha);
-		
-		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
-		pressCenter.setPosition(410, 30);
-		pressCenter.draw(batch, alpha);
 	}
 
 	private void clearMode() {
