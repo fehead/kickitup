@@ -13,11 +13,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import fehead.im.player.PlayerState;
+import fehead.im.stage.IStage;
+import fehead.im.stage.TitleStage;
 import lombok.extern.java.Log;
 
 @Log
 public class KickItUpGame extends ApplicationAdapter {
 
+	static public PlayerState	playerState = new PlayerState();
+	private	IStage	stage;
+	
 	List<Song> songList = new ArrayList<Song>();
 
 	SpriteBatch batch;
@@ -85,7 +91,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private KIUConfig kcfg;
 
-	private GameStage g_programState = GameStage.GAMETITLE;
+	public static GameStage g_programState = GameStage.GAMETITLE;
 
 
 	private boolean	songFlag;
@@ -199,14 +205,17 @@ public class KickItUpGame extends ApplicationAdapter {
 		terrain.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		groundTextureRegion = new TextureRegion(terrain);
 		inputProcessor = new CharacterProcessor();
-		Gdx.input.setInputProcessor(inputProcessor);
+		// Gdx.input.setInputProcessor(inputProcessor);
 
 		kloadImage();
 		readSongs();
 		soundSetLoading();
 		configLoading();
-		clearMode();
-		g_dsOpening.loop();
+		clearMode();		
+		TitleStage titleStage = new TitleStage(batch);
+		stage = titleStage;
+		Gdx.input.setInputProcessor(titleStage);
+		stage.getIn();
 	}
 
 	private void configLoading() {
@@ -265,7 +274,8 @@ public class KickItUpGame extends ApplicationAdapter {
 		displayMessage(0, 0, "Loading Image....");
 		inputProcessor.getPlayer().getCharacterSprite().draw(batch);
 		// kiu code
-		updateFrame();
+		// updateFrame();
+		stage.render();
 
 		batch.end();
 		updateScene();
@@ -414,5 +424,9 @@ public class KickItUpGame extends ApplicationAdapter {
 			alpha = 1.0f;
 			alphaDir = -1.0f;
 		}
+	}
+
+	public static void quit() {
+		Gdx.app.exit();
 	}
 }
