@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import fehead.im.BlinkAnimation;
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
 import lombok.extern.java.Log;
@@ -18,8 +19,7 @@ public class TitleStage implements InputProcessor, IStage {
 	private Texture titleImg = new Texture("images/title.png");
 	private Texture cFontImg = new Texture("images/cfont.png");
 	private Sound openingSnd;
-	
-	private	float alpha = 0.5f;
+	private	BlinkAnimation	blank = new BlinkAnimation();
 	
 	public TitleStage(SpriteBatch batch) {
 		this.batch = batch;
@@ -27,6 +27,7 @@ public class TitleStage implements InputProcessor, IStage {
 	
 	@Override
 	public void getIn() {
+		Gdx.graphics.setTitle("KIUP stageTitle");
 		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
 	}
@@ -39,22 +40,23 @@ public class TitleStage implements InputProcessor, IStage {
 	
 	@Override
 	public void render() {
-		Gdx.graphics.setTitle("KIUP stageTitle");
+		blank.update();
+		
 		batch.draw(titleImg, 0, 0); // 타이틀
 
 		// Draw to screen "FREE PLAY!"
 		Sprite sprite = new Sprite(cFontImg, 0, 48, 220, 23);
 		sprite.setPosition(220, 30);
-		sprite.draw(batch, alpha);
+		sprite.draw(batch, blank.getAlpha());
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		Sprite pressCenter = new Sprite(cFontImg, 0, 0, 220, 23);
 		pressCenter.setPosition(10, 30);
-		pressCenter.draw(batch, alpha);
+		pressCenter.draw(batch, blank.getAlpha());
 		
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		pressCenter.setPosition(410, 30);
-		pressCenter.draw(batch, alpha);
+		pressCenter.draw(batch, blank.getAlpha());
 	}
 
 	@Override
