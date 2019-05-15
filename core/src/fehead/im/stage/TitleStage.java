@@ -49,14 +49,18 @@ public class TitleStage implements InputProcessor, IStage {
 		sprite.setPosition(220, 30);
 		sprite.draw(batch, blank.getAlpha());
 
-		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		Sprite pressCenter = new Sprite(cFontImg, 0, 0, 220, 23);
-		pressCenter.setPosition(10, 30);
-		pressCenter.draw(batch, blank.getAlpha());
+		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
+		if(!KickItUpGame.playerState.isStart1p()) {			
+			pressCenter.setPosition(10, 30);
+			pressCenter.draw(batch, blank.getAlpha());
+		}
 		
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
-		pressCenter.setPosition(410, 30);
-		pressCenter.draw(batch, blank.getAlpha());
+		if(!KickItUpGame.playerState.isStart2p()) {
+			pressCenter.setPosition(410, 30);
+			pressCenter.draw(batch, blank.getAlpha());
+		}
 	}
 
 	@Override
@@ -66,14 +70,20 @@ public class TitleStage implements InputProcessor, IStage {
 		case Input.Keys.S:
 			if (KickItUpGame.playerState.isStart1p())
 				gotoNextStage();
+			else
+				KickItUpGame.playerState.setStart1p(true);
+			
 			break;
 		case Input.Keys.NUM_5:
 			if (KickItUpGame.playerState.isStart2p())
 				gotoNextStage();
+			else
+				KickItUpGame.playerState.setStart2p(true);
 			break;
+			
 		case Input.Keys.ESCAPE:
 			if(KickItUpGame.playerState.isStart())
-				KickItUpGame.playerState.resetStart(false);
+				KickItUpGame.playerState.resetStart();
 			else
 				gotoPrevStage();
 			break;

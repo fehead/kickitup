@@ -14,9 +14,17 @@ public class PlayerState {
 		return false;
 	}
 
-	public void resetStart(boolean b) {
+	public void resetStart() {
 		isStart1p = false;
 		isStart2p = false;
+	}
+
+	public void setStart1p(boolean b) {
+		isStart1p = b;
+	}
+
+	public void setStart2p(boolean b) {
+		isStart2p = b;
 	}
 	
 }
