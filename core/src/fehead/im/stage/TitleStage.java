@@ -59,6 +59,7 @@ public class TitleStage implements InputProcessor, IStage {
 			pressCenter1pImg.draw(batch, blank.getAlpha());
 		}
 		
+		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart2p()) {
 			pressCenter2pImg.draw(batch, blank.getAlpha());
