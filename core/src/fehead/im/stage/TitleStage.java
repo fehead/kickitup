@@ -20,7 +20,12 @@ public class TitleStage implements InputProcessor, IStage {
 	private Texture cFontImg = new Texture("images/cfont.png");
 	private Sound openingSnd;
 	private	BlinkAnimation	blank = new BlinkAnimation();
-	
+
+	// Draw to screen "FREE PLAY!"
+	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);	
+	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
+	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
+
 	public TitleStage(SpriteBatch batch) {
 		this.batch = batch;
 	}
@@ -28,6 +33,9 @@ public class TitleStage implements InputProcessor, IStage {
 	@Override
 	public void getIn() {
 		Gdx.graphics.setTitle("KIUP stageTitle");
+		freePlayImg.setPosition(220, 30);
+		pressCenter1pImg.setPosition(10, 30);
+		pressCenter2pImg.setPosition(410, 30);
 		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
 	}
@@ -44,22 +52,16 @@ public class TitleStage implements InputProcessor, IStage {
 		
 		batch.draw(titleImg, 0, 0); // 타이틀
 
-		// Draw to screen "FREE PLAY!"
-		Sprite sprite = new Sprite(cFontImg, 0, 48, 220, 23);
-		sprite.setPosition(220, 30);
-		sprite.draw(batch, blank.getAlpha());
+		freePlayImg.draw(batch, blank.getAlpha());
 
-		Sprite pressCenter = new Sprite(cFontImg, 0, 0, 220, 23);
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart1p()) {			
-			pressCenter.setPosition(10, 30);
-			pressCenter.draw(batch, blank.getAlpha());
+			pressCenter1pImg.draw(batch, blank.getAlpha());
 		}
 		
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart2p()) {
-			pressCenter.setPosition(410, 30);
-			pressCenter.draw(batch, blank.getAlpha());
+			pressCenter2pImg.draw(batch, blank.getAlpha());
 		}
 	}
 
