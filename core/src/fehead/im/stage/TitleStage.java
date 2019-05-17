@@ -26,8 +26,10 @@ public class TitleStage implements InputProcessor, IStage {
 	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 
-	public TitleStage(SpriteBatch batch) {
+	private	Stages	stages;
+	public TitleStage(SpriteBatch batch, Stages	stages) {
 		this.batch = batch;
+		this.stages = stages;
 	}
 	
 	@Override
@@ -38,6 +40,7 @@ public class TitleStage implements InputProcessor, IStage {
 		pressCenter2pImg.setPosition(410, 30);
 		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
+		Gdx.input.setInputProcessor(this);
 	}
 	
 	@Override
@@ -98,6 +101,7 @@ public class TitleStage implements InputProcessor, IStage {
 	public void gotoNextStage() {
 		getOut();
 		KickItUpGame.g_programState = GameStage.SELECTSONG;
+		stages.setStage("select");
 	}
 	
 	@Override

@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import fehead.im.player.PlayerState;
 import fehead.im.stage.IStage;
+import fehead.im.stage.Stages;
 import fehead.im.stage.TitleStage;
 import lombok.extern.java.Log;
 
@@ -21,8 +22,7 @@ import lombok.extern.java.Log;
 public class KickItUpGame extends ApplicationAdapter {
 
 	static public PlayerState	playerState = new PlayerState();
-	private	IStage	stage;
-	
+	private	Stages	stages;
 	List<Song> songList = new ArrayList<Song>();
 
 	SpriteBatch batch;
@@ -194,7 +194,7 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void create () {
+	public void create () {		
 		batch = new SpriteBatch();
 		background = new Texture("sky2.jpg");
 		terrain = new Texture("grey_stone_1.png");
@@ -207,11 +207,9 @@ public class KickItUpGame extends ApplicationAdapter {
 		readSongs();
 		soundSetLoading();
 		configLoading();
-		clearMode();		
-		TitleStage titleStage = new TitleStage(batch);
-		stage = titleStage;
-		Gdx.input.setInputProcessor(titleStage);
-		stage.getIn();
+		clearMode();
+		stages = new Stages(batch);
+		stages.setStage("title");
 	}
 
 	private void configLoading() {
@@ -269,7 +267,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		inputProcessor.getPlayer().getCharacterSprite().draw(batch);
 		// kiu code
 		// updateFrame();
-		stage.render();
+		stages.render();
 
 		batch.end();
 		updateScene();

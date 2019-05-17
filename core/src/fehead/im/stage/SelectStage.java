@@ -27,9 +27,11 @@ public class SelectStage implements InputProcessor, IStage {
 	private Sound bgmSnd;				// BackGround Music
     private Sound shiftMoveSnd;            // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.
     
+    private	Stages stages;
     
-	public SelectStage(SpriteBatch batch) {
+	public SelectStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
+		this.stages = stages;
 	}
 	
 	@Override
