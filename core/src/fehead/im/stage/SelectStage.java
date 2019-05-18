@@ -1,29 +1,25 @@
 package fehead.im.stage;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.BlinkAnimation;
+import fehead.im.GameStage;
+import fehead.im.KickItUpGame;
+import lombok.extern.java.Log;
 
+@Log
 public class SelectStage implements InputProcessor, IStage {
 	private	SpriteBatch batch;
-	private Texture titleImg = new Texture("images/title.png");
-	private Texture cFontImg = new Texture("images/cfont.png");
-	private Sound openingSnd;
+	private Texture titleImg = new Texture("images/selectback.png");
+	private Texture shiftLImg = new Texture("images/shiftl.png");
+	private Texture shiftRImg = new Texture("images/shiftr.png");
 	private	BlinkAnimation	blank = new BlinkAnimation();
 
-	// Draw to screen "FREE PLAY!"
-	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);	
-	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
-	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
-
-	private Texture stateCommentImg;	// 하단 상태 표시
-	private Texture shiftLeftImg;		// 하단 왼쪽 버튼(다른곡선택버튼)
-	private Texture shiftRightImg;		// 하단 오른쪽 버튼(다른곡선택버튼)
-    private Texture modeIcon;        // easy, hard, double crazy icon
 	private Sound bgmSnd;				// BackGround Music
     private Sound shiftMoveSnd;            // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.
     
@@ -33,40 +29,61 @@ public class SelectStage implements InputProcessor, IStage {
 		this.batch = batch;
 		this.stages = stages;
 	}
-	
-	@Override
-	public void gotoPrevStage() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void gotoNextStage() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void render() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void getIn() {
-		// TODO Auto-generated method stub
+		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
+		bgmSnd.loop();
 		
+		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
+		Gdx.input.setInputProcessor(this);
+	}
+	
+	@Override
+	public void render() {
+		blank.update();
+		batch.draw(titleImg, 0, 0);
+		
+		// shift left button.
+		batch.draw(shiftLImg, 10, 50);
+		
+		// shift right button.
+		batch.draw(shiftRImg, 320, 50);
 	}
 
 	@Override
 	public void getOut() {
-		// TODO Auto-generated method stub
-		
+		shiftMoveSnd.dispose();
+		bgmSnd.dispose();
+	}
+
+	@Override
+	public void gotoPrevStage() {
+		KickItUpGame.g_programState = GameStage.GAMETITLE;
+		stages.setStage("title");
+	}
+
+	@Override
+	public void gotoNextStage() {
 	}
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
+		log.info("keycode : " + keycode);
+		switch(keycode) {
+		case Input.Keys.Z:
+			turnLeft();
+			break;
+		case Input.Keys.C:
+			turnRight();
+			break;
+		case Input.Keys.NUM_5:
+			break;
+			
+		case Input.Keys.ESCAPE:
+			gotoPrevStage();
+			break;
+		}
 		return false;
 	}
 
@@ -114,11 +131,12 @@ public class SelectStage implements InputProcessor, IStage {
 
     //  왼쪽으로 화면이동
     private void   turnLeft() {
-    	
+    	shiftMoveSnd.play();
     }
     
     // 오른쪽으로 화면이동
     private void   turnRight() {
+    	shiftMoveSnd.play();
     }
     
     // 선택된곡 리셀

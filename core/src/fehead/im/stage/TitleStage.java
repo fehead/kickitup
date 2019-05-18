@@ -41,6 +41,8 @@ public class TitleStage implements InputProcessor, IStage {
 		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
 		Gdx.input.setInputProcessor(this);
+		
+		KickItUpGame.playerState.resetStart();
 	}
 	
 	@Override
