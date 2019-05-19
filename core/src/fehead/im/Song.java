@@ -21,10 +21,8 @@ public class Song {
 
 	private	File titleImgPath;
 	private	File bgImgPath   ;
-	private	File playWavPath ;
 	private	File playMp3Path ;
 	private	File playMpgPath ;
-	private	File introWavPath;
 	private	File introMp3Path;
 
 	private Texture	diskImage;
@@ -115,10 +113,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -150,10 +146,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -185,10 +179,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -220,10 +212,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -256,10 +246,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -291,10 +279,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
@@ -326,10 +312,8 @@ public class Song {
 
 		titleImgPath = new File(stepFile.getParentFile(), "title.png");
 		bgImgPath    = new File(stepFile.getParentFile(), "back.png");
-		playWavPath  = new File(stepFile.getParentFile(), "song.wav");
 		playMp3Path  = new File(stepFile.getParentFile(), "song.mp3");
 		playMpgPath  = new File(stepFile.getParentFile(), "song.mpg");
-		introWavPath = new File(stepFile.getParentFile(), "intro.wav");
 		introMp3Path = new File(stepFile.getParentFile(), "intro.mp3");
 
 		File disc = new File(stepFile.getParentFile(), "disc.png");
