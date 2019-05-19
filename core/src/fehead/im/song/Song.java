@@ -1,16 +1,15 @@
-package fehead.im;
+package fehead.im.song;
 
 import java.io.File;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import fehead.im.KickItUpGame;
 import lombok.Getter;
 
 @Getter
 public class Song {
-	public LPDIRECTSOUNDBUFFER Int_Song;
-
 	private double	bpm;
 	private double	bpm2;
 	private double	bpm3;

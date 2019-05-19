@@ -5,6 +5,8 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 
+import fehead.im.song.Song;
+
 public class Main {
 	////////////////////////////////////////////////////////
 	// 임의로 만들어낸 변수
@@ -2719,8 +2721,8 @@ public class Main {
 	}
 	
 	static private void ReleaseDSound() {
+		/*
 		int i;
-
 		for(i=0;i<512;i++)
 		{
 			if(CSONG[i].Int_Song != null)
@@ -2730,7 +2732,7 @@ public class Main {
 			}
 		}
 
-	/*	if (lpdsbd != NULL)
+		if (lpdsbd != NULL)
 		{
 			lpdsbd->Release();
 			lpdsbd = NULL;

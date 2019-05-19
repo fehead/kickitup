@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import fehead.im.player.PlayerState;
+import fehead.im.song.Song;
+import fehead.im.song.SongMgr;
 import fehead.im.stage.IStage;
 import fehead.im.stage.Stages;
 import fehead.im.stage.TitleStage;
@@ -23,7 +25,6 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	static public PlayerState	playerState = new PlayerState();
 	private	Stages	stages;
-	List<Song> songList = new ArrayList<Song>();
 
 	SpriteBatch batch;
 	Texture img;
@@ -204,7 +205,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		// Gdx.input.setInputProcessor(inputProcessor);
 
 		kloadImage();
-		readSongs();
+		SongMgr.getInstace().load();
 		soundSetLoading();
 		configLoading();
 		clearMode();
@@ -216,19 +217,6 @@ public class KickItUpGame extends ApplicationAdapter {
 		final String configPath = "kiu.cfg";
 		File configFile = new File(configPath);
 		kcfg = KIUConfig.of(configFile);
-	}
-
-	// C void Read()
-	private void readSongs() {
-		final String songPath="song";
-		File songDir = new File(songPath);
-		for(File f : songDir.listFiles()) {
-			if(f.isDirectory()) {
-				Song song = new Song();
-				song.readStepFiles(f);
-				songList.add(song);
-			}
-		}
 	}
 
 	private void soundSetLoading() {

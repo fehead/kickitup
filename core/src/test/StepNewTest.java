@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import fehead.im.StepNew;
+import fehead.im.song.StepNew;
 
 public class StepNewTest {
 	final static String songPath="assets/song";
