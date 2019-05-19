@@ -72,6 +72,13 @@ public class Song {
 			if(f.isDirectory())
 				continue;
 			String fileName = f.getName().toLowerCase();
+			for(PlayMode pm : PlayMode.values()) {
+				if(pm.isCouple()) {
+					for(int i = 1 ; i <= 2; ++i) {
+						// readKSF
+					}
+				}
+			}
 			if(fileName.equals("easy_1.ksf")) {
 				readEasy1KSF(f);
 			} else if(fileName.equals("easy_2.ksf")) {
