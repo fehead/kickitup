@@ -1,7 +1,6 @@
 package fehead.im.song;
 
 import java.io.File;
-import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 
@@ -10,12 +9,6 @@ import lombok.Getter;
 
 @Getter
 public class Song {
-	private double	bpm;
-	private double	bpm2;
-	private double	bpm3;
-
-	private	long	bunki;
-	private	long	bunki2;
 	private	String	songTitle;
 
 	private	File titleImgPath;
@@ -25,48 +18,36 @@ public class Song {
 	private	File introMp3Path;
 
 	private Texture	diskImage;
+	private	PlayMode playMode;
+	private	StepKsf[] stepKsf = new StepKsf[2];
 
-	private	boolean	haveCrazy;
-	private	int	crazyDiff;
-	private	int	crazyStart;
-	private	int	crazyStart2;
-	private	int	crazyStart3;
-	private	int	crazyTick;
-	private	List<String>	dataCrazy;		// Crazy single step
-
-	private	List<String>	dataCrazy1;	// Crazy couple step
-
-	private	boolean	haveEasy;
-	private	int	easyDiff;
-	private	int	easyStart;
-	private	int	easyStart2;
-	private	int	easyStart3;
-	private	int	easyTick;
-	private	List<String>	dataEasy;		// Easy single step
-
-	private	boolean	haveCouple;
-	private	List<String>	dataEasy1;		// Easy couple step
-
-	private	int	hardDiff;
-	private	int	hardStart;
-	private	int	hardStart2;
-	private	int	hardStart3;
-	private	int	hardTick;
-
-	private	boolean	haveHard;
-	private	List<String>	dataHard;
-	private	List<String>	dataHard1;
-
-	private	boolean	haveDouble;
-
-	private	int	doubleDiff;
-	private	int	doubleStart;
-	private	int	doubleStart2;
-	private	int	doubleStart3;
-	private	int	doubleTick;
-
-	private	List<String>	dataDouble;
-
+	public void readKsf(PlayMode playMode, File path) {
+		this.playMode = playMode;
+		for(File f : path.listFiles()) {
+			if(f.isDirectory())
+				continue;
+			String fileName = f.getName().toLowerCase();
+			if(playMode.isCouple()) {
+				for(int i = 0 ; i <= stepKsf.length; ++i) {
+					String ksfFileName = String.format("%s_%d.ksf", playMode.getName(), i+1);
+					if(fileName.equals(ksfFileName)) {
+						readKsf(i, f);
+					}
+				}
+			} else {
+				String ksfFileName = String.format("%s.ksf", playMode.getName());
+				if(fileName.equals(ksfFileName)) {
+					readKsf(0, f);
+				}
+			}				
+		}
+	}
+	
+	private void readKsf(int i, File f) {
+		stepKsf[i].readKSF(f);
+	}
+	
+	/*
 	public void readStepFiles(File path) {
 		for(File f : path.listFiles()) {
 			if(f.isDirectory())
@@ -74,9 +55,10 @@ public class Song {
 			String fileName = f.getName().toLowerCase();
 			for(PlayMode pm : PlayMode.values()) {
 				if(pm.isCouple()) {
+					StepKsf step = new StepKsf();
 					for(int i = 1 ; i <= 2; ++i) {
-						// readKSF
-					}
+						step.readKSF(f);
+					}					
 				}
 			}
 			if(fileName.equals("easy_1.ksf")) {
@@ -328,4 +310,5 @@ public class Song {
 		else
 			diskImage = KickItUpGame.noDisc;
 	}
+	*/
 }

@@ -28,9 +28,10 @@ public class SongMgr {
 		File songDir = new File(songPath);
 		for(File f : songDir.listFiles()) {
 			if(f.isDirectory()) {
-				Song song = new Song();
-				song.readStepFiles(f);
-				SongMgr.getInstace().add(song);
+				// TODO: implement!!
+				// Song song = new Song();
+				// song.readStepFiles(f);
+				// SongMgr.getInstace().add(song);
 			}
 		}
 		
