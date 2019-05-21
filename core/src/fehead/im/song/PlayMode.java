@@ -6,11 +6,11 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PlayMode {
-	EASY("easy", true)
-	, HARD("hard", true)
-	, CRAZY("crazy", true)
-	, DOUBLE("double", false);
+	EASY("easy", 2)
+	, HARD("hard", 2)
+	, CRAZY("crazy", 2)
+	, DOUBLE("double", 1);
 	
 	private	String	name;
-	private	boolean	couple;
+	private	int	stepCnt;
 }

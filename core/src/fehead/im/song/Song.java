@@ -1,6 +1,7 @@
 package fehead.im.song;
 
 import java.io.File;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
 
@@ -19,32 +20,40 @@ public class Song {
 
 	private Texture	diskImage;
 	private	PlayMode playMode;
-	private	StepKsf[] stepKsf = new StepKsf[2];
+	private	List<StepKsf> stepList;
 
-	public void readKsf(PlayMode playMode, File path) {
-		this.playMode = playMode;
-		for(File f : path.listFiles()) {
-			if(f.isDirectory())
-				continue;
-			String fileName = f.getName().toLowerCase();
-			if(playMode.isCouple()) {
-				for(int i = 0 ; i <= stepKsf.length; ++i) {
-					String ksfFileName = String.format("%s_%d.ksf", playMode.getName(), i+1);
-					if(fileName.equals(ksfFileName)) {
-						readKsf(i, f);
-					}
-				}
-			} else {
-				String ksfFileName = String.format("%s.ksf", playMode.getName());
-				if(fileName.equals(ksfFileName)) {
-					readKsf(0, f);
-				}
-			}				
-		}
+	private Song(File songDir, PlayMode pm, List<StepKsf> stepList) {
+		this.playMode = pm;
+		this.stepList = stepList;
+		
+		titleImgPath = new File(songDir, "title.png");
+		bgImgPath    = new File(songDir, "back.png");
+		playMp3Path  = new File(songDir, "song.mp3");
+		playMpgPath  = new File(songDir, "song.mpg");
+		introMp3Path = new File(songDir, "intro.mp3");
+
+		File disc = new File(songDir, "disc.png");
+		if(disc.exists())
+			diskImage = new Texture(disc.getAbsolutePath());
+		else
+			diskImage = KickItUpGame.noDisc;
 	}
-	
-	private void readKsf(int i, File f) {
-		stepKsf[i].readKSF(f);
+
+	public static Song of(File songDir, PlayMode pm, List<StepKsf> stepList) {
+		String[] fileNames = { "title.png", "back.png", "song.mp3", "intro.mp3", "disc.png" };
+		for(String fn : fileNames) {
+			File f1 = new File(songDir, fn);
+			if(!f1.exists())
+				throw new IllegalArgumentException(f1.getAbsolutePath() + " 파일이 없습니다.");
+		}
+		
+		if(pm.getStepCnt() != stepList.size()) {
+			throw new IllegalArgumentException(
+					String.format("%s 스텝파일 개수가 %d개이여야 합니다.", pm.getName(), pm.getStepCnt())
+					);
+		}
+		
+		return new Song(songDir, pm, stepList);
 	}
 	
 	/*

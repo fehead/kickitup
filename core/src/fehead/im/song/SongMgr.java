@@ -27,17 +27,40 @@ public class SongMgr {
 		final String songPath="song";
 		File songDir = new File(songPath);
 		for(File f : songDir.listFiles()) {
-			if(f.isDirectory()) {
-				// TODO: implement!!
-				// Song song = new Song();
-				// song.readStepFiles(f);
-				// SongMgr.getInstace().add(song);
-			}
+			if(f.isFile())
+				continue;
+			readSongs(f);
 		}
 		
 		if(!songList.isEmpty()) {
 			leftIndex = 0;
 			rightIndex = 1;
+		}
+	}
+	
+	public void readSongs(File songDir) {
+		for(PlayMode pm : PlayMode.values()) {
+			List<StepKsf>	stepList = new ArrayList<>(pm.getStepCnt());
+			for(int i = 0 ; i < pm.getStepCnt(); ++i) {
+				String stepFileName; 
+				if(pm.getStepCnt() == 1) {
+					stepFileName = String.format("%s.ksf", pm.getName());
+				} else {
+					stepFileName = String.format("%s_%d.ksf", pm.getName(), i + 1);
+				}
+					
+				File stepFile = new File(songDir, stepFileName); 
+				StepKsf step = StepKsf.OfFile(stepFile);
+				if(step == null) {
+					stepList.clear();
+					break;
+				}
+				stepList.add(step);
+			}
+			
+			if(!stepList.isEmpty()) {
+				songList.add(Song.of(songDir, pm, stepList));
+			}
 		}
 	}
 }

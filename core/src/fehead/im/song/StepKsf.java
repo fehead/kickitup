@@ -95,4 +95,10 @@ public class StepKsf {
 		start[0] = (int)tempStart;
 		return true;
 	}
+
+	public static StepKsf OfFile(File stepFile) {
+		StepKsf stepKsf = new StepKsf();
+		stepKsf.readKSF(stepFile);
+		return stepKsf;
+	}
 }
