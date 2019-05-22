@@ -40,7 +40,7 @@ public class Song {
 	}
 
 	public static Song of(File songDir, PlayMode pm, List<StepKsf> stepList) {
-		String[] fileNames = { "title.png", "back.png", "song.mp3", "intro.mp3", "disc.png" };
+		String[] fileNames = { "title.png", "song.mp3", "intro.mp3" };
 		for(String fn : fileNames) {
 			File f1 = new File(songDir, fn);
 			if(!f1.exists())
