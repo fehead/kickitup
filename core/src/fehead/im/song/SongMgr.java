@@ -63,4 +63,34 @@ public class SongMgr {
 			}
 		}
 	}
+	
+	public void turnLeft() {
+	    if( !songList.isEmpty() ) {
+	    	leftIndex = (leftIndex - 2) % songList.size();
+	        rightIndex = (rightIndex - 2) % songList.size();
+	    }
+	    curSong = null;
+	}
+	
+	public void turnRight() {
+	    if( !songList.isEmpty() ) {
+	    	leftIndex = (leftIndex + 2) % songList.size();
+	        rightIndex = (rightIndex + 2) % songList.size();
+	    }
+	    curSong = null;
+	}
+
+	public Song getLeftSong() {
+		  Song ret = null;
+		    if( leftIndex != -1 )
+		        ret = songList.get(leftIndex);
+		    return ret;
+	}
+
+	public Song getRightSong() {
+		Song ret = null;
+	    if( rightIndex != -1 )
+	        ret = songList.get(rightIndex);
+	    return ret;
+	}
 }
