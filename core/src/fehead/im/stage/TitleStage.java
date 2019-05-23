@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import fehead.im.BlinkAnimation;
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
+import fehead.im.effect.BlinkAnimation;
 import lombok.extern.java.Log;
 
 @Log

@@ -1,4 +1,4 @@
-package fehead.im;
+package fehead.im.effect;
 
 import lombok.Getter;
 
