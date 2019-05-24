@@ -32,10 +32,11 @@ public class SongMgr {
 			readSongs(f);
 		}
 		
-		if(!songList.isEmpty()) {
-			leftIndex = 0;
-			rightIndex = 1;
-		}
+		if(songList.isEmpty())
+			throw new IllegalStateException("song is empty");
+		
+		leftIndex = 0;
+		rightIndex = 1;
 	}
 	
 	public void readSongs(File songDir) {
@@ -92,5 +93,14 @@ public class SongMgr {
 	    if( rightIndex != -1 )
 	        ret = songList.get(rightIndex);
 	    return ret;
+	}
+
+	public void reset() {
+		leftIndex = 0;
+		if(songList.size() > 1)
+			rightIndex = 1;
+		else 
+			rightIndex = 0;
+		curSong = null;
 	}
 }

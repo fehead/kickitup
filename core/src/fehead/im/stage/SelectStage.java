@@ -98,6 +98,7 @@ public class SelectStage implements InputProcessor, IStage {
 	public void getOut() {
 		shiftMoveSnd.dispose();
 		bgmSnd.dispose();
+		SongMgr.getInstace().reset();
 	}
 
 	@Override
