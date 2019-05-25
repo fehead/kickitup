@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
-import fehead.im.effect.BlinkAnimation;
+import fehead.im.effect.BlinkBase;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import lombok.extern.java.Log;
@@ -27,7 +27,7 @@ public class SelectStage implements InputProcessor, IStage {
 	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 
-	private	BlinkAnimation	blank = new BlinkAnimation();
+	private	BlinkBase	blank = new BlinkBase();
 
 	private Sound bgmSnd;				// BackGround Music
     private Sound shiftMoveSnd;            // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.

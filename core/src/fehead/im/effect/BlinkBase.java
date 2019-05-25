@@ -2,7 +2,7 @@ package fehead.im.effect;
 
 import lombok.Getter;
 
-public class BlinkAnimation {
+public class BlinkBase {
 	@Getter
 	private	float	alpha = 1.0f;
 	private	float	alphaDir = -1.0f;

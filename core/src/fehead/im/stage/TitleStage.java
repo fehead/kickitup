@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
-import fehead.im.effect.BlinkAnimation;
+import fehead.im.effect.BlinkBase;
 import lombok.extern.java.Log;
 
 @Log
@@ -19,7 +19,7 @@ public class TitleStage implements InputProcessor, IStage {
 	private Texture titleImg = new Texture("images/title.png");
 	private Texture cFontImg = new Texture("images/cfont.png");
 	private Sound openingSnd;
-	private	BlinkAnimation	blank = new BlinkAnimation();
+	private	BlinkBase	blank = new BlinkBase();
 
 	// Draw to screen "FREE PLAY!"
 	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);	
