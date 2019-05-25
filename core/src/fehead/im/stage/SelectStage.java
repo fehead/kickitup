@@ -79,17 +79,17 @@ public class SelectStage implements InputProcessor, IStage {
 		batch.draw(shiftRImg, 320, 50);
 		
 		
-		freePlayImg.draw(batch, blank.getAlpha());
+		freePlayImg.draw(batch, blank.getValue());
 		
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart1p()) {			
-			pressCenter1pImg.draw(batch, blank.getAlpha());
+			pressCenter1pImg.draw(batch, blank.getValue());
 		}
 		
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart2p()) {
-			pressCenter2pImg.draw(batch, blank.getAlpha());
+			pressCenter2pImg.draw(batch, blank.getValue());
 		}
 
 	}
