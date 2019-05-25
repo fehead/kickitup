@@ -17,6 +17,5 @@ public class ZoomAnimation extends Animation {
 	
 	@Override
 	public void render() {
-		
 	}
 }
