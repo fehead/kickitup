@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import fehead.im.KickItUpGame;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class Song {
 	private	File playMpgPath ;
 	private	File introMp3Path;
 
-	private Texture	diskImage;
+	private Sprite	diskImage;
 	private	PlayMode playMode;
 	private	List<StepKsf> stepList;
 
@@ -34,9 +35,9 @@ public class Song {
 
 		File disc = new File(songDir, "disc.png");
 		if(disc.exists())
-			diskImage = new Texture(disc.getAbsolutePath());
+			diskImage = new Sprite(new Texture(disc.getAbsolutePath()));
 		else
-			diskImage = KickItUpGame.noDisc;
+			diskImage = new Sprite(KickItUpGame.noDisc);
 	}
 
 	public static Song of(File songDir, PlayMode pm, List<StepKsf> stepList) {

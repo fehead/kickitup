@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkBase;
+import fehead.im.effect.ZoomAnimation;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import lombok.extern.java.Log;
@@ -26,7 +27,8 @@ public class SelectStage implements InputProcessor, IStage {
 	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);
 	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
-
+	private	ZoomAnimation leftZoomAni;
+	private	ZoomAnimation rightZoomAni;
 	private	BlinkBase	blank = new BlinkBase();
 
 	private Sound bgmSnd;				// BackGround Music
@@ -55,6 +57,10 @@ public class SelectStage implements InputProcessor, IStage {
 		
 	    leftSong = SongMgr.getInstace().getLeftSong();
 	    rightSong = SongMgr.getInstace().getRightSong();
+	    leftZoomAni = ZoomAnimation.of(leftSong.getDiskImage(), 1.0f, 1.3f);
+	    leftZoomAni.setPosition(10,  250);
+	    rightZoomAni = ZoomAnimation.of(rightSong.getDiskImage(), 1.0f, 1.3f);
+	    rightZoomAni.setPosition(320,  250);
 	}
 	
 	@Override
@@ -64,12 +70,14 @@ public class SelectStage implements InputProcessor, IStage {
 		
 		// Draw Left top Song
 		if(leftSong != null ) {
-			batch.draw(leftSong.getDiskImage(), 10, 250);
+			// batch.draw(leftSong.getDiskImage(), 10, 250);
+			leftZoomAni.draw(batch);
 		}
 		
 		// Draw Right top Song
 		if(rightSong != null ) {
-			batch.draw(rightSong.getDiskImage(), 320, 250);
+			// batch.draw(rightSong.getDiskImage(), 320, 250);
+			rightZoomAni.draw(batch);
 		}
 		
 		// shift left button.
