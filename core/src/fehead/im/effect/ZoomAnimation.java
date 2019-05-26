@@ -9,7 +9,8 @@ public class ZoomAnimation {
 	private	float	minZoom;	// max zoom
 	private	float	maxZoom;	// max zoom
 	private	float	curZoom;	// current zoom.
-	private	boolean	oscillate = true;
+	
+	private	boolean	oscillate = false;
 	
 	private BlinkBase blinkBase;
 	private Sprite sprite;
@@ -43,10 +44,22 @@ public class ZoomAnimation {
 		update();
 		sprite.draw(batch);
 	}
+
+	public void start() {
+		oscillate = true;
+	}
+	
+	public void stop() {
+		sprite.setScale(1.0f);
+		oscillate = false;
+	}
 	
 	private void update() {
+		if(!oscillate)
+			return;
 		blinkBase.update();
 		curZoom = (maxZoom - minZoom) * blinkBase.getValue() + minZoom;
 		sprite.setScale(curZoom);
 	}
+	
 }

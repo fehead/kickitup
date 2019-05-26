@@ -129,7 +129,13 @@ public class SelectStage implements InputProcessor, IStage {
 		case Input.Keys.C:
 			turnRight();
 			break;
-		case Input.Keys.NUM_5:
+		case Input.Keys.Q:
+			rightZoomAni.stop();
+			leftZoomAni.start();
+			break;
+		case Input.Keys.E:
+			leftZoomAni.stop();
+			rightZoomAni.start();
 			break;
 			
 		case Input.Keys.ESCAPE:
@@ -183,12 +189,16 @@ public class SelectStage implements InputProcessor, IStage {
 
     //  왼쪽으로 화면이동
     private void   turnLeft() {
+		leftZoomAni.stop();
+		rightZoomAni.stop();
     	SongMgr.getInstace().turnLeft();
     	shiftMoveSnd.play();
     }
     
     // 오른쪽으로 화면이동
     private void   turnRight() {
+		leftZoomAni.stop();
+		rightZoomAni.stop();
     	SongMgr.getInstace().turnRight();
     	shiftMoveSnd.play();
     }
