@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
+import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
 import lombok.extern.java.Log;
 
@@ -22,22 +23,27 @@ public class TitleStage implements InputProcessor, IStage {
 	private	BlinkBase	blank = new BlinkBase();
 
 	// Draw to screen "FREE PLAY!"
-	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);	
-	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
-	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
+	private	BlinkAnimation freePlayImg;	
+	private	BlinkAnimation pressCenter1pImg;
+	private	BlinkAnimation pressCenter2pImg;
 
 	private	Stages	stages;
 	public TitleStage(SpriteBatch batch, Stages	stages) {
 		this.batch = batch;
 		this.stages = stages;
+		
+
+		freePlayImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);	
+		pressCenter1pImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+		pressCenter2pImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+		freePlayImg.setPosition(220, 30);
+		pressCenter1pImg.setPosition(10, 30);
+		pressCenter2pImg.setPosition(410, 30);
 	}
 	
 	@Override
 	public void getIn() {
 		Gdx.graphics.setTitle("KIUP stageTitle");
-		freePlayImg.setPosition(220, 30);
-		pressCenter1pImg.setPosition(10, 30);
-		pressCenter2pImg.setPosition(410, 30);
 		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
 		Gdx.input.setInputProcessor(this);
@@ -57,17 +63,17 @@ public class TitleStage implements InputProcessor, IStage {
 		
 		batch.draw(titleImg, 0, 0); // 타이틀
 
-		freePlayImg.draw(batch, blank.getValue());
+		freePlayImg.draw(batch);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart1p()) {			
-			pressCenter1pImg.draw(batch, blank.getValue());
+			pressCenter1pImg.draw(batch);
 		}
 		
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart2p()) {
-			pressCenter2pImg.draw(batch, blank.getValue());
+			pressCenter2pImg.draw(batch);
 		}
 	}
 
