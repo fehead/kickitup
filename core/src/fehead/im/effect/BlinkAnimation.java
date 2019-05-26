@@ -17,7 +17,7 @@ public class BlinkAnimation {
 	
 	public static BlinkAnimation of(Sprite sprite, BlinkBase blinkBase) {
 		Objects.requireNonNull(sprite, "sprite is require Not null");
-		Objects.requireNonNull(sprite, "blinkBase is require Not null");
+		Objects.requireNonNull(blinkBase, "blinkBase is require Not null");
 
 		return new BlinkAnimation(sprite, blinkBase);
 	}
