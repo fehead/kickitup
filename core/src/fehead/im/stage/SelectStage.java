@@ -1,5 +1,8 @@
 package fehead.im.stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -12,6 +15,7 @@ import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
+import fehead.im.song.PlayMode;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import lombok.extern.java.Log;
@@ -23,7 +27,8 @@ public class SelectStage implements InputProcessor, IStage {
 	private Texture shiftLImg = new Texture("images/shiftl.png");
 	private Texture shiftRImg = new Texture("images/shiftr.png");
 	private Texture cFontImg = new Texture("images/cfont.png");
-	
+	private	Map<PlayMode, Texture>	modeIconMap;
+
 	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);
 	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
 	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
@@ -37,10 +42,14 @@ public class SelectStage implements InputProcessor, IStage {
 	private Song rightSong;
 	private Song selectedSong;
     private	Stages stages;
-    
+
 	public SelectStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
+		modeIconMap = new HashMap<>();
+		for(PlayMode pm : PlayMode.values()) {
+			modeIconMap.put(pm, new Texture("images/" + pm.getName() + "icon.png"));
+		}
 	}
 
 	@Override
@@ -51,49 +60,52 @@ public class SelectStage implements InputProcessor, IStage {
 
 		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
 		bgmSnd.loop();
-		
+
 		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
 		Gdx.input.setInputProcessor(this);
-		
+
 	    leftSong = SongMgr.getInstace().getLeftSong();
 	    rightSong = SongMgr.getInstace().getRightSong();
-	    leftZoomAni = ZoomAnimation.of(leftSong.getDiskImage(), 1.0f, 1.3f);
+	    leftZoomAni = ZoomAnimation.of(leftSong.getDiskImage(), 1.0f, 1.5f);
 	    leftZoomAni.setPosition(10,  250);
-	    rightZoomAni = ZoomAnimation.of(rightSong.getDiskImage(), 1.0f, 1.3f);
+	    rightZoomAni = ZoomAnimation.of(rightSong.getDiskImage(), 1.0f, 1.5f);
 	    rightZoomAni.setPosition(320,  250);
 	}
-	
+
 	@Override
 	public void render() {
 		blank.update();
 		batch.draw(titleImg, 0, 0);
-		
+
+		// shift left button.
+		batch.draw(shiftLImg, 10, 50);
+
+		// shift right button.
+		batch.draw(shiftRImg, 320, 50);
+
 		// Draw Left top Song
 		if(leftSong != null ) {
 			// batch.draw(leftSong.getDiskImage(), 10, 250);
 			leftZoomAni.draw(batch);
+			Texture t = modeIconMap.get(leftSong.getPlayMode());
+			batch.draw(t, 0, 366);
 		}
-		
+
 		// Draw Right top Song
 		if(rightSong != null ) {
 			// batch.draw(rightSong.getDiskImage(), 320, 250);
 			rightZoomAni.draw(batch);
+			Texture t = modeIconMap.get(leftSong.getPlayMode());
+			batch.draw(t, 320, 366);
 		}
-		
-		// shift left button.
-		batch.draw(shiftLImg, 10, 50);
-		
-		// shift right button.
-		batch.draw(shiftRImg, 320, 50);
-		
-		
+
 		freePlayImg.draw(batch, blank.getValue());
-		
+
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
-		if(!KickItUpGame.playerState.isStart1p()) {			
+		if(!KickItUpGame.playerState.isStart1p()) {
 			pressCenter1pImg.draw(batch, blank.getValue());
 		}
-		
+
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!KickItUpGame.playerState.isStart2p()) {
@@ -137,7 +149,7 @@ public class SelectStage implements InputProcessor, IStage {
 			leftZoomAni.stop();
 			rightZoomAni.start();
 			break;
-			
+
 		case Input.Keys.ESCAPE:
 			gotoPrevStage();
 			break;
@@ -194,7 +206,7 @@ public class SelectStage implements InputProcessor, IStage {
     	SongMgr.getInstace().turnLeft();
     	shiftMoveSnd.play();
     }
-    
+
     // 오른쪽으로 화면이동
     private void   turnRight() {
 		leftZoomAni.stop();
@@ -202,7 +214,7 @@ public class SelectStage implements InputProcessor, IStage {
     	SongMgr.getInstace().turnRight();
     	shiftMoveSnd.play();
     }
-    
+
     // 선택된곡 reset
     private void   resetSelectSong() {
     	if(selectedSong != null) {
@@ -212,16 +224,16 @@ public class SelectStage implements InputProcessor, IStage {
 	    rightSong = SongMgr.getInstace().getRightSong();
         bgmSnd.loop();
     }
-    
+
     // 곡 선택
     private void   selectSong( int direction ) {
     }
-    
+
     // 오른쪽 곡 선택
     private void   selectRightSong() {
-    	
+
     }
-    
+
     // check hidden mode.
     private void   checkHiddenMode() {
     }

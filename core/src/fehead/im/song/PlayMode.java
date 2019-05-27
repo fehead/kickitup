@@ -10,7 +10,7 @@ public enum PlayMode {
 	, HARD("hard", 2)
 	, CRAZY("crazy", 2)
 	, DOUBLE("double", 1);
-	
+
 	private	String	name;
 	private	int	stepCnt;
 }
