@@ -48,7 +48,7 @@ public class SelectStage implements InputProcessor, IStage {
 		this.stages = stages;
 		modeIconMap = new HashMap<>();
 		for(PlayMode pm : PlayMode.values()) {
-			modeIconMap.put(pm, new Texture("images/" + pm.getName() + "icon.png"));
+			modeIconMap.put(pm, new Texture(pm.iconFileName()));
 		}
 	}
 

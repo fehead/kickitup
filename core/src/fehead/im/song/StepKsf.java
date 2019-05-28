@@ -30,7 +30,7 @@ public class StepKsf {
 	private int bunki[] = new int[2];
 
 	List<String>	step = new ArrayList<>(MAX_STEPS);
-	
+
 	public boolean readKSF(File stepFile) {
 		List<String> tempStep = new ArrayList<>(MAX_STEPS);
 		try(BufferedReader br = new BufferedReader(new FileReader(stepFile))) {
@@ -96,7 +96,7 @@ public class StepKsf {
 		return true;
 	}
 
-	public static StepKsf OfFile(File stepFile) {
+	public static StepKsf fileOf(File stepFile) {
 		StepKsf stepKsf = new StepKsf();
 		stepKsf.readKSF(stepFile);
 		return stepKsf;
