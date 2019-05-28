@@ -54,6 +54,10 @@ public class ZoomAnimation {
 		oscillate = false;
 	}
 	
+	public boolean isStarted() {
+		return oscillate;
+	}
+	
 	private void update() {
 		if(!oscillate)
 			return;

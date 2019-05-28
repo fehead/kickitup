@@ -37,7 +37,8 @@ public class SelectStage implements InputProcessor, IStage {
 	private	BlinkBase	blank = new BlinkBase();
 
 	private Sound bgmSnd;				// BackGround Music
-    private Sound shiftMoveSnd;            // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.
+    private Sound shiftMoveSnd;         // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.
+    private Sound introSnd;
 	private Song leftSong;
 	private Song rightSong;
 	private Song selectedSong;
@@ -116,6 +117,10 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void getOut() {
+		if(introSnd != null)
+			introSnd.dispose();
+		introSnd = null;
+		selectedSong = null;
 		shiftMoveSnd.dispose();
 		bgmSnd.dispose();
 		SongMgr.getInstace().reset();
@@ -142,12 +147,10 @@ public class SelectStage implements InputProcessor, IStage {
 			turnRight();
 			break;
 		case Input.Keys.Q:
-			rightZoomAni.stop();
-			leftZoomAni.start();
+			selectLeft();
 			break;
 		case Input.Keys.E:
-			leftZoomAni.stop();
-			rightZoomAni.start();
+			selectRight();
 			break;
 
 		case Input.Keys.ESCAPE:
@@ -155,6 +158,38 @@ public class SelectStage implements InputProcessor, IStage {
 			break;
 		}
 		return false;
+	}
+
+	private void selectRight() {
+		bgmSnd.dispose();
+		if(rightZoomAni.isStarted()) {
+			// TODO: next stage.
+		} else {
+			leftZoomAni.stop();
+			rightZoomAni.start();
+			if(introSnd != null)
+				introSnd.dispose();
+			selectedSong = leftSong;
+			introSnd = selectedSong.getIntroSnd();
+			introSnd.loop();
+		}
+	}
+
+	private void selectLeft() {
+		bgmSnd.dispose();
+		if(leftZoomAni.isStarted()) {
+			
+		} else {
+			// TODO: next stage.
+			rightZoomAni.stop();
+			leftZoomAni.start();
+			if(introSnd != null)
+				introSnd.dispose();
+			selectedSong = leftSong;
+			introSnd = selectedSong.getIntroSnd();
+			introSnd.loop();
+			
+		}
 	}
 
 	@Override
@@ -201,6 +236,10 @@ public class SelectStage implements InputProcessor, IStage {
 
     //  왼쪽으로 화면이동
     private void   turnLeft() {
+		if(introSnd != null) {
+			introSnd.dispose();
+			introSnd = null;
+		}
 		leftZoomAni.stop();
 		rightZoomAni.stop();
     	SongMgr.getInstace().turnLeft();
@@ -209,7 +248,12 @@ public class SelectStage implements InputProcessor, IStage {
 
     // 오른쪽으로 화면이동
     private void   turnRight() {
-		leftZoomAni.stop();
+		if(introSnd != null) {
+			introSnd.dispose();
+			introSnd = null;
+		}
+
+    	leftZoomAni.stop();
 		rightZoomAni.stop();
     	SongMgr.getInstace().turnRight();
     	shiftMoveSnd.play();

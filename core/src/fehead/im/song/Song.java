@@ -3,6 +3,8 @@ package fehead.im.song;
 import java.io.File;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -18,10 +20,12 @@ public class Song {
 	private	File playMp3Path ;
 	private	File playMpgPath ;
 	private	File introMp3Path;
-
+		
 	private Sprite	diskImage;
 	private	PlayMode playMode;
 	private	List<StepKsf> stepList;
+	
+	private	Sound playingSnd;
 
 	private Song(File songDir, PlayMode pm, List<StepKsf> stepList) {
 		this.playMode = pm;
@@ -55,6 +59,10 @@ public class Song {
 		}
 		
 		return new Song(songDir, pm, stepList);
+	}
+
+	public Sound getIntroSnd() {
+		return Gdx.audio.newSound(Gdx.files.internal(introMp3Path.getAbsolutePath()));
 	}
 	
 	/*
