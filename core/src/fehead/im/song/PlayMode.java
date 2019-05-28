@@ -1,6 +1,7 @@
 package fehead.im.song;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,10 +25,10 @@ public enum PlayMode {
 		if(stepCnt < 1)
 			return new ArrayList<>();
 
+
 		// exam) DOUBLE -> ["double.ksf"]
 		if(stepCnt == 1)
-			return Stream.of(name + ".ksf")
-				.collect(Collectors.toList());
+			return Arrays.asList(name + ".ksf");
 
 		// exam) EASY -> ["easy_1.ksf", "easy_2.ksf"]
 		// 	HARD -> ["hard_1.ksf", "hard_2.ksf"]
