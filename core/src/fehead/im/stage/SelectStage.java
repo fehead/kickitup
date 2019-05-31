@@ -51,6 +51,9 @@ public class SelectStage implements InputProcessor, IStage {
 		for(PlayMode pm : PlayMode.values()) {
 			modeIconMap.put(pm, new Texture(pm.iconFileName()));
 		}
+
+		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
+		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
 	}
 
 	@Override
@@ -59,10 +62,8 @@ public class SelectStage implements InputProcessor, IStage {
 		pressCenter1pImg.setPosition(10, 30);
 		pressCenter2pImg.setPosition(410, 30);
 
-		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
 		bgmSnd.loop();
 
-		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
 		Gdx.input.setInputProcessor(this);
 
 	    leftSong = SongMgr.getInstace().getLeftSong();
@@ -178,7 +179,7 @@ public class SelectStage implements InputProcessor, IStage {
 	private void selectLeft() {
 		bgmSnd.dispose();
 		if(leftZoomAni.isStarted()) {
-			
+
 		} else {
 			// TODO: next stage.
 			rightZoomAni.stop();
@@ -188,7 +189,7 @@ public class SelectStage implements InputProcessor, IStage {
 			selectedSong = leftSong;
 			introSnd = selectedSong.getIntroSnd();
 			introSnd.loop();
-			
+
 		}
 	}
 
