@@ -162,7 +162,7 @@ public class SelectStage implements InputProcessor, IStage {
 	}
 
 	private void selectRight() {
-		bgmSnd.dispose();
+		bgmSnd.stop();
 		if(rightZoomAni.isStarted()) {
 			// TODO: next stage.
 		} else {
@@ -177,7 +177,7 @@ public class SelectStage implements InputProcessor, IStage {
 	}
 
 	private void selectLeft() {
-		bgmSnd.dispose();
+		bgmSnd.stop();
 		if(leftZoomAni.isStarted()) {
 
 		} else {
@@ -240,6 +240,7 @@ public class SelectStage implements InputProcessor, IStage {
 		if(introSnd != null) {
 			introSnd.dispose();
 			introSnd = null;
+			bgmSnd.loop();
 		}
 		leftZoomAni.stop();
 		rightZoomAni.stop();
@@ -252,6 +253,7 @@ public class SelectStage implements InputProcessor, IStage {
 		if(introSnd != null) {
 			introSnd.dispose();
 			introSnd = null;
+			bgmSnd.loop();
 		}
 
     	leftZoomAni.stop();
