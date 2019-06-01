@@ -48,9 +48,8 @@ public class SelectStage implements InputProcessor, IStage {
 		this.batch = batch;
 		this.stages = stages;
 		modeIconMap = new HashMap<>();
-		for(PlayMode pm : PlayMode.values()) {
+		for(PlayMode pm : PlayMode.values())
 			modeIconMap.put(pm, new Texture(pm.iconFileName()));
-		}
 
 		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
 		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
