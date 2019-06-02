@@ -241,10 +241,9 @@ public class SelectStage implements InputProcessor, IStage {
 			introSnd = null;
 			bgmSnd.loop();
 		}
-		leftZoomAni.stop();
-		rightZoomAni.stop();
     	SongMgr.getInstace().turnLeft();
     	shiftMoveSnd.play();
+    	setSongs();
     }
 
     // 오른쪽으로 화면이동
@@ -255,10 +254,9 @@ public class SelectStage implements InputProcessor, IStage {
 			bgmSnd.loop();
 		}
 
-    	leftZoomAni.stop();
-		rightZoomAni.stop();
     	SongMgr.getInstace().turnRight();
     	shiftMoveSnd.play();
+    	setSongs();
     }
 
     // 선택된곡 reset
@@ -269,6 +267,17 @@ public class SelectStage implements InputProcessor, IStage {
     	leftSong = SongMgr.getInstace().getLeftSong();
 	    rightSong = SongMgr.getInstace().getRightSong();
         bgmSnd.loop();
+    }
+    
+    private void setSongs() {
+    	leftZoomAni.stop();
+		rightZoomAni.stop();
+    	leftSong = SongMgr.getInstace().getLeftSong();
+	    rightSong = SongMgr.getInstace().getRightSong();
+	    leftZoomAni = ZoomAnimation.of(leftSong.getDiskImage(), 1.0f, 1.5f);
+	    leftZoomAni.setPosition(10,  250);
+	    rightZoomAni = ZoomAnimation.of(rightSong.getDiskImage(), 1.0f, 1.5f);
+	    rightZoomAni.setPosition(320,  250);
     }
 
     // 곡 선택

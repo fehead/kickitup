@@ -59,18 +59,34 @@ public class SongMgr {
 	}
 
 	public void turnLeft() {
-	    if( !songList.isEmpty() ) {
-	    	leftIndex = (leftIndex - 2) % songList.size();
-	        rightIndex = (rightIndex - 2) % songList.size();
-	    }
+		if(songList.isEmpty())
+			return;
+		
+		leftIndex -= 2;
+		if(leftIndex < 0)
+			leftIndex += songList.size();
+		rightIndex -= 2;
+		if(rightIndex < 0)
+			rightIndex += songList.size();
+		
+    	leftIndex = leftIndex % songList.size();
+        rightIndex = rightIndex % songList.size();
 	    curSong = null;
 	}
 
 	public void turnRight() {
-	    if( !songList.isEmpty() ) {
-	    	leftIndex = (leftIndex + 2) % songList.size();
-	        rightIndex = (rightIndex + 2) % songList.size();
-	    }
+		if(songList.isEmpty())
+			return;
+		
+		leftIndex += 2;
+		if(leftIndex < 0)
+			leftIndex += songList.size();
+		rightIndex += 2;
+		if(rightIndex < 0)
+			rightIndex += songList.size();
+		
+	   	leftIndex = leftIndex % songList.size();
+        rightIndex = rightIndex % songList.size();
 	    curSong = null;
 	}
 
