@@ -61,7 +61,7 @@ public class Main {
 	private static final String IDB_CARROW9 = null;
 	private static final int PM_NOREMOVE = 41;
 	private static final int DDLOCK_WAIT = 42;
-	
+
 	////////////////////////////////////////////////////////
 
 	static Random generator = new Random();
@@ -120,14 +120,14 @@ public class Main {
 	static final	int	JUDGE_SIZE_X	=	250;
 	static final	int	JUDGE_SIZE_Y	=	50;
 
-	static final	String	VER_NUM	= "0.4b";	
+	static final	String	VER_NUM	= "0.4b";
 	static final	String	PRGNAME = "Kick It UP!";
-	
+
 	static final	int	MAX_PATH = 255;
-	
+
 	static private String	TITLE;
-	
-	
+
+
 	// 일반 하드 데이터 부분
 	static private char [][] 			Data	= new char[MAX_DATA+1][14];
 	static private char [][]			Data_Judge	= new char[MAX_DATA+1][14];
@@ -337,15 +337,12 @@ public class Main {
 
 	static private boolean	g_fullscreen=false;
 
-	static private CMedia intro;
-	static private CMedia song;
-
 	static private RECT                    g_rcViewport;           // Pos. & size to blt from
 	static private RECT                    g_rcScreen;             // Screen pos. for blt
-	
-	
+
+
 	static private void	DebugPrintf(String fmt, Object... args) {
-		Gdx.app.log("", String.format(fmt, args));		
+		Gdx.app.log("", String.format(fmt, args));
 	}
 
 	static private void	JudgementSet()	{
@@ -356,10 +353,10 @@ public class Main {
 		for(i=64;i<96;i++)	JudgeArray[i] = GREAT;
 		for(i=73;i<88;i++)	JudgeArray[i] = PERFECT;
 	}
-	
+
 	static private void	DisplayStageCount(long Count) {
 		RECT	sssRect = new RECT();
-		
+
 		sssRect.top=0;
 		sssRect.left=Count*80;
 		sssRect.right=sssRect.left+80;
@@ -367,8 +364,8 @@ public class Main {
 
 		g_pDDSBack.BltFast(280, 0, StageCount, sssRect, DDBLTFAST_SRCCOLORKEY);
 	}
-	
-	
+
+
 	static private void ClearMode() {
 			HighSpeed1p=1;
 			bModeMirror1p=false;
@@ -402,8 +399,8 @@ public class Main {
 			bModeRandomS2p=false;
 			bModeSuddenR2p=false;
 	}
-	
-	
+
+
 	static private int GameOver1_count = 0;
 	static private void	GameOver1()	{
 		if(First==0) {
@@ -418,12 +415,12 @@ public class Main {
 		}
 		Flipp();
 	}
-	
+
 	// void DrawBackground(char[][14] Data, long i, int temp)
 	static private void DrawBackground(char[][] Data, long i, int temp)	{
 		g_pDDSBack.BltFast(0,0,songBack,null, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 	}
-	
+
 	static private void DrawScore1p() {
 		RECT	cRect = new RECT();
 		int Loop;
@@ -440,13 +437,13 @@ public class Main {
 			g_pDDSBack.BltFast(20+Loop*22,444,Score, cRect, DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		}/* 여기까지 */
 	}
-	
+
 	static private void DrawScore2p()	{
 		RECT	cRect = new RECT();
 		int Loop;
 
 		char [] chScore = String.format("%07d",Score2p).toCharArray();
-				
+
 		for(Loop=0;;Loop++)	{
 			if(chScore[Loop] == 0)break;
 			chScore[Loop]-=48;
@@ -457,7 +454,7 @@ public class Main {
 			g_pDDSBack.BltFast(463+Loop*22,444,Score,cRect, DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		}/* 여기까지 */
 	}
-	
+
 	static private void DrawGauge1p() {
 		int CurG;
 		int i;
@@ -466,7 +463,7 @@ public class Main {
 		RECT sRect = new RECT();
 
 		CurG=Gauge1p;
-		
+
 		if(CurG<0)CurG=0;
 
 		g_pDDSBack.BltFast(32,0,GaugeWaku,null, DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
@@ -477,7 +474,7 @@ public class Main {
 			return;
 		}
 		else Phase++;*/
-		
+
 		sRect.top=0;
 		sRect.left=0;
 		sRect.right=6;
@@ -510,7 +507,7 @@ public class Main {
 			g_pDDSBack.BltFast(280-(i*6),20,Gauge,sRect,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		}
 	}
-	
+
 	static private void DrawGauge2p() {
 		int CurG;
 		int i;
@@ -518,7 +515,7 @@ public class Main {
 //		static	int	Phase;
 
 		CurG=Gauge2p;
-		
+
 		if(CurG<0)CurG=0;
 
 		g_pDDSBack.BltFast(352,0,GaugeWaku,null,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
@@ -563,7 +560,7 @@ public class Main {
 			g_pDDSBack.BltFast(352+(i*6),20,Gauge,sRect,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		}
 	}
-	
+
 	static private void WaveSet_Loading() {
 		g_dsOpening=DSLoadSoundBuffer(lpds, "wave\\Opening.wav");
 		g_dsDead=DSLoadSoundBuffer(lpds,"wave\\Dead.wav");
@@ -573,7 +570,7 @@ public class Main {
 		g_dsBeat=DSLoadSoundBuffer(lpds,"wave\\Beat.wav");
 		g_dsSelectSong=DSLoadSoundBuffer(lpds, "wave\\MusicSelect.wav");
 	}
-	
+
 	static private void DisplayMessage(int x, int y, String msg) {
 		final int FONT_SIZE	= 8;
 		final int FONT_HEIGHT = 16;
@@ -581,28 +578,28 @@ public class Main {
 		RECT sRect = new RECT();
 
 		char [] message = msg.toCharArray();
-		for(int i = 0 ; ; i++) {		
+		for(int i = 0 ; ; i++) {
 			if(message[i] == 0)
-				break;	
-		
+				break;
+
 			char msg1 = Character.toUpperCase(message[i]);
-			
+
 			sRect.top = 0;
 			sRect.bottom = FONT_HEIGHT;
 			sRect.left = FONT_SIZE * (msg1-' ');
 			sRect.right = sRect.left + FONT_SIZE;
-			
+
 			g_pDDSBack.BltFast(x, y, SmallFont, sRect, DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 			x += FONT_SIZE;
 		}
 	}
-	
+
 	// static RECT sRect = new RECT();
 	static private RECT ClpBlt_sRect;
 	static private HRESULT	ClpBlt(int x ,int y ,LPDIRECTDRAWSURFACE ds,RECT srect,int mode){
 		HRESULT	hRet = HRESULT.DD_OK;
 		ClpBlt_sRect = new RECT(srect);
-		
+
 		if(x>640 || y>480)
 			return HRESULT.DD_OK;
 
@@ -722,7 +719,7 @@ public class Main {
 
 		if(PressedKey2p[5]==1)
 			Start2p=true;
-		
+
 		// Draw background image. "KICK IT UP"
 		g_pDDSBack.BltFast(0,0,GameTITLE, null, DDBLTFAST_WAIT | DDBLTFAST_NOCOLORKEY);
 
@@ -798,7 +795,7 @@ public class Main {
 
 	}
 
-	
+
 	// DrawJudge1p
 	static private char DrawJudge1p_LastJudge;
 	static private long DrawJudge1p_sec,DrawJudge1p_delta;
@@ -896,7 +893,7 @@ public class Main {
 
 		if(Judgement1p != 0) {
 			//g_pDDSBack.BltFast(40,200+dwState/2,JudgeFont,&rRect, DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-			
+
 			g_pDDSBack.Blt(destRect, JudgeFont, rRect,DDBLT_WAIT | DDBLT_KEYSRC , null);
 
 			/* 콤보 출력부 입니다. */
@@ -919,7 +916,7 @@ public class Main {
 					cRect.right=150;
 					cRect.top=65;
 					cRect.bottom=100;
-					
+
 					if(dwState>10)
 						g_pDDSBack.BltFast(80,320+dwState*2-dwState*2,ComboFont,cRect, DDBLTFAST_SRCCOLORKEY);
 					else
@@ -949,7 +946,7 @@ public class Main {
 			Judgement2p=DrawJudge2p_LastJudge;
 
 			DrawJudge2p_delta=timeGetTime()-DrawJudge2p_sec;
-			
+
 			if(DrawJudge2p_delta>16) {
 				DrawJudge2p_sec=timeGetTime();
 				if(dwState2>=40) {
@@ -1031,7 +1028,7 @@ public class Main {
 			if((Judgement2p==PERFECT || Judgement2p==GREAT) && Combo2p>3)
 			{
 				chCombo2p = String.format("%03d",Combo2p).toCharArray();
-				
+
 				for(Loop=0;;Loop++)	{
 					if(chCombo2p[Loop]==0)break;
 					chCombo2p[Loop]-=48;
@@ -1049,7 +1046,7 @@ public class Main {
 					cRect.right=150;
 					cRect.top=65;
 					cRect.bottom=100;
-					
+
 					if(dwState2>10)
 						g_pDDSBack.BltFast(400,320+dwState2*2-dwState2*2,ComboFont,cRect, DDBLTFAST_SRCCOLORKEY);
 					else
@@ -1061,8 +1058,8 @@ public class Main {
 		Judgement2p=NONE;
 	}
 
-	
-	
+
+
 	static private int [] DrawArrow1p_arrow_l = new int[]{0,0,72,72,144,144,216,216,288,288,360,360,432,432,504,504,576,576,648,648};
 	static private int [] DrawArrow1p_arrow_r = new int[]{72,72,144,144,216,216,288,288,360,360,432,432,504,504,576,576,648,648,720,720};
 
@@ -1111,14 +1108,14 @@ public class Main {
 			DrawArrow1p_cur2=cur;
 			DrawArrow1p_beat=4;
 		}
-		else 
+		else
 		{
 			DrawArrow1p_beat--;
 			if(DrawArrow1p_beat<=0)DrawArrow1p_beat=0;
 		}
 
 		ReadGameInput();
-	// 오토 버튼 지원 부분 
+	// 오토 버튼 지원 부분
 		if(KCFG.auto1_1p==true)
 		{
 			for(count=0;count<10;count++)
@@ -1134,7 +1131,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1153,7 +1150,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1172,7 +1169,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1209,7 +1206,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1227,7 +1224,7 @@ public class Main {
 			if(PressedKey1p[1] != 0)
 			for(count=0;count<18;count++)
 			{
-				if( KDouble.ZONE_U*HighSpeed1p_1 < Data_y[(int) (cur+count)] && 
+				if( KDouble.ZONE_U*HighSpeed1p_1 < Data_y[(int) (cur+count)] &&
 						KDouble.ZONE_D*HighSpeed1p_1 > Data_y[(int) (cur+count)]  )
 				{
 					if( KDouble.PERFECT_ZONE_U*HighSpeed1p_1 < Data_y[(int) (cur+count)] &&
@@ -1247,7 +1244,7 @@ public class Main {
 							break;
 						}
 					}
-					else if( KDouble.GREAT_ZONE_U*HighSpeed1p_1 < Data_y[(int) (cur+count)] && 
+					else if( KDouble.GREAT_ZONE_U*HighSpeed1p_1 < Data_y[(int) (cur+count)] &&
 							KDouble.GREAT_ZONE_D*HighSpeed1p_1 > Data_y[(int) (cur+count)]  )
 					{
 						if(Data_Judge[(int) (cur+count)][0]=='1')
@@ -1460,8 +1457,8 @@ public class Main {
 							break;
 						}
 					}
-					
-				} 
+
+				}
 			}
 
 		}
@@ -1638,9 +1635,9 @@ public class Main {
 			}
 
 		}
-		
+
 		Judgement1p=JudgeTemp;
-		
+
 		// 미스처리입니다.
 		for(count=0;count<10;count++)
 		if(Data_y[cur+count] < KDouble.ZONE_U
@@ -1772,8 +1769,6 @@ public class Main {
 				{
 					if(SongFlag)
 					{
-						song.OnMediaStop();
-						song = null;
 						SongFlag=false;
 					}
 					g_programState=DEAD;
@@ -1785,8 +1780,6 @@ public class Main {
 				{
 					if(SongFlag)
 					{
-						song.OnMediaStop();
-						song = null;
 						SongFlag=false;
 					}
 					g_programState=DEAD;
@@ -1853,21 +1846,21 @@ public class Main {
 
 		if(DrawArrow1p_Crash1)g_pDDSBack.BltFast(25,43,cArrow1,DrawArrow1p_cArr1,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow1p_s1!=0)g_pDDSBack.BltFast(27,45,pArrow1,DrawArrow1p_pArr1,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow1p_Crash7)g_pDDSBack.BltFast(75,43,cArrow7,DrawArrow1p_cArr7,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow1p_s7!=0)g_pDDSBack.BltFast(77,45,pArrow7,DrawArrow1p_pArr7,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow1p_Crash5)g_pDDSBack.BltFast(125,43,cArrow5,DrawArrow1p_cArr5,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow1p_s5!=0)g_pDDSBack.BltFast(127,45,pArrow5,DrawArrow1p_pArr5,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 
 		if(DrawArrow1p_Crash9)g_pDDSBack.BltFast(175,43,cArrow9,DrawArrow1p_cArr9,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow1p_s9!=0)g_pDDSBack.BltFast(177,45,pArrow9,DrawArrow1p_pArr9,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow1p_Crash3)g_pDDSBack.BltFast(225,43,cArrow3,DrawArrow1p_cArr3,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow1p_s3!=0)g_pDDSBack.BltFast(227,45,pArrow3,DrawArrow1p_pArr3,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 	}
-	
-	
+
+
 	static int [] DrawArrow2p_arrow_l = new int[]{0,0,72,72,144,144,216,216,288,288,360,360,432,432,504,504,576,576,648,648};
 	static int [] DrawArrow2p_arrow_r = new int[]{72,72,144,144,216,216,288,288,360,360,432,432,504,504,576,576,648,648,720,720};
 	static int [] DrawArrow2p_Carrow_l= new int[]{0,0,80,80,160,160,240,240,320,320,400,400,480,480,560,560,640,640};
@@ -1906,7 +1899,7 @@ public class Main {
 		char JudgeTemp=0;
 		int	count;
 
-		
+
 		if(Start2p==true && Start1p==false)ReadGameInput();
 		if(DrawArrow2p_cur2!=cur)
 		{
@@ -1915,12 +1908,12 @@ public class Main {
 			DrawArrow2p_cur2=cur;
 			DrawArrow2p_beat=4;
 		}
-		else 
+		else
 		{
 			DrawArrow2p_beat--;
 			if(DrawArrow2p_beat<=0)DrawArrow2p_beat=0;
 		}
-	// 오토 버튼 지원 부분 
+	// 오토 버튼 지원 부분
 		if(KCFG.auto1_2p==true)
 		{
 			for(count=0;count<10;count++)
@@ -1936,7 +1929,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1955,7 +1948,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1974,7 +1967,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -1993,7 +1986,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -2012,7 +2005,7 @@ public class Main {
 						break;
 					}
 				}
-				
+
 			}
 		}
 
@@ -2030,7 +2023,7 @@ public class Main {
 			if(PressedKey2p[1] != 0)
 			for(count=0;count<18;count++)
 			{
-				if( KDouble.ZONE_U*HighSpeed2p_1 < Data_y1[cur+count] && 
+				if( KDouble.ZONE_U*HighSpeed2p_1 < Data_y1[cur+count] &&
 						KDouble.ZONE_D*HighSpeed2p_1 > Data_y1[cur+count]  )
 				{
 					if( KDouble.PERFECT_ZONE_U*HighSpeed2p_1 < Data_y1[cur+count] &&
@@ -2050,7 +2043,7 @@ public class Main {
 							break;
 						}
 					}
-					else if( KDouble.GREAT_ZONE_U*HighSpeed2p_1 < Data_y1[cur+count] && 
+					else if( KDouble.GREAT_ZONE_U*HighSpeed2p_1 < Data_y1[cur+count] &&
 							KDouble.GREAT_ZONE_D*HighSpeed2p_1 > Data_y1[cur+count]  )
 					{
 						if(Data_Judge1[cur+count][5]=='1')
@@ -2267,8 +2260,8 @@ public class Main {
 							break;
 						}
 					}
-					
-				} 
+
+				}
 			}
 
 		}
@@ -2445,9 +2438,9 @@ public class Main {
 			}
 
 		}
-		
+
 		Judgement2p=JudgeTemp;
-		
+
 		// 미스처리입니다.
 		for(count=0;count<10;count++)
 		if(Data_y1[cur+count] < 40
@@ -2577,8 +2570,6 @@ public class Main {
 				{
 					if(SongFlag)
 					{
-						song.OnMediaStop();
-						song = null;
 						SongFlag=false;
 					}
 					g_programState=DEAD;
@@ -2590,8 +2581,6 @@ public class Main {
 				{
 					if(SongFlag)
 					{
-						song.OnMediaStop();
-						song = null;
 						SongFlag=false;
 					}
 					g_programState=DEAD;
@@ -2658,21 +2647,21 @@ public class Main {
 
 		if(DrawArrow2p_Crash1)g_pDDSBack.BltFast(345,43,cArrow1,DrawArrow2p_cArr1,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow2p_s1 != 0)g_pDDSBack.BltFast(347,45,pArrow1,DrawArrow2p_pArr1,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow2p_Crash7)g_pDDSBack.BltFast(395,43,cArrow7,DrawArrow2p_cArr7,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow2p_s7 != 0)g_pDDSBack.BltFast(397,45,pArrow7,DrawArrow2p_pArr7,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow2p_Crash5)g_pDDSBack.BltFast(445,43,cArrow5,DrawArrow2p_cArr5,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow2p_s5 != 0)g_pDDSBack.BltFast(447,45,pArrow5,DrawArrow2p_pArr5,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 
 		if(DrawArrow2p_Crash9)g_pDDSBack.BltFast(495,43,cArrow9,DrawArrow2p_cArr9,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow2p_s9 != 0)g_pDDSBack.BltFast(497,45,pArrow9,DrawArrow2p_pArr9,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
-		
+
 		if(DrawArrow2p_Crash3)g_pDDSBack.BltFast(545,43,cArrow3,DrawArrow2p_cArr3,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 		else if(DrawArrow2p_s3 != 0)g_pDDSBack.BltFast(547,45,pArrow3,DrawArrow2p_pArr3,DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY);
 	}
-	
-	static private HRESULT	RestoreAll() { 
+
+	static private HRESULT	RestoreAll() {
 		HRESULT	hRet;
 		hRet=g_pDDSPrimary.Restore();
 		return hRet;
@@ -2680,7 +2669,7 @@ public class Main {
 
 	static private void Flipp() {
 		HRESULT hRet;
-		
+
 		while(true)	{
 			if(g_fullscreen)
 				hRet=g_pDDSPrimary.Flip(null,DDFLIP_WAIT);
@@ -2700,7 +2689,7 @@ public class Main {
 				break;
 		}
 	}
-	
+
 	static private boolean InitDSound(HWND hWnd, int Samples, int Bits, int nChannels)
 	{
 		HRESULT			hRet;
@@ -2719,7 +2708,7 @@ public class Main {
 		return true;
 
 	}
-	
+
 	static private void ReleaseDSound() {
 		/*
 		int i;
@@ -2994,8 +2983,8 @@ public class Main {
 			CleanupInput();
 		}
 	}
-	
-	
+
+
 	static private long UpdateFrame_lastTime, UpdateFrame_fpsTime,UpdateFrame_framesRendered,UpdateFrame_fps;
 	static private void UpdateFrame()	{
 		// FPS count start
@@ -3055,7 +3044,7 @@ public class Main {
 		}
 
 	}
-	
+
 	static private long WindowProc(HWND hWnd, int message, long wParam, long lParam)
 	{
 		switch (message)
@@ -3102,8 +3091,6 @@ public class Main {
 							case SELECTSONG:
 								g_programState=CONFIG;
 								if(IntroFlag){
-									intro.OnMediaStop();
-									intro = null;
 									IntroFlag=false;
 								}
 								if(g_dsSelectSong != null)
@@ -3114,8 +3101,6 @@ public class Main {
 							case STAGE1:
 								if(SongFlag)
 								{
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								g_programState=CONFIG;
@@ -3123,8 +3108,6 @@ public class Main {
 							case DOUBLE:
 								if(SongFlag)
 								{
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								g_programState=CONFIG;
@@ -3132,8 +3115,6 @@ public class Main {
 							case COUPLE:
 								if(SongFlag)
 								{
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								g_programState=CONFIG;
@@ -3221,8 +3202,6 @@ public class Main {
 							case SELECTSONG:
 								g_programState=GAMETITLE;
 								if(IntroFlag){
-									intro.OnMediaStop();
-									intro = null;
 									IntroFlag=false;
 								}
 								if(g_dsSelectSong != null)
@@ -3232,8 +3211,6 @@ public class Main {
 
 							case STAGE1:
 								if(SongFlag) {
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								First=0;
@@ -3241,8 +3218,6 @@ public class Main {
 								break;
 							case DOUBLE:
 								if(SongFlag) {
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								First=0;
@@ -3251,8 +3226,6 @@ public class Main {
 							case COUPLE:
 								if(SongFlag)
 								{
-									song.OnMediaStop();
-									song = null;
 									SongFlag=false;
 								}
 								First=0;
@@ -3284,7 +3257,7 @@ public class Main {
 	    }
 	    return DefWindowProc(hWnd, message, wParam, lParam);
 	}
-	
+
 	HRESULT InitFail(HWND hWnd, HRESULT hRet, String szError, Object... args) {
 		ReleaseAllObjects();
 		MessageBox(hWnd, String.format(szError, args), TITLE, MB_OK);
@@ -3343,7 +3316,7 @@ public class Main {
 		TITLE = String.format("KICK IT UP! beta version v%s - Minor release" ,VER_NUM);
 
 	    // Create a window
-	    hWnd = CreateWindowEx(dwExStyle ,	
+	    hWnd = CreateWindowEx(dwExStyle ,
 								PRGNAME,
 								TITLE,
 								dwStyle,
@@ -3364,7 +3337,7 @@ public class Main {
 		return HRESULT.DD_OK;
 
 	}
-	
+
 	static private HRESULT InitDD() {
 		DDSURFACEDESC			ddsd = new DDSURFACEDESC();
 		DDSCAPS					ddscaps = new DDSCAPS();
@@ -3388,7 +3361,7 @@ public class Main {
 
 			// Create the primary surface
 //			ddsd.dwSize = sizeof(ddsd);
-//			ddsd.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT; 
+//			ddsd.dwFlags = DDSD_CAPS | DDSD_BACKBUFFERCOUNT;
 //			ddsd.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE |
 //								  DDSCAPS_FLIP |
 //								  DDSCAPS_COMPLEX;
@@ -3418,13 +3391,13 @@ public class Main {
 
 			// Create the primary surface
 //			ddsd.dwSize = sizeof(ddsd);
-//			ddsd.dwFlags = DDSD_CAPS ; 
+//			ddsd.dwFlags = DDSD_CAPS ;
 //			ddsd.ddsCaps.dwCaps = DDSCAPS_PRIMARYSURFACE;
 
 			g_pDD.CreateSurface(ddsd,g_pDDSPrimary,null);
 
 			hRet=g_pDD.CreateClipper(0, pClipper, null);
-			
+
 			if(hRet != HRESULT.DD_OK)
 			return InitFail(hWnd,hRet,"CreateClipper() : FAILED");
 
@@ -3449,11 +3422,11 @@ public class Main {
 		}
 		return	hRet;
 	}
-	
+
 	static public HRESULT KLoadImage()
 	{
 		// Loading image here
-		
+
 		SmallFont=DDLoadBitmap(g_pDD,"images\\sfont.bmp",0,0);
 		if(SmallFont==null)
 		{
@@ -3492,7 +3465,7 @@ public class Main {
 			return HRESULT.DD_ERROR;
 		}
 		DDSetColorKey(JudgeFont,CLR_INVALID);
-		
+
 		NumberFont = DDLoadBitmap(g_pDD,"images\\Number.bmp",0,0);
 		if(NumberFont==null)
 		{
@@ -3548,7 +3521,7 @@ public class Main {
 			return HRESULT.DD_ERROR;
 		}
 		DDSetColorKey(Gauge,CLR_INVALID);
-		
+
 		Arrow1=DDLoadBitmap(g_pDD,IDB_ARROW1,0,0);
 		if(Arrow1==null)
 		{
@@ -3751,7 +3724,7 @@ public class Main {
 
 		return HRESULT.DD_OK;
 	}
-	
+
 	static private int WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance, String lpCmdLine,int nCmdShow)
 	{
 	    MSG	msg = MSG.wParam;
@@ -3765,11 +3738,11 @@ public class Main {
 		today=localtime(&ltime);
 		g_szDebugName = String.format("%d%d%d.txt",today->tm_year+1900, today->tm_mon+1, today->tm_mday);
 	// define end :)
-	 * 
+	 *
 	 */
 
 		CoInitialize(null);
-		
+
 		if(InitWin(hInstance, 640, 480, nCmdShow) != HRESULT.DD_OK)
 			return 1;
 
@@ -3778,7 +3751,7 @@ public class Main {
 
 		Read();
 	 	if(InitDSound(hWnd,22050,8,2))return 1;
-		
+
 		WaveSet_Loading();
 	 	if(InitDI(hInstance) != HRESULT.DD_OK)return 1;
 
@@ -3833,7 +3806,7 @@ public class Main {
 
 		// Set height and width of SPRITE
 		height = (int)(srcRect.bottom - srcRect.top);
-		width = (int)(srcRect.right - srcRect.left); 
+		width = (int)(srcRect.right - srcRect.left);
 
 		// Lock down both surfaces for read and write
 		// memset(&srcDDSD, 0, sizeof(srcDDSD));
@@ -3863,13 +3836,13 @@ public class Main {
 		switch(BPP)
 		{
 		case 8:
-			// IMHO paletized modes are a thing of the past please feel free to 
+			// IMHO paletized modes are a thing of the past please feel free to
 			// implement this if you so desire.
 			break;
 
 		case 15:  ////////////////////////////////////////////////////////////////////////
 			//
-			//  WARNING!!!: I do not have a video card that uses the 5-5-5 format 
+			//  WARNING!!!: I do not have a video card that uses the 5-5-5 format
 			//              this barnch of code has not be tested.
 			//
 			////////////////////////////////////////////////////////////////////////
@@ -3908,13 +3881,13 @@ public class Main {
 						sr = (sTemp >> 10) & 0x1f;
 						dr = (dTemp >> 10) & 0x1f;
 
-						// TODO 
+						// TODO
 //						*((WORD*)lpDest) = (WORD)((ALPHA * (db - sb) >> 8) + sb |
 //								((ALPHA * (dg - sg) >> 8) + sg) << 5 |
 //								((ALPHA * (dr - sr) >> 8) + sr) << 10);
 					}
 
-					// TODO 
+					// TODO
 //					lpDest += 2;
 //					lpSprite += 2;
 				}
@@ -4047,7 +4020,7 @@ public class Main {
 
 		case 24:  ////////////////////////////////////////////////////////////////////////
 			//
-			//  WARNING!!!: I do not have a video card capable of 24bit rendering 
+			//  WARNING!!!: I do not have a video card capable of 24bit rendering
 			//              this barnch of code has not be tested.
 			//
 			////////////////////////////////////////////////////////////////////////
@@ -4160,8 +4133,8 @@ public class Main {
 		return HRESULT.DD_OK;
 	}
 
-	
-	
+
+
 	static private int temp;
 	static private int i;
 	static private long cur,last,sec;
@@ -4182,7 +4155,7 @@ public class Main {
 		static long cur,last,sec;
 		static long starttime, curtime;
 
-		static RECT rect1[7],rect3[7],rect5[7],rect7[7],rect9[7];		
+		static RECT rect1[7],rect3[7],rect5[7],rect7[7],rect9[7];
 		long delta;
 
 		static int sta;
@@ -4202,8 +4175,8 @@ public class Main {
 
 		DrawBackground(Data,i,temp);
 		DisplayStageCount(dwGameCount);
-		
-		
+
+
 		// Display debug msg.
 		DisplayMessage(0,0,String.format("start1: %d", start));
 		DisplayMessage(0,16,String.format("start2: %d", start2));
@@ -4224,13 +4197,13 @@ public class Main {
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed1p_5);
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed1p_7);
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed1p_9);
-				
+
 				MinSpeed = Math.min( MinSpeed, HighSpeed1p_3);
 				MinSpeed = Math.min( MinSpeed, HighSpeed1p_5);
 				MinSpeed = Math.min( MinSpeed, HighSpeed1p_7);
 				MinSpeed = Math.min( MinSpeed, HighSpeed1p_9);
 			}
-			else 
+			else
 			{
 				MaxSpeed = MinSpeed = HighSpeed1p;
 				HighSpeed1p_1 = HighSpeed1p_3 = HighSpeed1p_5 = HighSpeed1p_7 = HighSpeed1p_9 = HighSpeed1p;
@@ -4244,13 +4217,13 @@ public class Main {
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed2p_5);
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed2p_7);
 				MaxSpeed = Math.max( MaxSpeed, HighSpeed2p_9);
-				
+
 				MinSpeed = Math.min( MinSpeed, HighSpeed2p_3);
 				MinSpeed = Math.min( MinSpeed, HighSpeed2p_5);
 				MinSpeed = Math.min( MinSpeed, HighSpeed2p_7);
 				MinSpeed = Math.min( MinSpeed, HighSpeed2p_9);
 			}
-			else 
+			else
 			{
 				MaxSpeed = MinSpeed = HighSpeed2p;
 				HighSpeed2p_1 = HighSpeed2p_3 = HighSpeed2p_5 = HighSpeed2p_7 = HighSpeed2p_9 = HighSpeed2p;
@@ -4299,7 +4272,7 @@ public class Main {
 					Data[MAX_DATA][4]=Data[i][4];
 
 					if(Data[i][0]=='2')break;
-					
+
 					Data[i][0]=Data[i][1]=Data[i][2]=Data[i][3]=Data[i][4]='0';
 
 					if(Data[MAX_DATA][0]=='1')Data[i][rand()%5]='1';
@@ -4309,11 +4282,11 @@ public class Main {
 					if(Data[MAX_DATA][4]=='1')Data[i][rand()%5]='1';
 				}
 			}
-			
+
 			if(bModeRandom2p)
 			{
 				// if(!bModeRandom1p)srand((unsigned) time(&t));
-				
+
 				for(i=0;i<MAX_DATA;i++)
 				{
 					Data1[MAX_DATA][5]=Data1[i][5];
@@ -4323,7 +4296,7 @@ public class Main {
 					Data1[MAX_DATA][9]=Data1[i][9];
 
 					if(Data1[i][0]=='2')break;
-					
+
 					Data1[i][5]=Data1[i][6]=Data1[i][7]=Data1[i][8]=Data1[i][9]='0';
 
 					if(Data1[MAX_DATA][5]=='1')Data1[i][5+rand()%5]='1';
@@ -4346,11 +4319,11 @@ public class Main {
 
 					if(Data[i][0]=='2')break;
 
-					if(Data[MAX_DATA][0]=='1')Data[i][3]='1'; else Data[i][3]='0'; 
-					if(Data[MAX_DATA][1]=='1')Data[i][4]='1'; else Data[i][4]='0'; 
-					if(Data[MAX_DATA][2]=='1')Data[i][2]='1'; else Data[i][2]='0'; 
-					if(Data[MAX_DATA][3]=='1')Data[i][0]='1'; else Data[i][0]='0'; 
-					if(Data[MAX_DATA][4]=='1')Data[i][1]='1'; else Data[i][1]='0'; 
+					if(Data[MAX_DATA][0]=='1')Data[i][3]='1'; else Data[i][3]='0';
+					if(Data[MAX_DATA][1]=='1')Data[i][4]='1'; else Data[i][4]='0';
+					if(Data[MAX_DATA][2]=='1')Data[i][2]='1'; else Data[i][2]='0';
+					if(Data[MAX_DATA][3]=='1')Data[i][0]='1'; else Data[i][0]='0';
+					if(Data[MAX_DATA][4]=='1')Data[i][1]='1'; else Data[i][1]='0';
 
 				}
 			}
@@ -4366,20 +4339,20 @@ public class Main {
 
 					if(Data1[i][0]=='2')break;
 
-					if(Data1[MAX_DATA][5]=='1')Data1[i][8]='1'; else Data1[i][8]='0'; 
-					if(Data1[MAX_DATA][6]=='1')Data1[i][9]='1'; else Data1[i][9]='0'; 
-					if(Data1[MAX_DATA][7]=='1')Data1[i][7]='1'; else Data1[i][7]='0'; 
-					if(Data1[MAX_DATA][8]=='1')Data1[i][5]='1'; else Data1[i][5]='0'; 
-					if(Data1[MAX_DATA][9]=='1')Data1[i][6]='1'; else Data1[i][6]='0'; 
+					if(Data1[MAX_DATA][5]=='1')Data1[i][8]='1'; else Data1[i][8]='0';
+					if(Data1[MAX_DATA][6]=='1')Data1[i][9]='1'; else Data1[i][9]='0';
+					if(Data1[MAX_DATA][7]=='1')Data1[i][7]='1'; else Data1[i][7]='0';
+					if(Data1[MAX_DATA][8]=='1')Data1[i][5]='1'; else Data1[i][5]='0';
+					if(Data1[MAX_DATA][9]=='1')Data1[i][6]='1'; else Data1[i][6]='0';
 
 				}
 			}
 
-			
-			
+
+
 			// TODO	memcpy(&Data_Judge,&Data,sizeof(Data));
 			// TODO	memcpy(&Data_Judge1,&Data1,sizeof(Data));
-		
+
 			if(bModeNonstep1p)
 			{
 				for(i=0;i<MAX_DATA;i++)
@@ -4402,7 +4375,7 @@ public class Main {
 					}
 				}
 			}
-			
+
 			if(bModeNonstep2p)
 			{
 				for(i=0;i<MAX_DATA;i++)
@@ -4435,7 +4408,7 @@ public class Main {
 			start*=10;
 			start2*=10;start3*=10;
 			bunki*=10;bunki2*=10;
-			
+
 			last=cur=timeGetTime();
 			tail=0;
 			i=0;
@@ -4445,7 +4418,7 @@ public class Main {
 			starttime=start;
 			curtime=0;
 		}
-		
+
 		cur=timeGetTime();        // 130/ 600000
 		delta=cur-last;
 		last=cur;
@@ -4485,7 +4458,7 @@ public class Main {
 
 				curtime=(long)(song.GetCurrentPosition()*1000);
 
-				if(curtime > starttime) 
+				if(curtime > starttime)
 				delta=(long)curtime-starttime;
 				else delta=(long)curtime;
 			}
@@ -4519,7 +4492,7 @@ public class Main {
 		}
 
 		if(Start1p)
-		for(k=0;k<48;k+=tick) 
+		for(k=0;k<48;k+=tick)
 		{
 			if(Data[i][0]=='2' || Data[i+1][0]=='2' || Data[i+2][0]=='2' || Data[i+3][0]=='2')
 			{
@@ -4547,9 +4520,9 @@ public class Main {
 					ClpBlt(LP9_X,(temp+PUMP_SPRITE_Y*k/2)*HighSpeed1p_9-(PUMP_SPRITE_Y)*(HighSpeed1p_9-1),wArrow,rect9.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data[i+k][4]=='1')
 					ClpBlt(LP3_X,(temp+PUMP_SPRITE_Y*k/2)*HighSpeed1p_3-(PUMP_SPRITE_Y)*(HighSpeed1p_3-1),wArrow,rect3.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
-				
+
 				Data_y[i+k]=(temp+PUMP_SPRITE_Y*k/2)*MinSpeed-(PUMP_SPRITE_Y)*(MinSpeed-1);
-				
+
 				if(Data[i+k+1][0]=='1')
 					ClpBlt(LP1_X,(25+temp+PUMP_SPRITE_Y*k/2)*HighSpeed1p_1-(PUMP_SPRITE_Y)*(HighSpeed1p_1-1),wArrow,rect1.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data[i+k+1][1]=='1')
@@ -4617,7 +4590,7 @@ public class Main {
 						}
 					}
 				}
-			}	
+			}
 			else if(tick==4)
 			{
 				if(Data[i+k][0]=='1')
@@ -4658,7 +4631,7 @@ public class Main {
 					ClpBlt(LP3_X,(25+temp+PUMP_SPRITE_Y*k/4)*HighSpeed1p_3-(PUMP_SPRITE_Y)*(HighSpeed1p_3-1),wArrow,rect3.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 
 				Data_y[i+k+2]=(25+temp+PUMP_SPRITE_Y*k/4)*MinSpeed-(PUMP_SPRITE_Y)*(MinSpeed-1);
-			
+
 				if(Data[i+k+3][0]=='1')
 					ClpBlt(LP1_X,(38+temp+PUMP_SPRITE_Y*k/4)*HighSpeed1p_1-(PUMP_SPRITE_Y)*(HighSpeed1p_1-1),wArrow,rect1.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data[i+k+3][1]=='1')
@@ -4779,7 +4752,7 @@ public class Main {
 		}
 
 		if(Start2p)
-		for(k=0;k<48;k+=tick) 
+		for(k=0;k<48;k+=tick)
 		{
 			if(Data1[i][0]=='2' || Data1[i+1][0]=='2' || Data1[i+2][0]=='2' || Data1[i+3][0]=='2')
 			{
@@ -4807,9 +4780,9 @@ public class Main {
 					ClpBlt(LP9_X1,(temp+PUMP_SPRITE_Y*k/2)*HighSpeed2p_9-(PUMP_SPRITE_Y)*(HighSpeed2p_9-1),wArrow,rect9.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data1[i+k][9]=='1')
 					ClpBlt(LP3_X1,(temp+PUMP_SPRITE_Y*k/2)*HighSpeed2p_3-(PUMP_SPRITE_Y)*(HighSpeed2p_3-1),wArrow,rect3.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
-				
+
 				Data_y1[i+k]=(temp+PUMP_SPRITE_Y*k/2)*MinSpeed-(PUMP_SPRITE_Y)*(MinSpeed-1);
-				
+
 				if(Data1[i+k+1][5]=='1')
 					ClpBlt(LP1_X1,(25+temp+PUMP_SPRITE_Y*k/2)*HighSpeed2p_1-(PUMP_SPRITE_Y)*(HighSpeed2p_1-1),wArrow,rect1.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data1[i+k+1][6]=='1')
@@ -4876,7 +4849,7 @@ public class Main {
 						}
 					}
 				}
-			}	
+			}
 			else if(tick==4)
 			{
 
@@ -4918,7 +4891,7 @@ public class Main {
 					ClpBlt(LP3_X1,(25+temp+PUMP_SPRITE_Y*k/4)*HighSpeed2p_3-(PUMP_SPRITE_Y)*(HighSpeed2p_3-1),wArrow,rect3.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 
 				Data_y1[i+k+2]=(25+temp+PUMP_SPRITE_Y*k/4)*MinSpeed-(PUMP_SPRITE_Y)*(MinSpeed-1);
-			
+
 				if(Data1[i+k+3][5]=='1')
 					ClpBlt(LP1_X1,(38+temp+PUMP_SPRITE_Y*k/4)*HighSpeed2p_1-(PUMP_SPRITE_Y)*(HighSpeed2p_1-1),wArrow,rect1.get(sta),DDBLTFAST_WAIT | DDBLTFAST_SRCCOLORKEY );
 				if(Data1[i+k+3][6]=='1')
@@ -5070,11 +5043,11 @@ public class Main {
 
 		Flipp();
 	}
-	
-	
+
+
 	static private void DrawMode(int j, int k, int hmodeMirror) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	static private void WaitMessage() {
