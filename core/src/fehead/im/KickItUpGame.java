@@ -32,7 +32,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	Texture terrain;
 	TextureRegion groundTextureRegion;
 	float backgroundPos = 0;
-	CharacterProcessor inputProcessor;
 
 	private Texture background = null;
 	private Texture songTitle = null;
@@ -139,7 +138,7 @@ public class KickItUpGame extends ApplicationAdapter {
 
 	private boolean Start1p = false;
 	private boolean Start2p = false;
-	
+
 	private	float	alpha = 1.0f;
 	private	float	alphaDir = -1.0f;
 
@@ -195,14 +194,12 @@ public class KickItUpGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void create () {		
+	public void create () {
 		batch = new SpriteBatch();
 		background = new Texture("sky2.jpg");
 		terrain = new Texture("grey_stone_1.png");
 		terrain.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		groundTextureRegion = new TextureRegion(terrain);
-		inputProcessor = new CharacterProcessor();
-		// Gdx.input.setInputProcessor(inputProcessor);
 
 		kloadImage();
 		SongMgr.getInstace().load();
@@ -252,7 +249,6 @@ public class KickItUpGame extends ApplicationAdapter {
 		// draw player
 		// batch.draw(smallFont, 0, 0);
 		displayMessage(0, 0, "Loading Image....");
-		inputProcessor.getPlayer().getCharacterSprite().draw(batch);
 		// kiu code
 		// updateFrame();
 		stages.render();
@@ -373,7 +369,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		bModeRandomS2p = false;
 		bModeSuddenR2p = false;
 	}
-	
+
 	private void updateAlpha() {
 		int fps = Math.max(Gdx.graphics.getFramesPerSecond(), 20);
 		float alphaInc = 2.0f / fps;	// 2초에 한번씩
