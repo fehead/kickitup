@@ -196,7 +196,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		background = new Texture("sky2.jpg");
 		terrain = new Texture("grey_stone_1.png");
 		terrain.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 		groundTextureRegion = new TextureRegion(terrain);
@@ -238,7 +237,6 @@ public class KickItUpGame extends ApplicationAdapter {
 	public void render() {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		// batch.draw(img, 0, 0);
 		batch.enableBlending();
 
 		batch.begin();
@@ -246,11 +244,7 @@ public class KickItUpGame extends ApplicationAdapter {
 		batch.draw(groundTextureRegion, backgroundPos, 0, 800, 100);
 		if (backgroundPos + 800 > 0 && backgroundPos + 800 < 800)
 			batch.draw(groundTextureRegion, backgroundPos + 800, 0, 800, 100);
-		// draw player
-		// batch.draw(smallFont, 0, 0);
 		displayMessage(0, 0, "Loading Image....");
-		// kiu code
-		// updateFrame();
 		stages.render();
 
 		batch.end();
