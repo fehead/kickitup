@@ -4451,7 +4451,6 @@ public class Main {
 				i=0;
 				temp=+55;
 				tail=0;
-
 				if(curtime > starttime)
 				delta=(long)curtime-starttime;
 				else delta=(long)curtime;
