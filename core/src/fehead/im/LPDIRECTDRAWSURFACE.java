@@ -16,7 +16,7 @@ public class LPDIRECTDRAWSURFACE {
 	/**
 	 * HRESULT Blt( LPRECT lpDestRect, LPDIRECTDRAWSURFACE lpDDSrcSurface, LPRECT lpSrcRect, DWORD dwFlags, LPDDBLTFX lpDDBltFX);
 	 */
-	
+
 	public HRESULT Blt(RECT lpDestRect, LPDIRECTDRAWSURFACE lpDDSrcSurface, RECT lpSrcRect, long dwFlags,
 			Object lpDDBltFX) {
 		// TODO Auto-generated method stub
@@ -30,27 +30,27 @@ public class LPDIRECTDRAWSURFACE {
 
 	public void Release() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public HRESULT GetAttachedSurface(DDSCAPS ddscaps, LPDIRECTDRAWSURFACE g_pDDSBack) {
+	public HRESULT GetAttachedSurface(Object ddscaps, LPDIRECTDRAWSURFACE g_pDDSBack) {
 		// TODO Auto-generated method stub
 		return HRESULT.DD_OK;
 	}
 
 	public void SetClipper(LPDIRECTDRAWCLIPPER pClipper) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void Lock(Object object, DDSURFACEDESC srcDDSD, int ddlockWait, Object object2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void Unlock(Object object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

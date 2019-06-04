@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 
 public class KSelect {
 	static private	Logger	logger = Logger.getLogger(KSelect.class.getName());
-	
+
 	// select.h
 	static public final int HMODE_CANCEL	= 99;
 	static public final int HMODE_2X		= 1 ;
@@ -26,21 +26,21 @@ public class KSelect {
 	static public final int HMODE_NONE		=0 ;
 	static public final int HMODE_SUDDENR	=14;
 	static public final int HMODE_RANDOMS	=15;
-	
-	
+
+
 	// select.cpp
 	static public final int DISCSIZE_X		= 300;
 	static public final int DISCSIZE_Y		= 200;
 	static public final int STILL_DRAWING	= 100;
-	
-	
+
+
 	static private	long	startTimer;
 	static private	long	curTimer;
-	
+
 	static HRESULT	ClpBlt3(int x ,int y ,LPDIRECTDRAWSURFACE ds, RECT srect, int mode) {
 		RECT sRect = new RECT(srect);
 		HRESULT	hRet;
-	
+
 		if(x>640 || y>480)
 			return HRESULT.DD_OK;
 
@@ -57,12 +57,12 @@ public class KSelect {
 			srect.left-=x;
 			x=0;
 		}
-		
+
 		hRet= Main.g_pDDSBack.BltFast(x,y,ds,srect,mode);
 
 		// TODO: memcpy(srect,&sRect,sizeof(sRect));
 		srect = sRect;
-		
+
 		return hRet;
 	}
 
@@ -72,7 +72,7 @@ public class KSelect {
 		/*
 		String path="SONG";
 		File dirFile=new File(path);
-		Gdx.app.log("KSelect", dirFile.getAbsolutePath());		
+		Gdx.app.log("KSelect", dirFile.getAbsolutePath());
 		for(File file : dirFile.listFiles()) {
 			if(file.isDirectory()) {
 				if(access("Crazy_2.stf",04)==0)CSONG[Count].ReadCrazy_2_STF("Crazy_2.stf");
@@ -96,8 +96,8 @@ public class KSelect {
 				else if(access("Double.ksf",04)==0)CSONG[Count].ReadDouble_KSF("Double.ksf");
 			}
 		}
-		
-		
+
+
 		if(lpData.dwFileAttributes==FILE_ATTRIBUTE_DIRECTORY) {
 			SetCurrentDirectory(cPathStr);
 			hFind=FindFirstFile("*.*",&lpData);
@@ -159,7 +159,7 @@ public class KSelect {
 
 						if(access("Double.stf",04)==0)CSONG[Count].ReadDouble_STF("Double.stf"),Count++;
 						else if(access("Double.ksf",04)==0)CSONG[Count].ReadDouble_KSF("Double.ksf"),Count++;
-					
+
 						//if(CSONG[Count].bpm!=0)Count++;
 						SetCurrentDirectory("..\\");
 					}
@@ -177,16 +177,6 @@ public class KSelect {
 			PostQuitMessage(0);
 		}
 		*/
-	}
-
-	private static boolean FindNextFile(HANDLE hFind, WIN32_FIND_DATA lpData) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	private static HANDLE FindFirstFile(String string, WIN32_FIND_DATA lpData) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

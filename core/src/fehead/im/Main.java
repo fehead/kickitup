@@ -3278,12 +3278,6 @@ public class Main {
 		WindowRect.top=(long)0;				// Set Top Value To 0
 		WindowRect.bottom=(long)Height;		// Set Bottom Value To Requested Height
 
-	// Detect os version (for title bar)
-		OSVERSIONINFO osver = new OSVERSIONINFO();
-
-		// osver.dwOSVersionInfoSize=sizeof(osver);
-		GetVersionEx(osver);
-	// Os ver detect finished.
 
 		// Set up and register window class
 	    wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -4451,7 +4445,6 @@ public class Main {
 				i=0;
 				temp=+55;
 				tail=0;
-
 				if(curtime > starttime)
 				delta=(long)curtime-starttime;
 				else delta=(long)curtime;
@@ -5163,10 +5156,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 	}
-	static private void GetVersionEx(OSVERSIONINFO osver) {
-		// TODO Auto-generated method stub
 
-	}
 	static private void DestroyWindow(HWND hWnd2) {
 		// TODO Auto-generated method stub
 
