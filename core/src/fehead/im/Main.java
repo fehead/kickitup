@@ -3719,8 +3719,7 @@ public class Main {
 
 	static private int WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance, String lpCmdLine,int nCmdShow)
 	{
-	    MSG	msg = MSG.wParam;
-
+		Object	msg = new Object();
 	    /*
 	// Debug File name definition
 		long	ltime;
@@ -5037,19 +5036,19 @@ public class Main {
 		// TODO Auto-generated method stub
 
 	}
-	static private void DispatchMessage(MSG msg) {
+	static private void DispatchMessage(Object msg) {
 		// TODO Auto-generated method stub
 
 	}
-	static private void TranslateMessage(MSG msg) {
+	static private void TranslateMessage(Object msg) {
 		// TODO Auto-generated method stub
 
 	}
-	static private boolean GetMessage(MSG msg, Object object, int i, int j) {
+	static private boolean GetMessage(Object msg, Object object, int i, int j) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	static private boolean PeekMessage(MSG msg, Object object, int i, int j, int pmNoremove) {
+	static private boolean PeekMessage(Object msg, Object object, int i, int j, int pmNoremove) {
 		// TODO Auto-generated method stub
 		return false;
 	}
