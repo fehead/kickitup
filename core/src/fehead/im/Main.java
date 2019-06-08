@@ -198,7 +198,6 @@ public class Main {
 	static private boolean				Start2p;
 
 	static private HWND hWnd;
-	static private HINSTANCE	g_hInst;
 
 	static private LPDIRECTDRAW g_pDD                = null;
 	static private LPDIRECTDRAWSURFACE	g_pDDSPrimary = null;
@@ -3265,7 +3264,7 @@ public class Main {
 		return hRet;
 	}
 
-	static private HRESULT	InitWin(HINSTANCE hInstance, long Width, long Height, int nCmdShow)
+	static private HRESULT	InitWin(Object hInstance, long Width, long Height, int nCmdShow)
 	{
 		WNDCLASS	wc = new WNDCLASS();
 
@@ -3284,7 +3283,6 @@ public class Main {
 	    wc.lpfnWndProc = null;		    // TODO wc.lpfnWndProc = WindowProc;
 	    wc.cbClsExtra = 0;
 	    wc.cbWndExtra = 0;
-	    wc.hInstance = hInstance;
 	    wc.hIcon = LoadIcon(0, IDI_ICON);
 	    wc.hCursor = LoadCursor(null, IDC_ARROW);
 	    // wc.hbrBackground = (HBRUSH )GetStockObject(BLACK_BRUSH);
@@ -3327,7 +3325,6 @@ public class Main {
 	    UpdateWindow(hWnd);
 	    SetFocus(hWnd);
 
-		g_hInst=hInstance;
 		return HRESULT.DD_OK;
 
 	}
@@ -3717,7 +3714,7 @@ public class Main {
 		return HRESULT.DD_OK;
 	}
 
-	static private int WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance, String lpCmdLine,int nCmdShow)
+	static private int WinMain(Object hInstance, Object hPrevInstance, String lpCmdLine,int nCmdShow)
 	{
 		Object	msg = new Object();
 	    /*
@@ -5056,7 +5053,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 	}
-	static private HRESULT InitDI(HINSTANCE hInstance) {
+	static private HRESULT InitDI(Object hInstance) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -5105,7 +5102,7 @@ public class Main {
 
 	}
 	static private HWND CreateWindowEx(long dwExStyle, String pRGNAME2, String tITLE2, long dwStyle, int i, int j, long l,
-			long m, Object object, Object object2, HINSTANCE hInstance, Object object3) {
+			long m, Object object, Object object2, Object hInstance, Object object3) {
 		// TODO Auto-generated method stub
 		return null;
 	}
