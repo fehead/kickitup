@@ -6,7 +6,7 @@ public class WNDCLASS {
 	public Object lpfnWndProc;
 	public int cbClsExtra;
 	public int cbWndExtra;
-	public HINSTANCE hInstance;
+	public Object hInstance;
 	public Object hIcon;
 	public Object hCursor;
 	public String lpszMenuName;
