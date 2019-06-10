@@ -15,6 +15,7 @@ import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
+import fehead.im.player.PlayerState;
 import fehead.im.song.PlayMode;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
@@ -178,9 +179,8 @@ public class SelectStage implements InputProcessor, IStage {
 	private void selectLeft() {
 		bgmSnd.stop();
 		if(leftZoomAni.isStarted()) {
-
-		} else {
 			// TODO: next stage.
+		} else {
 			rightZoomAni.stop();
 			leftZoomAni.start();
 			if(introSnd != null)
@@ -188,7 +188,6 @@ public class SelectStage implements InputProcessor, IStage {
 			selectedSong = leftSong;
 			introSnd = selectedSong.getIntroSnd();
 			introSnd.loop();
-
 		}
 	}
 
@@ -268,7 +267,7 @@ public class SelectStage implements InputProcessor, IStage {
 	    rightSong = SongMgr.getInstace().getRightSong();
         bgmSnd.loop();
     }
-    
+
     private void setSongs() {
     	leftZoomAni.stop();
 		rightZoomAni.stop();
