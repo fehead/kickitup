@@ -135,6 +135,8 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void gotoNextStage() {
+		KickItUpGame.g_programState = GameStage.STAGE1;
+		stages.setStage("play");
 	}
 
 	@Override
@@ -165,6 +167,7 @@ public class SelectStage implements InputProcessor, IStage {
 		bgmSnd.stop();
 		if(rightZoomAni.isStarted()) {
 			// TODO: next stage.
+			gotoNextStage();
 		} else {
 			leftZoomAni.stop();
 			rightZoomAni.start();
@@ -180,6 +183,7 @@ public class SelectStage implements InputProcessor, IStage {
 		bgmSnd.stop();
 		if(leftZoomAni.isStarted()) {
 			// TODO: next stage.
+			gotoNextStage();
 		} else {
 			rightZoomAni.stop();
 			leftZoomAni.start();
