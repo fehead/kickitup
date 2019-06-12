@@ -11,11 +11,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import fehead.im.GameStage;
 import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
-import fehead.im.player.PlayerState;
 import fehead.im.song.PlayMode;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
@@ -129,13 +127,11 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void gotoPrevStage() {
-		KickItUpGame.g_programState = GameStage.GAMETITLE;
 		stages.setStage("title");
 	}
 
 	@Override
 	public void gotoNextStage() {
-		KickItUpGame.g_programState = GameStage.STAGE1;
 		stages.setStage("play");
 	}
 
@@ -262,16 +258,6 @@ public class SelectStage implements InputProcessor, IStage {
     	setSongs();
     }
 
-    // 선택된곡 reset
-    private void   resetSelectSong() {
-    	if(selectedSong != null) {
-    	}
-
-    	leftSong = SongMgr.getInstace().getLeftSong();
-	    rightSong = SongMgr.getInstace().getRightSong();
-        bgmSnd.loop();
-    }
-
     private void setSongs() {
     	leftZoomAni.stop();
 		rightZoomAni.stop();
@@ -281,6 +267,16 @@ public class SelectStage implements InputProcessor, IStage {
 	    leftZoomAni.setPosition(10,  250);
 	    rightZoomAni = ZoomAnimation.of(rightSong.getDiskImage(), 1.0f, 1.5f);
 	    rightZoomAni.setPosition(320,  250);
+    }
+
+    // 선택된곡 reset
+    private void   resetSelectSong() {
+    	if(selectedSong != null) {
+    	}
+
+    	leftSong = SongMgr.getInstace().getLeftSong();
+	    rightSong = SongMgr.getInstace().getRightSong();
+        bgmSnd.loop();
     }
 
     // 곡 선택

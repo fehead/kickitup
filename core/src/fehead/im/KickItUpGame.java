@@ -15,25 +15,23 @@ import fehead.im.stage.Stages;
 
 public class KickItUpGame extends ApplicationAdapter {
 
-	static public PlayerState	playerState = new PlayerState();
+	public static PlayerState playerState = new PlayerState();
+	public static Texture noDisc = null;
+
 	private	Stages	stages;
 
-	SpriteBatch batch;
-	Texture img;
-	public static Texture noDisc = null;
+	private	SpriteBatch batch;
 	private Texture smallFont = null;
 
 	@SuppressWarnings("unused")
 	private KIUConfig kcfg;
 
-	public static GameStage g_programState = GameStage.GAMETITLE;
-
 	//////////////////////////////////
 	// test code
 	// Texture background;
-	Texture terrain;
-	TextureRegion groundTextureRegion;
-	float backgroundPos = 0;
+	private Texture terrain;
+	private TextureRegion groundTextureRegion;
+	private float backgroundPos = 0;
 	//////////////////////////////////
 
 	private void displayMessage(int x, int y, String msg) {
