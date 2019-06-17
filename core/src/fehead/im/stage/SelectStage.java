@@ -95,7 +95,7 @@ public class SelectStage implements InputProcessor, IStage {
 		if(rightSong != null ) {
 			// batch.draw(rightSong.getDiskImage(), 320, 250);
 			rightZoomAni.draw(batch);
-			Texture t = modeIconMap.get(leftSong.getPlayMode());
+			Texture t = modeIconMap.get(rightSong.getPlayMode());
 			batch.draw(t, 320, 366);
 		}
 
