@@ -1,6 +1,6 @@
 package fehead.im.stage;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
@@ -46,7 +46,7 @@ public class SelectStage implements InputProcessor, IStage {
 	public SelectStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
-		modeIconMap = new HashMap<>();
+		modeIconMap = new EnumMap<>(PlayMode.class);
 		for(PlayMode pm : PlayMode.values())
 			modeIconMap.put(pm, new Texture(pm.iconFileName()));
 
