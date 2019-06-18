@@ -4,12 +4,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SongMgr {
 	private	List<Song> songList = new ArrayList<>();
 
 	private int leftIndex;
 	private int rightIndex;
-	private Song curSong;
+	@Setter @Getter
+	private Song selectedSong;
 
 	private	static class LazyHolder {
 		public static final SongMgr INSTANCE = new SongMgr();
@@ -71,7 +75,7 @@ public class SongMgr {
 		
     	leftIndex = leftIndex % songList.size();
         rightIndex = rightIndex % songList.size();
-	    curSong = null;
+	    selectedSong = null;
 	}
 
 	public void turnRight() {
@@ -87,7 +91,7 @@ public class SongMgr {
 		
 	   	leftIndex = leftIndex % songList.size();
         rightIndex = rightIndex % songList.size();
-	    curSong = null;
+	    selectedSong = null;
 	}
 
 	public Song getLeftSong() {
@@ -110,6 +114,6 @@ public class SongMgr {
 			rightIndex = 1;
 		else
 			rightIndex = 0;
-		curSong = null;
+		selectedSong = null;
 	}
 }
