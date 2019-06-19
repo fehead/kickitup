@@ -26,7 +26,7 @@ public class SelectStage implements InputProcessor, IStage {
 	private Texture shiftLImg = new Texture("images/shiftl.png");
 	private Texture shiftRImg = new Texture("images/shiftr.png");
 	private Texture cFontImg = new Texture("images/cfont.png");
-	private	Map<PlayMode, Texture>	modeIconMap;
+	private	Map<PlayMode, Texture>	modeIcon;
 
 	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);
 	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
@@ -46,9 +46,9 @@ public class SelectStage implements InputProcessor, IStage {
 	public SelectStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
-		modeIconMap = new EnumMap<>(PlayMode.class);
+		modeIcon = new EnumMap<>(PlayMode.class);
 		for(PlayMode pm : PlayMode.values())
-			modeIconMap.put(pm, new Texture(pm.iconFileName()));
+			modeIcon.put(pm, new Texture(pm.iconFileName()));
 
 		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
 		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
@@ -87,7 +87,7 @@ public class SelectStage implements InputProcessor, IStage {
 		if(leftSong != null ) {
 			// batch.draw(leftSong.getDiskImage(), 10, 250);
 			leftZoomAni.draw(batch);
-			Texture t = modeIconMap.get(leftSong.getPlayMode());
+			Texture t = modeIcon.get(leftSong.getPlayMode());
 			batch.draw(t, 0, 366);
 		}
 
@@ -95,7 +95,7 @@ public class SelectStage implements InputProcessor, IStage {
 		if(rightSong != null ) {
 			// batch.draw(rightSong.getDiskImage(), 320, 250);
 			rightZoomAni.draw(batch);
-			Texture t = modeIconMap.get(rightSong.getPlayMode());
+			Texture t = modeIcon.get(rightSong.getPlayMode());
 			batch.draw(t, 320, 366);
 		}
 
