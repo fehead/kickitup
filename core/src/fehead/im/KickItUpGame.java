@@ -15,7 +15,6 @@ import fehead.im.stage.Stages;
 
 public class KickItUpGame extends ApplicationAdapter {
 
-	public static PlayerState playerState = new PlayerState();
 	public static Texture noDisc = null;
 
 	private	Stages	stages;

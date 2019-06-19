@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
+import fehead.im.player.PlayerState;
 import fehead.im.song.PlayMode;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
@@ -42,6 +42,8 @@ public class SelectStage implements InputProcessor, IStage {
 	private Song rightSong;
 	private Song selectedSong;
     private	Stages stages;
+
+    private PlayerState playerState = PlayerState.getInstance();
 
 	public SelectStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -102,13 +104,13 @@ public class SelectStage implements InputProcessor, IStage {
 		freePlayImg.draw(batch, blank.getValue());
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
-		if(!KickItUpGame.playerState.isStart1p()) {
+		if(!playerState.isStart1p()) {
 			pressCenter1pImg.draw(batch, blank.getValue());
 		}
 
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
-		if(!KickItUpGame.playerState.isStart2p()) {
+		if(!playerState.isStart2p()) {
 			pressCenter2pImg.draw(batch, blank.getValue());
 		}
 

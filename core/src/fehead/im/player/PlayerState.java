@@ -7,7 +7,17 @@ public class PlayerState {
 	private	int	stepSpeed = 1;
 	private	boolean	isStart1p = false;
 	private	boolean	isStart2p = false;
-	
+
+	private	static class LazyHolder {
+		public static final PlayerState INSTANCE = new PlayerState();
+	}
+
+	private	PlayerState() {}
+
+	public static PlayerState getInstance() {
+		return LazyHolder.INSTANCE;
+	}
+
 	public boolean isStart() {
 		if(isStart1p || isStart2p)
 			return true;
@@ -26,5 +36,5 @@ public class PlayerState {
 	public void setStart2p(boolean b) {
 		isStart2p = b;
 	}
-	
+
 }

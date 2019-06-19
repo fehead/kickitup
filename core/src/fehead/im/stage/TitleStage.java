@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import fehead.im.KickItUpGame;
 import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
+import fehead.im.player.PlayerState;
 import lombok.extern.java.Log;
 
 @Log
@@ -27,6 +28,9 @@ public class TitleStage implements InputProcessor, IStage {
 	private	BlinkAnimation pressCenter2pImg;
 
 	private	Stages	stages;
+
+	private PlayerState playerState = PlayerState.getInstance();
+
 	public TitleStage(SpriteBatch batch, Stages	stages) {
 		this.batch = batch;
 		this.stages = stages;
@@ -47,7 +51,7 @@ public class TitleStage implements InputProcessor, IStage {
 		openingSnd.loop();
 		Gdx.input.setInputProcessor(this);
 
-		KickItUpGame.playerState.resetStart();
+		playerState.resetStart();
 	}
 
 	@Override
@@ -65,13 +69,13 @@ public class TitleStage implements InputProcessor, IStage {
 		freePlayImg.draw(batch);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
-		if(!KickItUpGame.playerState.isStart1p()) {
+		if(!playerState.isStart1p()) {
 			pressCenter1pImg.draw(batch);
 		}
 
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
-		if(!KickItUpGame.playerState.isStart2p()) {
+		if(!playerState.isStart2p()) {
 			pressCenter2pImg.draw(batch);
 		}
 	}
@@ -81,22 +85,22 @@ public class TitleStage implements InputProcessor, IStage {
 		log.info("keycode : " + keycode);
 		switch(keycode) {
 		case Input.Keys.S:
-			if (KickItUpGame.playerState.isStart1p())
+			if (playerState.isStart1p())
 				gotoNextStage();
 			else
-				KickItUpGame.playerState.setStart1p(true);
+				playerState.setStart1p(true);
 
 			break;
 		case Input.Keys.NUM_5:
-			if (KickItUpGame.playerState.isStart2p())
+			if (playerState.isStart2p())
 				gotoNextStage();
 			else
-				KickItUpGame.playerState.setStart2p(true);
+				playerState.setStart2p(true);
 			break;
 
 		case Input.Keys.ESCAPE:
-			if(KickItUpGame.playerState.isStart())
-				KickItUpGame.playerState.resetStart();
+			if(playerState.isStart())
+				playerState.resetStart();
 			else
 				gotoPrevStage();
 			break;
