@@ -1,4 +1,4 @@
-package fehead.im.sound;
+package fehead.im.audio;
 
 public interface Sound {
 	boolean free();

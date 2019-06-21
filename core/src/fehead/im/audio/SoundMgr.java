@@ -1,4 +1,4 @@
-package fehead.im.sound;
+package fehead.im.audio;
 
 import java.util.Map;
 

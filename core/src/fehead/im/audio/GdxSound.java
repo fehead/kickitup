@@ -1,4 +1,4 @@
-package fehead.im.sound;
+package fehead.im.audio;
 
 import com.badlogic.gdx.Gdx;
 
