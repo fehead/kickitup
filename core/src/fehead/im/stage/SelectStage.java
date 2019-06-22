@@ -6,11 +6,12 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import fehead.im.audio.Sound;
+import fehead.im.audio.SoundMgr;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
 import fehead.im.player.PlayerState;
@@ -52,8 +53,8 @@ public class SelectStage implements InputProcessor, IStage {
 		for(PlayMode pm : PlayMode.values())
 			modeIcon.put(pm, new Texture(pm.iconFileName()));
 
-		bgmSnd = Gdx.audio.newSound(Gdx.files.internal("wave/music_select.mp3"));
-		shiftMoveSnd = Gdx.audio.newSound(Gdx.files.internal("wave/move.mp3"));
+		bgmSnd = SoundMgr.of("music_select", "wave/music_select.mp3");
+		shiftMoveSnd = SoundMgr.of("move", "wave/move.mp3");
 	}
 
 	@Override
@@ -119,11 +120,11 @@ public class SelectStage implements InputProcessor, IStage {
 	@Override
 	public void getOut() {
 		if(introSnd != null)
-			introSnd.dispose();
+			introSnd.stop();
 		introSnd = null;
 		selectedSong = null;
-		shiftMoveSnd.dispose();
-		bgmSnd.dispose();
+		shiftMoveSnd.stop();
+		bgmSnd.stop();
 		SongMgr.getInstace().reset();
 	}
 
@@ -171,7 +172,7 @@ public class SelectStage implements InputProcessor, IStage {
 			leftZoomAni.stop();
 			rightZoomAni.start();
 			if(introSnd != null)
-				introSnd.dispose();
+				introSnd.stop();
 			selectedSong = leftSong;
 			introSnd = selectedSong.getIntroSnd();
 			introSnd.loop();
@@ -187,7 +188,7 @@ public class SelectStage implements InputProcessor, IStage {
 			rightZoomAni.stop();
 			leftZoomAni.start();
 			if(introSnd != null)
-				introSnd.dispose();
+				introSnd.stop();
 			selectedSong = leftSong;
 			introSnd = selectedSong.getIntroSnd();
 			introSnd.loop();
@@ -239,7 +240,7 @@ public class SelectStage implements InputProcessor, IStage {
     //  왼쪽으로 화면이동
     private void   turnLeft() {
 		if(introSnd != null) {
-			introSnd.dispose();
+			introSnd.stop();
 			introSnd = null;
 			bgmSnd.loop();
 		}
@@ -251,7 +252,7 @@ public class SelectStage implements InputProcessor, IStage {
     // 오른쪽으로 화면이동
     private void   turnRight() {
 		if(introSnd != null) {
-			introSnd.dispose();
+			introSnd.stop();
 			introSnd = null;
 			bgmSnd.loop();
 		}

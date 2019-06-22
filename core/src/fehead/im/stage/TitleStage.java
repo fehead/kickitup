@@ -3,12 +3,13 @@ package fehead.im.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.KickItUpGame;
+import fehead.im.audio.Sound;
+import fehead.im.audio.SoundMgr;
 import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
 import fehead.im.player.PlayerState;
@@ -42,12 +43,12 @@ public class TitleStage implements InputProcessor, IStage {
 		freePlayImg.setPosition(220, 30);
 		pressCenter1pImg.setPosition(10, 30);
 		pressCenter2pImg.setPosition(410, 30);
+		openingSnd = SoundMgr.of("opening", "wave/opening.mp3");
 	}
 
 	@Override
 	public void getIn() {
 		Gdx.graphics.setTitle("KIUP stageTitle");
-		openingSnd = Gdx.audio.newSound(Gdx.files.internal("wave/opening.mp3"));
 		openingSnd.loop();
 		Gdx.input.setInputProcessor(this);
 
@@ -56,8 +57,7 @@ public class TitleStage implements InputProcessor, IStage {
 
 	@Override
 	public void getOut() {
-		openingSnd.stop();
-		openingSnd.dispose();
+		openingSnd.stop();		
 	}
 
 	@Override

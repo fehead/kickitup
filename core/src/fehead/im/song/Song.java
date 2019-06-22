@@ -3,12 +3,12 @@ package fehead.im.song;
 import java.io.File;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import fehead.im.KickItUpGame;
+import fehead.im.audio.GdxSound;
+import fehead.im.audio.Sound;
 import lombok.Getter;
 
 @Getter
@@ -62,7 +62,8 @@ public class Song {
 	}
 
 	public Sound getIntroSnd() {
-		return Gdx.audio.newSound(Gdx.files.internal(introMp3Path.getAbsolutePath()));
+		return GdxSound.of(introMp3Path.getAbsolutePath());
+		// return Gdx.audio.newSound(Gdx.files.internal(introMp3Path.getAbsolutePath()));
 	}
 	
 	/*

@@ -1,10 +1,11 @@
 package fehead.im.audio;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SoundMgr {
 
-	private	Map<String, Sound>	soundMap;
+	private	Map<String, Sound>	soundMap = new HashMap<>();
 
 	private	static class LazyHolder {
 		public static final SoundMgr INSTANCE = new SoundMgr();
