@@ -12,6 +12,7 @@ public class Stages {
 	public Stages(SpriteBatch batch) {
 		stageMap.put("title", new TitleStage(batch, this));
 		stageMap.put("select", new SelectStage(batch, this));
+		stageMap.put("normal", new NormalStage(batch, this));
 	}
 	
 	public void setStage(String stage) {

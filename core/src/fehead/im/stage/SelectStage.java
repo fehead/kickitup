@@ -136,7 +136,7 @@ public class SelectStage implements InputProcessor, IStage {
 	@Override
 	public void gotoNextStage() {
 		SongMgr.getInstace().setSelectedSong(selectedSong);
-		stages.setStage("play");
+		stages.setStage("normal");
 	}
 
 	@Override
