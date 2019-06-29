@@ -15,6 +15,9 @@ public class SongMgr {
 	@Setter @Getter
 	private Song selectedSong;
 
+	private SongMgr() {
+	}
+	
 	private	static class LazyHolder {
 		public static final SongMgr INSTANCE = new SongMgr();
 	}

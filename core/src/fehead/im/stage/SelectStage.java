@@ -125,7 +125,7 @@ public class SelectStage implements InputProcessor, IStage {
 		selectedSong = null;
 		shiftMoveSnd.stop();
 		bgmSnd.stop();
-		SongMgr.getInstace().reset();
+		// SongMgr.getInstace().reset();
 	}
 
 	@Override

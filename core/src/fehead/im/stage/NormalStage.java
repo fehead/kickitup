@@ -26,7 +26,8 @@ public class NormalStage implements IStage, InputProcessor {
 	public void getIn() {
 		song = SongMgr.getInstace().getSelectedSong();
 		bgm = GdxMusic.of(song.getPlayMp3Path().getAbsolutePath());
-		titleImg = new Texture(song.getBgImgPath().getAbsolutePath());
+		titleImg = new Texture(song.getTitleImgPath().getAbsolutePath());
+		bgm.play();
 	}
 
 	@Override
