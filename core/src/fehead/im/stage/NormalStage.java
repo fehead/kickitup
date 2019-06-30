@@ -1,5 +1,8 @@
 package fehead.im.stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,11 +18,21 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Music	bgm;
 	private	Song	song;
 	private Texture titleImg;
+	private List<Texture> backArrows;
+	private	Texture	stepArrows;
+	private	Texture	gaugeWaku;
+	private	Texture	gauge;
 	
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
-		this.stages = stages;		
-				
+		this.stages = stages;
+		
+		backArrows = new ArrayList<>(2);
+		backArrows.add(new Texture("images/arrow1.png"));
+		backArrows.add(new Texture("images/arrow2.png"));
+		stepArrows = new Texture("images/arrow.png");
+		gaugeWaku = new Texture("images/gaugewaku.png");
+		gauge = new Texture("images/gauge.png");
 	}
 
 	@Override
@@ -37,10 +50,33 @@ public class NormalStage implements IStage, InputProcessor {
 	
 	@Override
 	public void render() {
-		batch.draw(titleImg, 0, 0);
+		drawBackGround();
+		drawBackArrow();
+		
+		
+		drawGauge();
 	}
 
 	
+	void drawBackGround() {
+		batch.draw(titleImg, 0, 0);
+	}
+	
+	// 화살표 백패널를 그린다.
+	void drawBackArrow() {
+		// 백패널의 반짝임을 계산 각 tick 마다 60ms시간만끔 반짝임을 준다.
+		batch.draw(backArrows.get(0), 32, 370);
+		batch.draw(backArrows.get(0), 352, 370);
+	}
+	
+
+	/// 판정관련 데이터를 화면에 뿌린다.
+	void drawGauge() {
+		batch.draw(gaugeWaku, 32, 430);
+		batch.draw(gaugeWaku, 352, 430);
+		batch.draw(gauge, 268, 440);
+		batch.draw(gauge, 352, 440);
+	}
 
 	@Override
 	public boolean keyDown(int keycode) {
@@ -92,14 +128,12 @@ public class NormalStage implements IStage, InputProcessor {
 
 	@Override
 	public void gotoPrevStage() {
-		// TODO Auto-generated method stub
-
+		stages.setStage("selectStage");
 	}
 
 	@Override
 	public void gotoNextStage() {
-		// TODO Auto-generated method stub
-
+		stages.setStage("resultStage");
 	}
 
 }
