@@ -13,12 +13,16 @@ public class FrameAnimation {
 	private	int	currentFrame = 0;
 	private	int	maxFrames;
 	private	boolean	isLoop = false;
-	private	long	beforeTime;
+	private	long	beforeTime = 0;
+	private	int	width;
+	private	int	height;
 	@Setter
-	private	int frameRate;
+	private	long frameRate;
 
 	public FrameAnimation(Texture texture, int w, int h) {
 		this.sprite = new Sprite(texture, w, h);
+		this.width = w;
+		this.height = w;
 	}
 
 	public static FrameAnimation of(Texture texture, int w, int h) {
@@ -37,6 +41,18 @@ public class FrameAnimation {
 	}
 
 	public void draw(Batch batch) {
+		if(beforeTime == 0)
+			beforeTime = System.currentTimeMillis();
+
+		long delta = System.currentTimeMillis() - beforeTime;
+		while(frameRate <= delta) {
+			++currentFrame;
+			delta -= frameRate;
+			beforeTime += frameRate;
+			if(currentFrame <= maxFrames) {
+				sprite.scroll(this.width, 0);
+			}
+		}
 
 		sprite.draw(batch);
 	}
