@@ -5,3 +5,7 @@ kick it up(0.4a) for java.
 ![Select Stage.](https://user-images.githubusercontent.com/14028505/58261931-39463b00-7db4-11e9-9c7c-500120a05953.png)
  
 ![normalStage1](https://user-images.githubusercontent.com/14028505/60396985-0cd7c880-9b83-11e9-82e4-ba027bd73840.png)
+
+# TODO
+* button press efect.
+* node animation.
