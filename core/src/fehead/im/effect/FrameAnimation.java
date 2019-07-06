@@ -10,14 +10,15 @@ import lombok.Setter;
 
 public class FrameAnimation {
 	private Sprite sprite;
-	private	int	currentFrame = 0;
-	private	int	maxFrames;
-	private	boolean	isLoop = false;
-	private	long	beforeTime = 0;
-	private	int	width;
-	private	int	height;
+	private int currentFrame = 0;
+	private int maxFrames;
+	private boolean isLoop = false;
+	private	boolean isEnd = false;
+	private long beforeTime = 0;
+	private int width;
+	private int height;
 	@Setter
-	private	long frameRate;
+	private long frameRate;
 
 	public FrameAnimation(Texture texture, int w, int h) {
 		this.sprite = new Sprite(texture, w, h);
@@ -27,7 +28,6 @@ public class FrameAnimation {
 
 	public static FrameAnimation of(Texture texture, int w, int h) {
 		Objects.requireNonNull(texture, "texture is require Not null");
-
 		return new FrameAnimation(texture, w , h);
 	}
 
@@ -51,9 +51,10 @@ public class FrameAnimation {
 			beforeTime += frameRate;
 			if(currentFrame <= maxFrames) {
 				sprite.scroll(this.width, 0);
+			} else {
+				isEnd = true;
 			}
 		}
-
 		sprite.draw(batch);
 	}
 }
