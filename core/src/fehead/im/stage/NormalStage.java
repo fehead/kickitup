@@ -82,18 +82,17 @@ public class NormalStage implements IStage, InputProcessor {
 	// 화살표 백패널를 그린다.
 	void drawBackArrow() {
 		// 백패널의 반짝임을 계산 각 tick 마다 60ms시간만끔 반짝임을 준다.
-		Double oneSecound = bpm*tick;
-	    long tmp = plaingPosition % oneSecound.longValue();
-	    if( 0 < tmp && tmp < 60 ) {
-			batch.draw(backArrows.get(1), 32, 370);
-			batch.draw(backArrows.get(1), 352, 370);
-	    }
-	    else {
-			batch.draw(backArrows.get(0), 32, 370);
-			batch.draw(backArrows.get(0), 352, 370);
-	    }
+		Double oneSecound = bpm * tick;
+		long tmp = plaingPosition % oneSecound.longValue();
+		Texture backArrow;
+		if (0 <= tmp && tmp <= 60)
+			backArrow = backArrows.get(1);
+		else
+			backArrow = backArrows.get(0);
+
+		batch.draw(backArrow, 32, 370);
+		batch.draw(backArrow, 352, 370);
 	}
-	
 
 	/// 판정관련 데이터를 화면에 뿌린다.
 	void drawGauge() {
