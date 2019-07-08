@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
+import lombok.Getter;
 import lombok.Setter;
 
 public class FrameAnimation {
@@ -13,7 +14,6 @@ public class FrameAnimation {
 	private int currentFrame = 0;
 	private int maxFrames;
 	private boolean isLoop = false;
-	private	boolean isEnd = false;
 	private long beforeTime = 0;
 	private int width;
 	private int height;
@@ -50,11 +50,25 @@ public class FrameAnimation {
 			delta -= frameRate;
 			beforeTime += frameRate;
 			if(currentFrame <= maxFrames) {
-				sprite.scroll(this.width, 0);
-			} else {
-				isEnd = true;
+				// sprite.setRegionX(this.width * currentFrame);
+				// sprite.setU(this.width * currentFrame);
+				sprite.setRegion(this.width * currentFrame, 0, width, height);
 			}
 		}
 		sprite.draw(batch);
+	}
+
+	public void setCurrentFrame(int frame) {		
+		if (frame < 0 || maxFrames <= frame)
+			return;
+		currentFrame = frame;
+	}
+
+	public void setLoop(boolean b) {
+		isLoop = b; 
+	}
+
+	public boolean isEnd() {
+		return maxFrames <= currentFrame;
 	}
 }
