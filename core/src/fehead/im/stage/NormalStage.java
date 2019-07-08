@@ -3,16 +3,21 @@ package fehead.im.stage;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.audio.GdxMusic;
 import fehead.im.audio.Music;
+import fehead.im.effect.FrameAnimation;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import fehead.im.song.StepKsf;
+import lombok.extern.java.Log;
 
+@Log
 public class NormalStage implements IStage, InputProcessor {
 	private	SpriteBatch batch;
 	private	Stages stages;
@@ -29,6 +34,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	long	tick;
 	private	Double	bpm;
 	private	Double	stepGapTime;	//  1step time(ms)
+	private	FrameAnimation	aniPushArrows;
 	
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -40,6 +46,13 @@ public class NormalStage implements IStage, InputProcessor {
 		stepArrows = new Texture("images/arrow.png");
 		gaugeWaku = new Texture("images/gaugewaku.png");
 		gauge = new Texture("images/gauge.png");
+		aniPushArrows = FrameAnimation.of(new Texture("images/parrow1.png"), 72, 70);
+		aniPushArrows.setPosition(27, 480-45-70);
+		
+		aniPushArrows.setMaxFrame(9);
+		aniPushArrows.setCurrentFrame(9);
+		aniPushArrows.setFrameRate(30);
+		aniPushArrows.setLoop(false);
 	}
 
 	@Override
@@ -51,6 +64,8 @@ public class NormalStage implements IStage, InputProcessor {
 		bpm = new Double(stepKsf.getBpm()[0]);
 		stepGapTime = 60000.0/(bpm * tick);
 		bgm = GdxMusic.of(song.getPlayMp3Path().getAbsolutePath());
+		
+		Gdx.input.setInputProcessor(this);
 		
 		titleImg = new Texture(song.getTitleImgPath().getAbsolutePath());
 		bgm.play();
@@ -68,7 +83,14 @@ public class NormalStage implements IStage, InputProcessor {
 		drawBackGround();
 		drawBackArrow();	
 		
+		drawPushArraw();
+
 		drawGauge();
+	}
+
+	private void drawPushArraw() {
+       if( aniPushArrows.isEnd() == false )
+            aniPushArrows.draw(batch);
 	}
 
 	private void think() {
@@ -104,7 +126,14 @@ public class NormalStage implements IStage, InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
+		switch(keycode) {
+		case Input.Keys.Z:
+			aniPushArrows.setCurrentFrame(0);
+			break;
+		case Input.Keys.ESCAPE:
+			gotoPrevStage();
+			break;
+		}
 		return false;
 	}
 
@@ -152,12 +181,12 @@ public class NormalStage implements IStage, InputProcessor {
 
 	@Override
 	public void gotoPrevStage() {
-		stages.setStage("selectStage");
+		stages.setStage("select");
 	}
 
 	@Override
 	public void gotoNextStage() {
-		stages.setStage("resultStage");
+		// stages.setStage("resultStage");
 	}
 
 }
