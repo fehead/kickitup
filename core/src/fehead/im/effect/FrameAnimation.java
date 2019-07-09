@@ -50,8 +50,6 @@ public class FrameAnimation {
 			++currentFrame;
 			beforeTime = curTime;
 			if(!isEnd()) {
-				// sprite.setRegionX(this.width * currentFrame);
-				// sprite.setU(this.width * currentFrame);
 				sprite.setRegion(this.width * currentFrame, 0, width, height);
 			}
 		}
