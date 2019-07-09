@@ -52,7 +52,6 @@ public class NormalStage implements IStage, InputProcessor {
 		aniPushArrows.setMaxFrame(9);
 		aniPushArrows.setCurrentFrame(9);
 		aniPushArrows.setFrameRate(30);
-		aniPushArrows.setLoop(false);
 	}
 
 	@Override
