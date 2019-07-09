@@ -6,14 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import lombok.Getter;
 import lombok.Setter;
 
 public class FrameAnimation {
 	private Sprite sprite;
 	private int currentFrame = 0;
 	private int maxFrames;
-	private boolean isLoop = false;
 	private long beforeTime = 0;
 	private int width;
 	private int height;
@@ -60,10 +58,6 @@ public class FrameAnimation {
 		if (frame < 0 || maxFrames <= frame)
 			return;
 		currentFrame = frame;
-	}
-
-	public void setLoop(boolean b) {
-		isLoop = b; 
 	}
 
 	public boolean isEnd() {
