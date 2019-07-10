@@ -1,6 +1,7 @@
 package fehead.im.stage;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -15,7 +16,32 @@ import fehead.im.effect.FrameAnimation;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import fehead.im.song.StepKsf;
+import lombok.Getter;
 import lombok.extern.java.Log;
+
+enum EButton {
+	// 1	7	5	9	3
+	// 25, 75, 125, 175, 225
+	KEY1(1, 27),
+	KEY3(3, 227),
+	KEY5(5, 127),
+	KEY7(7, 77),
+	KEY9(9, 177);
+	
+	@Getter
+	private	int	key;
+	@Getter
+	private	int	x;
+	
+	EButton(int key, int x) {
+		this.key = key;
+		this.x = x;
+	}
+	
+	String getFileName() {
+		return "images/parrow" + key + ".png";
+	}
+}
 
 @Log
 public class NormalStage implements IStage, InputProcessor {
@@ -34,7 +60,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	long	tick;
 	private	Double	bpm;
 	private	Double	stepGapTime;	//  1step time(ms)
-	private	FrameAnimation	aniPushArrows;
+	private	EnumMap<EButton, FrameAnimation>	aniPushArrows;
 	
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -46,12 +72,17 @@ public class NormalStage implements IStage, InputProcessor {
 		stepArrows = new Texture("images/arrow.png");
 		gaugeWaku = new Texture("images/gaugewaku.png");
 		gauge = new Texture("images/gauge.png");
-		aniPushArrows = FrameAnimation.of(new Texture("images/parrow1.png"), 72, 70);
-		aniPushArrows.setPosition(27, 480-45-70);
 		
-		aniPushArrows.setMaxFrame(9);
-		aniPushArrows.setCurrentFrame(9);
-		aniPushArrows.setFrameRate(30);
+		aniPushArrows = new EnumMap<>(EButton.class);
+		for(EButton b : EButton.values()) {
+			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getFileName()), 72, 70);
+			aniPushArrow.setPosition(b.getX(), 480-45-70);
+			aniPushArrow.setMaxFrame(9);
+			aniPushArrow.setCurrentFrame(9);
+			aniPushArrow.setFrameRate(30);
+			aniPushArrows.put(b, aniPushArrow);
+		}
+		
 	}
 
 	@Override
@@ -88,8 +119,11 @@ public class NormalStage implements IStage, InputProcessor {
 	}
 
 	private void drawPushArraw() {
-       if( aniPushArrows.isEnd() == false )
-            aniPushArrows.draw(batch);
+		for (FrameAnimation f : aniPushArrows.values()) {
+			if (!f.isEnd())
+				f.draw(batch);
+		}
+
 	}
 
 	private void think() {
@@ -127,8 +161,21 @@ public class NormalStage implements IStage, InputProcessor {
 	public boolean keyDown(int keycode) {
 		switch(keycode) {
 		case Input.Keys.Z:
-			aniPushArrows.setCurrentFrame(0);
+			aniPushArrows.get(EButton.KEY1).setCurrentFrame(0);
 			break;
+		case Input.Keys.C:
+			aniPushArrows.get(EButton.KEY3).setCurrentFrame(0);
+			break;
+		case Input.Keys.S:
+			aniPushArrows.get(EButton.KEY5).setCurrentFrame(0);
+			break;
+		case Input.Keys.Q:
+			aniPushArrows.get(EButton.KEY7).setCurrentFrame(0);
+			break;
+		case Input.Keys.E:
+			aniPushArrows.get(EButton.KEY9).setCurrentFrame(0);
+			break;
+			
 		case Input.Keys.ESCAPE:
 			gotoPrevStage();
 			break;
