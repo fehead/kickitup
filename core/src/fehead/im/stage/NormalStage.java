@@ -38,8 +38,12 @@ enum EButton {
 		this.x = x;
 	}
 	
-	String getFileName() {
+	String getPushFileName() {
 		return "images/parrow" + key + ".png";
+	}
+	
+	String getCrashFileName() {
+		return "images/carrow" + key + ".png";
 	}
 }
 
@@ -61,6 +65,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Double	bpm;
 	private	Double	stepGapTime;	//  1step time(ms)
 	private	EnumMap<EButton, FrameAnimation>	aniPushArrows;
+	private	EnumMap<EButton, FrameAnimation>	aniCrashArrows;
 	
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -74,13 +79,21 @@ public class NormalStage implements IStage, InputProcessor {
 		gauge = new Texture("images/gauge.png");
 		
 		aniPushArrows = new EnumMap<>(EButton.class);
+		aniCrashArrows = new EnumMap<>(EButton.class);
 		for(EButton b : EButton.values()) {
-			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getFileName()), 72, 70);
+			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), 72, 70);
 			aniPushArrow.setPosition(b.getX(), 480-45-70);
 			aniPushArrow.setMaxFrame(9);
 			aniPushArrow.setCurrentFrame(9);
 			aniPushArrow.setFrameRate(30);
 			aniPushArrows.put(b, aniPushArrow);
+
+			FrameAnimation aniCrashArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 80, 80);
+			aniCrashArrow.setPosition(b.getX()-2, 480-43-80);
+			aniCrashArrow.setMaxFrame(9);
+			aniCrashArrow.setCurrentFrame(9);
+			aniCrashArrow.setFrameRate(30);
+			aniCrashArrows.put(b, aniCrashArrow);
 		}
 		
 	}
@@ -124,6 +137,11 @@ public class NormalStage implements IStage, InputProcessor {
 				f.draw(batch);
 		}
 
+		for (FrameAnimation f : aniCrashArrows.values()) {
+			if (!f.isEnd())
+				f.draw(batch);
+		}
+
 	}
 
 	private void think() {
@@ -162,18 +180,23 @@ public class NormalStage implements IStage, InputProcessor {
 		switch(keycode) {
 		case Input.Keys.Z:
 			aniPushArrows.get(EButton.KEY1).setCurrentFrame(0);
+			aniCrashArrows.get(EButton.KEY1).setCurrentFrame(0);
 			break;
 		case Input.Keys.C:
 			aniPushArrows.get(EButton.KEY3).setCurrentFrame(0);
+			aniCrashArrows.get(EButton.KEY3).setCurrentFrame(0);
 			break;
 		case Input.Keys.S:
 			aniPushArrows.get(EButton.KEY5).setCurrentFrame(0);
+			aniCrashArrows.get(EButton.KEY5).setCurrentFrame(0);
 			break;
 		case Input.Keys.Q:
 			aniPushArrows.get(EButton.KEY7).setCurrentFrame(0);
+			aniCrashArrows.get(EButton.KEY7).setCurrentFrame(0);
 			break;
 		case Input.Keys.E:
 			aniPushArrows.get(EButton.KEY9).setCurrentFrame(0);
+			aniCrashArrows.get(EButton.KEY9).setCurrentFrame(0);
 			break;
 			
 		case Input.Keys.ESCAPE:
