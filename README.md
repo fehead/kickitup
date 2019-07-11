@@ -7,5 +7,6 @@ kick it up(0.4a) for java.
 ![normalStage1](https://user-images.githubusercontent.com/14028505/60396985-0cd7c880-9b83-11e9-82e4-ba027bd73840.png)
 
 # TODO
-* button press efect.
+* ~~button press efect.~~
+* bitton creash effect.
 * node animation.
