@@ -16,6 +16,8 @@ public class FrameAnimation {
 	private int width;
 	private int height;
 	@Setter
+	private	boolean	isLoop = false;
+	@Setter
 	private long frameRate;
 
 	public FrameAnimation(Texture texture, int w, int h) {

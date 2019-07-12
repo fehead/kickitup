@@ -22,18 +22,26 @@ import lombok.extern.java.Log;
 enum EButton {
 	// 1	7	5	9	3
 	// 25, 75, 125, 175, 225
-	KEY1(1, 27),
-	KEY3(3, 227),
-	KEY5(5, 127),
-	KEY7(7, 77),
-	KEY9(9, 177);
+	KEY1(1, 27, 4, 80),
+	KEY3(3, 227, 3, 80),
+	KEY5(5, 127, 2, 80),
+	KEY7(7, 77, 0, 80),
+	KEY9(9, 177, 1, 80);
 	
 	@Getter
-	private	int	key;
+	private	int	key;	// keyboard key (1 3 5 7 9)
 	@Getter
-	private	int	x;
+	private	int	x;		// pushStepArrow(parrow.png, carrow.png)start x
+	@Getter
+	private	int	stepArrowIdx;	// stepArrow arrow.png
+	@Getter
+	private	int	stepArrowWith;	// stepArrow arrow.png width
 	
 	EButton(int key, int x) {
+		this(key, x, 0, 0);
+	}
+	
+	EButton(int key, int x, int stepArrowIdx, int stepArrowWith) {
 		this.key = key;
 		this.x = x;
 	}
@@ -66,6 +74,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Double	stepGapTime;	//  1step time(ms)
 	private	EnumMap<EButton, FrameAnimation>	aniPushArrows;
 	private	EnumMap<EButton, FrameAnimation>	aniCrashArrows;
+	private	EnumMap<EButton, FrameAnimation>	aniStepArraws;
 	
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -77,9 +86,11 @@ public class NormalStage implements IStage, InputProcessor {
 		stepArrows = new Texture("images/arrow.png");
 		gaugeWaku = new Texture("images/gaugewaku.png");
 		gauge = new Texture("images/gauge.png");
+		stepArrows = new Texture("images/arrow.png");
 		
 		aniPushArrows = new EnumMap<>(EButton.class);
 		aniCrashArrows = new EnumMap<>(EButton.class);
+		aniStepArraws = new EnumMap<>(EButton.class);
 		for(EButton b : EButton.values()) {
 			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), 72, 70);
 			aniPushArrow.setPosition(b.getX(), 480-45-70);
@@ -94,6 +105,14 @@ public class NormalStage implements IStage, InputProcessor {
 			aniCrashArrow.setCurrentFrame(9);
 			aniCrashArrow.setFrameRate(30);
 			aniCrashArrows.put(b, aniCrashArrow);
+			
+			// TODO: fixit.
+			FrameAnimation aniStepArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 60, 60);
+			aniStepArrow.setMaxFrame(6);
+			aniStepArrow.setCurrentFrame(0);
+			aniStepArrow.setFrameRate(100);
+			aniStepArrow.setLoop(true);
+			aniStepArraws.put(b, aniStepArrow);
 		}
 		
 	}
