@@ -16,11 +16,15 @@ public class FrameAnimation {
 	private int width;
 	private int height;
 	@Setter
+	private	int	x = 0;
+	@Setter
+	private	int	y = 0;
+	@Setter
 	private	boolean	isLoop = false;
 	@Setter
 	private long frameRate;
 
-	public FrameAnimation(Texture texture, int w, int h) {
+	private FrameAnimation(Texture texture, int w, int h) {
 		this.sprite = new Sprite(texture, w, h);
 		this.width = w;
 		this.height = w;
@@ -47,13 +51,19 @@ public class FrameAnimation {
 		long curTime = System.currentTimeMillis();
 		long delta = curTime - beforeTime;
 		if(frameRate <= delta) {
-			++currentFrame;
+			nextFrame();
 			beforeTime = curTime;
 			if(!isEnd()) {
-				sprite.setRegion(this.width * currentFrame, 0, width, height);
+				sprite.setRegion(this.width * currentFrame + x, y, width, height);
 			}
 		}
 		sprite.draw(batch);
+	}
+
+	private void nextFrame() {
+		++currentFrame;
+		if(isLoop)
+			currentFrame = currentFrame % maxFrames;
 	}
 
 	public void setCurrentFrame(int frame) {		

@@ -107,7 +107,9 @@ public class NormalStage implements IStage, InputProcessor {
 			aniCrashArrows.put(b, aniCrashArrow);
 			
 			// TODO: fixit.
-			FrameAnimation aniStepArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 60, 60);
+			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, 60, 60);
+			aniStepArrow.setPosition(100, 480-100-60);
+			aniStepArrow.setY(b.getStepArrowIdx() * 60);
 			aniStepArrow.setMaxFrame(6);
 			aniStepArrow.setCurrentFrame(0);
 			aniStepArrow.setFrameRate(100);
@@ -160,7 +162,11 @@ public class NormalStage implements IStage, InputProcessor {
 			if (!f.isEnd())
 				f.draw(batch);
 		}
-
+		
+		for (FrameAnimation f : aniStepArraws.values()) {
+			if (!f.isEnd())
+				f.draw(batch);
+		}
 	}
 
 	private void think() {
@@ -200,6 +206,7 @@ public class NormalStage implements IStage, InputProcessor {
 		case Input.Keys.Z:
 			aniPushArrows.get(EButton.KEY1).setCurrentFrame(0);
 			aniCrashArrows.get(EButton.KEY1).setCurrentFrame(0);
+			aniStepArraws.get(EButton.KEY1).setCurrentFrame(0);
 			break;
 		case Input.Keys.C:
 			aniPushArrows.get(EButton.KEY3).setCurrentFrame(0);
