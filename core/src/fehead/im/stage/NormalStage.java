@@ -68,6 +68,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Texture	gauge;
 	private	StepKsf	stepKsf;
 	private	long	startPosition;		// ksf start[0]
+	private	long	playingTime;
 	private	long	plaingPosition;
 	private	long	tick;
 	private	Double	bpm;
@@ -76,6 +77,10 @@ public class NormalStage implements IStage, InputProcessor {
 	private	EnumMap<EButton, FrameAnimation>	aniCrashArrows;
 	private	EnumMap<EButton, FrameAnimation>	aniStepArraws;
 	
+	private	int[]	start;
+	private	Double	detailStepIdx;
+	private	int		stepIdx;
+
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
@@ -125,6 +130,7 @@ public class NormalStage implements IStage, InputProcessor {
 		stepKsf = song.getStepList().get(0);
 		startPosition = stepKsf.getStart()[0];
 		tick = stepKsf.getTick();
+		start = stepKsf.getStart();
 		bpm = new Double(stepKsf.getBpm()[0]);
 		stepGapTime = 60000.0/(bpm * tick);
 		bgm = GdxMusic.of(song.getPlayMp3Path().getAbsolutePath());
@@ -171,6 +177,8 @@ public class NormalStage implements IStage, InputProcessor {
 
 	private void think() {
 		plaingPosition = Math.max(bgm.getPosition() - startPosition, 0);
+		detailStepIdx = getIndexByTime(plaingPosition);
+		stepIdx = detailStepIdx.intValue() + 1;
 	}
 	
 	void drawBackGround() {
@@ -200,6 +208,21 @@ public class NormalStage implements IStage, InputProcessor {
 		batch.draw(gauge, 352, 440);
 	}
 
+	// plaing time to index
+	double getIndexByTime(long playTime) {
+		if (playTime <= 0)
+			return 0;
+		return playTime / stepGapTime;
+	}
+
+	// index to plaingPosition
+	long getTimeByIndex(int stepIndex) {
+		if (playingTime <= 0)
+			return 0;
+		return (long) (stepIndex * stepGapTime);
+	}
+
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		switch(keycode) {
