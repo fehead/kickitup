@@ -101,4 +101,12 @@ public class StepKsf {
 		stepKsf.readKSF(stepFile);
 		return stepKsf;
 	}
+
+	public boolean isEndStep(int index) {
+		return step.size() <= index;
+	}
+
+	public String getStep(int i) {
+		return step.get(i);
+	}
 }
