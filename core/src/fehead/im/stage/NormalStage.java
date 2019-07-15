@@ -44,6 +44,9 @@ enum EButton {
 	EButton(int key, int x, int stepArrowIdx, int stepArrowWith) {
 		this.key = key;
 		this.x = x;
+		this.stepArrowIdx = stepArrowIdx;
+		this.stepArrowWith = stepArrowWith;
+		
 	}
 	
 	String getPushFileName() {
@@ -57,6 +60,7 @@ enum EButton {
 
 @Log
 public class NormalStage implements IStage, InputProcessor {
+	static final int    BACK_ARROW_Y    = 55;
 	private	SpriteBatch batch;
 	private	Stages stages;
 	private	Music	bgm;
@@ -79,7 +83,11 @@ public class NormalStage implements IStage, InputProcessor {
 	
 	private	int[]	start;
 	private	Double	detailStepIdx;
-	private	int		stepIdx;
+	private	Integer	stepIdx;
+	private	Double	stepSpeed = 1.0; // 1x, 2x, 4x
+	private	Double	distancePerStep; // distance(pixel) per one step.
+	private	int 	addedStep; // The number of steps that the Step Arrow is added to the screen.
+	private	int		y;	// Y reference value.
 
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
@@ -113,7 +121,7 @@ public class NormalStage implements IStage, InputProcessor {
 			
 			// TODO: fixit.
 			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, 60, 60);
-			aniStepArrow.setPosition(100, 480-100-60);
+			aniStepArrow.setPosition(b.getX(), -80);
 			aniStepArrow.setY(b.getStepArrowIdx() * 60);
 			aniStepArrow.setMaxFrame(6);
 			aniStepArrow.setCurrentFrame(0);
@@ -134,6 +142,7 @@ public class NormalStage implements IStage, InputProcessor {
 		bpm = new Double(stepKsf.getBpm()[0]);
 		stepGapTime = 60000.0/(bpm * tick);
 		bgm = GdxMusic.of(song.getPlayMp3Path().getAbsolutePath());
+		distancePerStep = BACK_ARROW_Y * stepSpeed; 
 		
 		Gdx.input.setInputProcessor(this);
 		
@@ -154,6 +163,7 @@ public class NormalStage implements IStage, InputProcessor {
 		drawBackArrow();	
 		
 		drawPushArraw();
+		drawStepArrow();
 
 		drawGauge();
 	}
@@ -179,6 +189,12 @@ public class NormalStage implements IStage, InputProcessor {
 		plaingPosition = Math.max(bgm.getPosition() - startPosition, 0);
 		detailStepIdx = getIndexByTime(plaingPosition);
 		stepIdx = detailStepIdx.intValue() + 1;
+		
+	   // 기준 y값 - back arrow 위에서 끝이 나게 되어있다.
+	    y = (int)(BACK_ARROW_Y + (stepIdx.doubleValue() - detailStepIdx) * distancePerStep );
+	    
+	    // 화면 전체에 출력하기 위해 추가되는 Step개수만큼 화면에서 빼준다.
+	    y -= (BACK_ARROW_Y * addedStep * stepSpeed);
 	}
 	
 	void drawBackGround() {
@@ -200,6 +216,31 @@ public class NormalStage implements IStage, InputProcessor {
 		batch.draw(backArrow, 352, 370);
 	}
 
+	void drawStepArrow() {
+	    int stepIndex = stepIdx - addedStep;
+		for( Integer i = 0 ;  i < 48 ; ++i ) {
+	        final int arrowX[] = { 30, 80, 132, 185, 235};
+
+	        if( stepKsf.isEndStep( i + stepIndex ) )
+	            break;
+
+	        String stepData = stepKsf.getStep(i + stepIndex);
+//	        if( i == 0 && stepData.charAt(0) == '2' )
+//	            SetQuitStage( true );
+
+	        
+	        for (EButton key : aniStepArraws.keySet()) {
+	        	int idx = key.ordinal();
+			    if( stepData.charAt(key.getKey()) == '1' ) {
+			    	FrameAnimation f = aniStepArraws.get(key);
+			    	// f.setCurrentFrame(0);
+			    	f.setPosition(key.getX(), 480 - (i.floatValue() * distancePerStep.floatValue()));
+			    	f.draw(batch);
+			    }
+	        }
+		}
+	}
+	
 	/// 판정관련 데이터를 화면에 뿌린다.
 	void drawGauge() {
 		batch.draw(gaugeWaku, 32, 430);
