@@ -230,7 +230,6 @@ public class NormalStage implements IStage, InputProcessor {
 
 	        
 	        for (EButton key : aniStepArraws.keySet()) {
-	        	int idx = key.ordinal();
 			    if( stepData.charAt(key.getKey()) == '1' ) {
 			    	FrameAnimation f = aniStepArraws.get(key);
 			    	// f.setCurrentFrame(0);
