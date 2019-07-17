@@ -72,8 +72,7 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Texture	gauge;
 	private	StepKsf	stepKsf;
 	private	long	startPosition;		// ksf start[0]
-	private	long	playingTime;
-	private	long	plaingPosition;
+	private	Long	plaingPosition;
 	private	long	tick;
 	private	Double	bpm;
 	private	Double	stepGapTime;	//  1step time(ms)
@@ -249,16 +248,16 @@ public class NormalStage implements IStage, InputProcessor {
 	}
 
 	// plaing time to index
-	double getIndexByTime(long playTime) {
-		if (playTime <= 0)
-			return 0;
-		return playTime / stepGapTime;
+	Double getIndexByTime(Long playTime) {
+		if (playTime.compareTo(0L) <= 0)
+			return 0.0;
+		return playTime.doubleValue() / stepGapTime;
 	}
 
 	// index to plaingPosition
-	long getTimeByIndex(int stepIndex) {
-		if (playingTime <= 0)
-			return 0;
+	Long getTimeByIndex(int stepIndex) {
+		if (plaingPosition.compareTo(0L) <= 0)
+			return 0L;
 		return (long) (stepIndex * stepGapTime);
 	}
 
