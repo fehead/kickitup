@@ -23,7 +23,7 @@ enum EButton {
 	// 1	7	5	9	3
 	// 25, 75, 125, 175, 225
 	KEY1(1, 27, 4, 60, 0),
-	KEY3(3, 227, 3, 60, 5),
+	KEY3(3, 227, 3, 60, 4),
 	KEY5(5, 127, 2, 60, 2),
 	KEY7(7, 77, 0, 60, 1),
 	KEY9(9, 177, 1, 60, 3);
@@ -58,7 +58,7 @@ enum EButton {
 
 @Log
 public class NormalStage implements IStage, InputProcessor {
-	static final int    BACK_ARROW_Y    = 55;
+	static final Double    BACK_ARROW_Y    = 55.0;
 	private	SpriteBatch batch;
 	private	Stages stages;
 	private	Music	bgm;
@@ -140,8 +140,11 @@ public class NormalStage implements IStage, InputProcessor {
 		stepGapTime = 60000.0/(bpm * tick);
 		bgm = GdxMusic.of(song.getPlayMp3Path().getAbsolutePath());
 		distancePerStep = BACK_ARROW_Y * stepSpeed; 
-		
-		Gdx.input.setInputProcessor(this);
+
+		// 추가되는 step개수는 가려서 잘 보이지 않는 스탭개수에서부터 스탭 백패널 까지의 개수이다. -60 ~ 55pixel 위치까지 step개수.
+	    addedStep = (int)((60.0 + BACK_ARROW_Y) / distancePerStep);
+
+	    Gdx.input.setInputProcessor(this);
 		
 		titleImg = new Texture(song.getTitleImgPath().getAbsolutePath());
 		bgm.play();
@@ -149,6 +152,7 @@ public class NormalStage implements IStage, InputProcessor {
 
 	@Override
 	public void getOut() {
+		log.info("getPosition : " + bgm.getPosition());
 		bgm.stop();
 	}
 	
@@ -217,6 +221,8 @@ public class NormalStage implements IStage, InputProcessor {
 	    int stepIndex = stepIdx - addedStep;
 		for( Integer i = 0 ;  i < 48 ; ++i ) {
 	        final int arrowX[] = { 30, 80, 132, 185, 235};
+	        if(i + stepIndex < 0)
+	        	continue;
 
 	        if( stepKsf.isEndStep( i + stepIndex ) )
 	            break;
@@ -224,13 +230,12 @@ public class NormalStage implements IStage, InputProcessor {
 	        String stepData = stepKsf.getStep(i + stepIndex);
 //	        if( i == 0 && stepData.charAt(0) == '2' )
 //	            SetQuitStage( true );
-
 	        
 			for (EButton key : aniStepArraws.keySet()) {
 				if (stepData.charAt(key.getKsfIdx()) == '1') {
 					FrameAnimation f = aniStepArraws.get(key);
 					// f.setCurrentFrame(0);
-					f.setPosition(key.getX(), 480 - y - (i.floatValue() * distancePerStep.floatValue()));
+					f.setPosition(arrowX[key.getKsfIdx()], 420 - y - (i.floatValue() * distancePerStep.floatValue()));
 					f.draw(batch);
 				}
 			}
