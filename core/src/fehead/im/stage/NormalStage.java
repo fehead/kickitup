@@ -86,6 +86,9 @@ public class NormalStage implements IStage, InputProcessor {
 	private	int 	addedStep; // The number of steps that the Step Arrow is added to the screen.
 	private	int		y;	// Y reference value.
 
+	private	Long	oldTime;
+	private	Texture	smallFont;
+
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
@@ -97,6 +100,7 @@ public class NormalStage implements IStage, InputProcessor {
 		gaugeWaku = new Texture("images/gaugewaku.png");
 		gauge = new Texture("images/gauge.png");
 		stepArrows = new Texture("images/arrow.png");
+		smallFont = new Texture("images/sfont.png");
 		
 		aniPushArrows = new EnumMap<>(EButton.class);
 		aniCrashArrows = new EnumMap<>(EButton.class);
@@ -147,6 +151,8 @@ public class NormalStage implements IStage, InputProcessor {
 	    Gdx.input.setInputProcessor(this);
 		
 		titleImg = new Texture(song.getTitleImgPath().getAbsolutePath());
+		
+		oldTime = System.currentTimeMillis();
 		bgm.play();
 	}
 
@@ -167,6 +173,9 @@ public class NormalStage implements IStage, InputProcessor {
 		drawStepArrow();
 
 		drawGauge();
+		
+		long curTime = System.currentTimeMillis() - oldTime;
+		displayMessage(0, 463, String.format("P:%5d %6d", bgm.getPosition(), curTime));
 	}
 
 	private void drawPushArraw() {
@@ -235,7 +244,8 @@ public class NormalStage implements IStage, InputProcessor {
 				if (stepData.charAt(key.getKsfIdx()) == '1') {
 					FrameAnimation f = aniStepArraws.get(key);
 					// f.setCurrentFrame(0);
-					f.setPosition(arrowX[key.getKsfIdx()], 420 - y - (i.floatValue() * distancePerStep.floatValue()));
+					Double y1 = 480.0 - (distancePerStep * i + y);
+					f.setPosition(arrowX[key.getKsfIdx()], y1.floatValue());
 					f.draw(batch);
 				}
 			}
@@ -349,4 +359,14 @@ public class NormalStage implements IStage, InputProcessor {
 		// stages.setStage("resultStage");
 	}
 
+	private void displayMessage(int x, int y, String msg) {
+		final int FONT_WIDTH = 8;
+		final int FONT_HEIGHT = 16;
+
+		String upppercaseMsg = msg.toUpperCase();
+		for (int i = 0; i < upppercaseMsg.length(); ++i) {
+			int fontIndex = upppercaseMsg.charAt(i) - ' ';
+			batch.draw(smallFont, x + i * FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
+		}
+	}
 }
