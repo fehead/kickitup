@@ -33,7 +33,7 @@ public class Song {
 		
 		titleImgPath = new File(songDir, "title.png");
 		bgImgPath    = new File(songDir, "back.png");
-		playMp3Path  = new File(songDir, "song.mp3");
+		playMp3Path  = new File(songDir, "song.ogg");
 		playMpgPath  = new File(songDir, "song.mpg");
 		introMp3Path = new File(songDir, "intro.mp3");
 
@@ -45,7 +45,7 @@ public class Song {
 	}
 
 	public static Song of(File songDir, PlayMode pm, List<StepKsf> stepList) {
-		String[] fileNames = { "title.png", "song.mp3", "intro.mp3" };
+		String[] fileNames = { "title.png", "song.ogg", "intro.mp3" };
 		for(String fn : fileNames) {
 			File f1 = new File(songDir, fn);
 			if(!f1.exists())
