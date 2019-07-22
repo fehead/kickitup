@@ -175,7 +175,8 @@ public class NormalStage implements IStage, InputProcessor {
 		drawGauge();
 		
 		long curTime = System.currentTimeMillis() - oldTime;
-		displayMessage(0, 463, String.format("P:%5d %6d", bgm.getPosition(), curTime));
+		displayMessage(0, 463, String.format("S:%6d M:%5d DIFF:%5d", curTime, bgm.getPosition()
+				, curTime - bgm.getPosition()));
 	}
 
 	private void drawPushArraw() {
