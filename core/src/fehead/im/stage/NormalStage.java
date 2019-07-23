@@ -245,7 +245,8 @@ public class NormalStage implements IStage, InputProcessor {
 				if (stepData.charAt(key.getKsfIdx()) == '1') {
 					FrameAnimation f = aniStepArraws.get(key);
 					// f.setCurrentFrame(0);
-					Double y1 = 480.0 - (distancePerStep * i + y);
+					
+					Double y1 = 480.0 - 60 - (distancePerStep * i + y);
 					f.setPosition(arrowX[key.getKsfIdx()], y1.floatValue());
 					f.draw(batch);
 				}
