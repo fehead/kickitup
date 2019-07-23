@@ -57,4 +57,9 @@ public class GdxMusic implements Music {
 	public long getPosition() {
 		return (long)(music.getPosition() * 1000.0f);
 	}
+	
+	@Override
+	public boolean isPlaying() {
+		return music.isPlaying();
+	}
 }

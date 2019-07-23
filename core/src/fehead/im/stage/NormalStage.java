@@ -206,6 +206,9 @@ public class NormalStage implements IStage, InputProcessor {
 	    
 	    // 화면 전체에 출력하기 위해 추가되는 Step개수만큼 화면에서 빼준다.
 	    y -= (BACK_ARROW_Y * addedStep * stepSpeed);
+	    
+		if (!bgm.isPlaying())
+			gotoPrevStage();
 	}
 	
 	void drawBackGround() {
