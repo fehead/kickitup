@@ -59,6 +59,7 @@ enum EButton {
 @Log
 public class NormalStage implements IStage, InputProcessor {
 	static final Double    BACK_ARROW_Y    = 55.0;
+	static final Integer    SCREEN_HEIGHT	= 480;
 	private	SpriteBatch batch;
 	private	Stages stages;
 	private	Music	bgm;
@@ -107,14 +108,14 @@ public class NormalStage implements IStage, InputProcessor {
 		aniStepArraws = new EnumMap<>(EButton.class);
 		for(EButton b : EButton.values()) {
 			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), 72, 70);
-			aniPushArrow.setPosition(b.getX(), 480-45-70);
+			aniPushArrow.setPosition(b.getX(), SCREEN_HEIGHT-45-70);
 			aniPushArrow.setMaxFrame(9);
 			aniPushArrow.setCurrentFrame(9);
 			aniPushArrow.setFrameRate(30);
 			aniPushArrows.put(b, aniPushArrow);
 
 			FrameAnimation aniCrashArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 80, 80);
-			aniCrashArrow.setPosition(b.getX()-2, 480-43-80);
+			aniCrashArrow.setPosition(b.getX()-2, SCREEN_HEIGHT-43-80);
 			aniCrashArrow.setMaxFrame(9);
 			aniCrashArrow.setCurrentFrame(9);
 			aniCrashArrow.setFrameRate(30);
@@ -249,7 +250,7 @@ public class NormalStage implements IStage, InputProcessor {
 					FrameAnimation f = aniStepArraws.get(key);
 					// f.setCurrentFrame(0);
 					
-					Double y1 = 480.0 - 60 - (distancePerStep * i + y);
+					Double y1 = SCREEN_HEIGHT - 60 - (distancePerStep * i + y);
 					f.setPosition(arrowX[key.getKsfIdx()], y1.floatValue());
 					f.draw(batch);
 				}
