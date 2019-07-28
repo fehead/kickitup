@@ -121,7 +121,6 @@ public class NormalStage implements IStage, InputProcessor {
 			aniCrashArrow.setFrameRate(30);
 			aniCrashArrows.put(b, aniCrashArrow);
 			
-			// TODO: fixit.
 			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, 60, 60);
 			aniStepArrow.setPosition(b.getX(), -80);
 			aniStepArrow.setY(b.getStepArrowIdx() * 60);
