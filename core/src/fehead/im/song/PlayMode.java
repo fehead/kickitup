@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import fehead.im.player.EPlayer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -22,10 +23,6 @@ public enum PlayMode {
 	private	int	stepCnt;
 
 	public List<String> stepFileNames() {
-		if(stepCnt < 1)
-			return new ArrayList<>();
-
-
 		// exam) DOUBLE -> ["double.ksf"]
 		if(stepCnt == 1)
 			return Arrays.asList(name + ".ksf");
@@ -39,5 +36,12 @@ public enum PlayMode {
 
 	public String iconFileName() {
 		return "images/" + name + "icon.png";
+	}
+	
+	public List<EPlayer> getPlayers() {
+		if(stepCnt == 1)
+			return Arrays.asList(EPlayer.Player1);
+		
+		return Arrays.asList(EPlayer.values()); 
 	}
 }
