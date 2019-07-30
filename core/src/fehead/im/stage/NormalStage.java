@@ -106,19 +106,24 @@ public class NormalStage implements IStage, InputProcessor {
 		aniPushArrows = new EnumMap<>(EButton.class);
 		aniCrashArrows = new EnumMap<>(EButton.class);
 		aniStepArraws = new EnumMap<>(EButton.class);
+		final Integer	PUSH_ARROW_WIDTH = 72;
+		final Integer	PUSH_ARROW_HEIGHT = 70;
+		final Integer	PUSH_ARROW_POSITION_Y = SCREEN_HEIGHT - PUSH_ARROW_HEIGHT -45;
+		final Integer	PUSH_ARROW_FRAME_CNT = 9;
+		final Integer	ARROW_FRAME_RATE = 30;
 		for(EButton b : EButton.values()) {
-			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), 72, 70);
-			aniPushArrow.setPosition(b.getX(), SCREEN_HEIGHT-45-70);
-			aniPushArrow.setMaxFrame(9);
-			aniPushArrow.setCurrentFrame(9);
-			aniPushArrow.setFrameRate(30);
+			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), PUSH_ARROW_WIDTH, PUSH_ARROW_HEIGHT);
+			aniPushArrow.setPosition(b.getX(), PUSH_ARROW_POSITION_Y);
+			aniPushArrow.setMaxFrame(PUSH_ARROW_FRAME_CNT);
+			aniPushArrow.setCurrentFrame(PUSH_ARROW_FRAME_CNT);
+			aniPushArrow.setFrameRate(ARROW_FRAME_RATE);
 			aniPushArrows.put(b, aniPushArrow);
 
 			FrameAnimation aniCrashArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 80, 80);
 			aniCrashArrow.setPosition(b.getX()-2, SCREEN_HEIGHT-43-80);
 			aniCrashArrow.setMaxFrame(9);
 			aniCrashArrow.setCurrentFrame(9);
-			aniCrashArrow.setFrameRate(30);
+			aniCrashArrow.setFrameRate(ARROW_FRAME_RATE);
 			aniCrashArrows.put(b, aniCrashArrow);
 			
 			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, 60, 60);
