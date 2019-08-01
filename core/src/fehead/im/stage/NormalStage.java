@@ -106,12 +106,12 @@ public class NormalStage implements IStage, InputProcessor {
 		aniPushArrows = new EnumMap<>(EButton.class);
 		aniCrashArrows = new EnumMap<>(EButton.class);
 		aniStepArraws = new EnumMap<>(EButton.class);
-		final Integer	PUSH_ARROW_WIDTH = 72;
-		final Integer	PUSH_ARROW_HEIGHT = 70;
-		final Integer	PUSH_ARROW_POSITION_Y = SCREEN_HEIGHT - PUSH_ARROW_HEIGHT -45;
-		final Integer	PUSH_ARROW_FRAME_CNT = 9;
-		final Integer	ARROW_FRAME_RATE = 30;
 		for(EButton b : EButton.values()) {
+			final Integer	PUSH_ARROW_WIDTH = 72;
+			final Integer	PUSH_ARROW_HEIGHT = 70;
+			final Integer	PUSH_ARROW_POSITION_Y = SCREEN_HEIGHT - PUSH_ARROW_HEIGHT -45;
+			final Integer	PUSH_ARROW_FRAME_CNT = 9;
+			final Integer	ARROW_FRAME_RATE = 30;
 			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), PUSH_ARROW_WIDTH, PUSH_ARROW_HEIGHT);
 			aniPushArrow.setPosition(b.getX(), PUSH_ARROW_POSITION_Y);
 			aniPushArrow.setMaxFrame(PUSH_ARROW_FRAME_CNT);
@@ -119,19 +119,29 @@ public class NormalStage implements IStage, InputProcessor {
 			aniPushArrow.setFrameRate(ARROW_FRAME_RATE);
 			aniPushArrows.put(b, aniPushArrow);
 
-			FrameAnimation aniCrashArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), 80, 80);
-			aniCrashArrow.setPosition(b.getX()-2, SCREEN_HEIGHT-43-80);
-			aniCrashArrow.setMaxFrame(9);
-			aniCrashArrow.setCurrentFrame(9);
+			final Integer	CRASH_ARROW_WIDTH = 80;
+			final Integer	CRASH_ARROW_HEIGHT = 80;
+			final Integer	CRASH_ARROW_POSITION_Y = SCREEN_HEIGHT - CRASH_ARROW_HEIGHT - 43;
+			final Integer	CRASH_ARROW_FRAME_CNT = 9;
+			
+			FrameAnimation aniCrashArrow = FrameAnimation.of(new Texture(b.getCrashFileName()), CRASH_ARROW_WIDTH, CRASH_ARROW_HEIGHT);
+			aniCrashArrow.setPosition(b.getX()-2, CRASH_ARROW_POSITION_Y);
+			aniCrashArrow.setMaxFrame(CRASH_ARROW_FRAME_CNT);
+			aniCrashArrow.setCurrentFrame(CRASH_ARROW_FRAME_CNT);
 			aniCrashArrow.setFrameRate(ARROW_FRAME_RATE);
 			aniCrashArrows.put(b, aniCrashArrow);
-			
-			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, 60, 60);
-			aniStepArrow.setPosition(b.getX(), -80);
-			aniStepArrow.setY(b.getStepArrowIdx() * 60);
-			aniStepArrow.setMaxFrame(6);
+
+			final Integer	STEP_ARROW_WIDTH = 60;
+			final Integer	STEP_ARROW_HEIGHT = 60;
+			final Integer	STEP_ARROW_POSITION_Y = -80;
+			final Integer	STEP_ARROW_FRAME_CNT = 6;
+			final Integer	STEP_ARROW_FRAME_RATE = 100;
+			FrameAnimation aniStepArrow = FrameAnimation.of(stepArrows, STEP_ARROW_WIDTH, STEP_ARROW_HEIGHT);
+			aniStepArrow.setPosition(b.getX(), STEP_ARROW_POSITION_Y);
+			aniStepArrow.setY(b.getStepArrowIdx() * STEP_ARROW_HEIGHT);
+			aniStepArrow.setMaxFrame(STEP_ARROW_FRAME_CNT);
 			aniStepArrow.setCurrentFrame(0);
-			aniStepArrow.setFrameRate(100);
+			aniStepArrow.setFrameRate(STEP_ARROW_FRAME_RATE);
 			aniStepArrow.setLoop(true);
 			aniStepArraws.put(b, aniStepArrow);
 		}
