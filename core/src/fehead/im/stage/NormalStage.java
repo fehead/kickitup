@@ -247,8 +247,7 @@ public class NormalStage implements IStage, InputProcessor {
 
 	void drawStepArrow() {
 	    int stepIndex = stepIdx - addedStep;
-		for( Integer i = 0 ;  i < 48 ; ++i ) {
-	        final int arrowX[] = { 30, 80, 132, 185, 235};
+		for( Integer i = 0 ;  i < 48 ; ++i ) {	        
 	        if(i + stepIndex < 0)
 	        	continue;
 
@@ -264,8 +263,9 @@ public class NormalStage implements IStage, InputProcessor {
 					FrameAnimation f = aniStepArraws.get(key);
 					// f.setCurrentFrame(0);
 					
+					final int stepArrowX[] = { 30, 80, 132, 185, 235};
 					Double y1 = SCREEN_HEIGHT - 60 - (distancePerStep * i + y);
-					f.setPosition(arrowX[key.getKsfIdx()], y1.floatValue());
+					f.setPosition(stepArrowX[key.getKsfIdx()], y1.floatValue());
 					f.draw(batch);
 				}
 			}
