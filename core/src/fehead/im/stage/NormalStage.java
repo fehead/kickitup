@@ -274,10 +274,18 @@ public class NormalStage implements IStage, InputProcessor {
 	
 	/// 판정관련 데이터를 화면에 뿌린다.
 	void drawGauge() {
-		batch.draw(gaugeWaku, 32, 430);
-		batch.draw(gaugeWaku, 352, 430);
-		batch.draw(gauge, 268, 440);
-		batch.draw(gauge, 352, 440);
+		final int	GAUGEWAKU_1P_X = 32;
+		final int	GAUGEWAKU_1P_Y = 430;
+		final int	GAUGEWAKU_2P_X = 352;
+		final int	GAUGEWAKU_2P_Y = 430;
+		final int	GAUGE_1P_X = 268;
+		final int	GAUGE_1P_Y = 440;
+		final int	GAUGE_2P_X = 252;
+		final int	GAUGE_2P_Y = 440;
+		batch.draw(gaugeWaku, GAUGEWAKU_1P_X, GAUGEWAKU_1P_Y);
+		batch.draw(gaugeWaku, GAUGEWAKU_2P_X, GAUGEWAKU_2P_Y);
+		batch.draw(gauge, GAUGE_1P_X, GAUGE_1P_Y);
+		batch.draw(gauge, GAUGE_2P_X, GAUGE_2P_Y);
 	}
 
 	// plaing time to index
