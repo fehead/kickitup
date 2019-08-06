@@ -10,4 +10,5 @@ kick it up(0.4a) for java.
 # TODO
 * ~~button press efect.~~
 * ~~bitton creash effect.~~
-* node animation.
+* ~~node animation.~~
+* node justice.
