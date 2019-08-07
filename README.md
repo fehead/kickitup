@@ -12,3 +12,4 @@ kick it up(0.4a) for java.
 * ~~bitton creash effect.~~
 * ~~node animation.~~
 * node justice.
+* score.
