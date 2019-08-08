@@ -3,6 +3,9 @@ package fehead.im.stage;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.stream.Stream;
+
+import org.assertj.core.util.Streams;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -195,20 +198,17 @@ public class NormalStage implements IStage, InputProcessor {
 	}
 
 	private void drawPushArraw() {
-		for (FrameAnimation f : aniPushArrows.values()) {
-			if (!f.isEnd())
-				f.draw(batch);
-		}
+		aniPushArrows.values().stream()
+			.filter(f -> !f.isEnd())
+			.forEach(f -> f.draw(batch));
 
-		for (FrameAnimation f : aniCrashArrows.values()) {
-			if (!f.isEnd())
-				f.draw(batch);
-		}
-		
-		for (FrameAnimation f : aniStepArraws.values()) {
-			if (!f.isEnd())
-				f.draw(batch);
-		}
+		aniCrashArrows.values().stream()
+			.filter(f -> !f.isEnd())
+			.forEach(f -> f.draw(batch));
+			
+		aniStepArraws.values().stream()
+			.filter(f -> !f.isEnd())
+			.forEach(f -> f.draw(batch));
 	}
 
 	private void think() {
