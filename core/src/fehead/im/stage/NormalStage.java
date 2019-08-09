@@ -3,9 +3,6 @@ package fehead.im.stage;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.stream.Stream;
-
-import org.assertj.core.util.Streams;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -19,85 +16,51 @@ import fehead.im.effect.FrameAnimation;
 import fehead.im.song.Song;
 import fehead.im.song.SongMgr;
 import fehead.im.song.StepKsf;
-import lombok.Getter;
 import lombok.extern.java.Log;
 
-enum EButton {
-	// 1	7	5	9	3
-	// 25, 75, 125, 175, 225
-	KEY1(1, 27, 4, 60, 0),
-	KEY3(3, 227, 3, 60, 4),
-	KEY5(5, 127, 2, 60, 2),
-	KEY7(7, 77, 0, 60, 1),
-	KEY9(9, 177, 1, 60, 3);
-	
-	@Getter
-	private	int	key;	// keyboard key (1 3 5 7 9)
-	@Getter
-	private	int	x;		// pushStepArrow(parrow.png, carrow.png)start x
-	@Getter
-	private	int	stepArrowIdx;	// stepArrow arrow.png
-	@Getter
-	private	int	stepArrowWith;	// stepArrow arrow.png width
-	@Getter
-	private	int	ksfIdx;	// ksfKey 17593
-	
-	EButton(int key, int x, int stepArrowIdx, int stepArrowWith, int ksfIdx) {
-		this.key = key;
-		this.x = x;
-		this.stepArrowIdx = stepArrowIdx;
-		this.stepArrowWith = stepArrowWith;
-		this.ksfIdx = ksfIdx;
-	}
-	
-	String getPushFileName() {
-		return "images/parrow" + key + ".png";
-	}
-	
-	String getCrashFileName() {
-		return "images/carrow" + key + ".png";
-	}
-}
+
 
 @Log
 public class NormalStage implements IStage, InputProcessor {
 	static final Double    BACK_ARROW_Y    = 55.0;
 	static final Integer    SCREEN_HEIGHT	= 480;
-	private	SpriteBatch batch;
-	private	Stages stages;
-	private	Music	bgm;
-	private	Song	song;
-	private Texture titleImg;
-	private List<Texture> backArrows;
-	private	Texture	stepArrows;
-	private	Texture	gaugeWaku;
-	private	Texture	gauge;
-	private	StepKsf	stepKsf;
+	
 	private	long	startPosition;		// ksf start[0]
-	private	Long	plaingPosition;
+	private	int 	addedStep; // The number of steps that the Step Arrow is added to the screen.
+	private	int		y;	// Y reference value.
 	private	long	tick;
+	private	int[]	start;
+
+	private	Long	plaingPosition;
 	private	Double	bpm;
 	private	Double	stepGapTime;	//  1step time(ms)
-	private	EnumMap<EButton, FrameAnimation>	aniPushArrows;
-	private	EnumMap<EButton, FrameAnimation>	aniCrashArrows;
-	private	EnumMap<EButton, FrameAnimation>	aniStepArraws;
-	
-	private	int[]	start;
 	private	Double	detailStepIdx;
 	private	Integer	stepIdx;
 	private	Double	stepSpeed = 1.0; // 1x, 2x, 4x
 	private	Double	distancePerStep; // distance(pixel) per one step.
-	private	int 	addedStep; // The number of steps that the Step Arrow is added to the screen.
-	private	int		y;	// Y reference value.
-
 	private	Long	oldTime;
+
+	private	Music	bgm;
+	private	Song	song;
+	private	StepKsf	stepKsf;
+	private	Stages stages;
+
+	private	SpriteBatch batch;
+	private Texture titleImg;
+	private	Texture	stepArrows;
+	private	Texture	gaugeWaku;
+	private	Texture	gauge;
 	private	Texture	smallFont;
+
+	private List<Texture> backArrows = new ArrayList<>(2);
+	private	EnumMap<EButton, FrameAnimation>	aniPushArrows = new EnumMap<>(EButton.class);
+	private	EnumMap<EButton, FrameAnimation>	aniCrashArrows = new EnumMap<>(EButton.class);
+	private	EnumMap<EButton, FrameAnimation>	aniStepArraws = new EnumMap<>(EButton.class);
 
 	public NormalStage(SpriteBatch batch, Stages stages) {
 		this.batch = batch;
 		this.stages = stages;
 		
-		backArrows = new ArrayList<>(2);
 		backArrows.add(new Texture("images/arrow1.png"));
 		backArrows.add(new Texture("images/arrow2.png"));
 		stepArrows = new Texture("images/arrow.png");
@@ -106,9 +69,6 @@ public class NormalStage implements IStage, InputProcessor {
 		stepArrows = new Texture("images/arrow.png");
 		smallFont = new Texture("images/sfont.png");
 		
-		aniPushArrows = new EnumMap<>(EButton.class);
-		aniCrashArrows = new EnumMap<>(EButton.class);
-		aniStepArraws = new EnumMap<>(EButton.class);
 		for(EButton b : EButton.values()) {
 			final Integer	PUSH_ARROW_WIDTH = 72;
 			final Integer	PUSH_ARROW_HEIGHT = 70;
