@@ -138,6 +138,7 @@ public class NormalStage implements IStage, InputProcessor {
 	public void getOut() {
 		log.info("getPosition : " + bgm.getPosition());
 		bgm.stop();
+		titleImg.dispose();
 	}
 	
 	@Override
