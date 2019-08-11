@@ -143,8 +143,6 @@ public class NormalStage implements IStage, InputProcessor {
 	
 	@Override
 	public void render() {
-		think();
-		
 		drawBackGround();
 		drawBackArrow();	
 		
@@ -172,7 +170,8 @@ public class NormalStage implements IStage, InputProcessor {
 			.forEach(f -> f.draw(batch));
 	}
 
-	private void think() {
+	@Override
+	public void think() {
 		plaingPosition = Math.max(bgm.getPosition() - startPosition, 0);
 		detailStepIdx = getIndexByTime(plaingPosition);
 		stepIdx = detailStepIdx.intValue() + 1;

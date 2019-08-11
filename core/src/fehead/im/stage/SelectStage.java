@@ -76,6 +76,10 @@ public class SelectStage implements InputProcessor, IStage {
 	}
 
 	@Override
+	public void think() {
+	}
+	
+	@Override
 	public void render() {
 		blank.update();
 		batch.draw(titleImg, 0, 0);

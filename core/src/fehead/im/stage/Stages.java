@@ -25,4 +25,8 @@ public class Stages {
 	public void render() {
 		curStage.render();
 	}
+
+	public void think() {
+		curStage.think();
+	}
 }

@@ -7,4 +7,5 @@ public interface IStage {
 	
 	void getIn();
 	void getOut();
+	void think();
 }

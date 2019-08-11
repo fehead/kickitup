@@ -61,6 +61,10 @@ public class TitleStage implements InputProcessor, IStage {
 	}
 
 	@Override
+	public void think() {
+	}
+	
+	@Override
 	public void render() {
 		blank.update();
 

@@ -77,8 +77,10 @@ public class KickItUpGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.enableBlending();
 
+		stages.think();
+		
 		batch.begin();
-
+		
 		stages.render();
 
 		printDebugInfo();
