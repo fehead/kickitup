@@ -2,6 +2,7 @@ package fehead.im.song;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import lombok.Getter;
@@ -33,11 +34,15 @@ public class SongMgr {
 	public void load() {
 		final String songPath="song";
 		File songDir = new File(songPath);
-		for(File f : songDir.listFiles()) {
-			if(f.isFile())
-				continue;
-			readSongs(f);
-		}
+		Arrays.stream(songDir.listFiles())
+			.filter(File::isDirectory)
+			.forEach(f -> readSongs(f));
+		
+//		for(File f : songDir.listFiles()) {
+//			if(f.isFile())
+//				continue;
+//			readSongs(f);
+//		}
 
 		if(songList.isEmpty())
 			throw new IllegalStateException("song is empty");
