@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.audio.Sound;
 import fehead.im.audio.SoundMgr;
+import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
 import fehead.im.player.PlayerState;
@@ -29,12 +30,12 @@ public class SelectStage implements InputProcessor, IStage {
 	private Texture cFontImg = new Texture("images/cfont.png");
 	private	Map<PlayMode, Texture>	modeIcon;
 
+	private	BlinkBase	blank = new BlinkBase();
 	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);
-	private	Sprite pressCenter1pImg = new Sprite(cFontImg, 0, 0, 220, 23);
-	private	Sprite pressCenter2pImg = new Sprite(cFontImg, 0, 0, 220, 23);
+	private	BlinkAnimation pressCenter1p = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+	private	BlinkAnimation pressCenter2p = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
 	private	ZoomAnimation leftZoomAni;
 	private	ZoomAnimation rightZoomAni;
-	private	BlinkBase	blank = new BlinkBase();
 
 	private Sound bgmSnd;				// BackGround Music
     private Sound shiftMoveSnd;         // shiftRight ShiftLeft Button을 눌렀을때 나는 소리.
@@ -60,8 +61,8 @@ public class SelectStage implements InputProcessor, IStage {
 	@Override
 	public void getIn() {
 		freePlayImg.setPosition(220, 30);
-		pressCenter1pImg.setPosition(10, 30);
-		pressCenter2pImg.setPosition(410, 30);
+		pressCenter1p.setPosition(10, 30);
+		pressCenter2p.setPosition(410, 30);
 
 		bgmSnd.loop();
 
@@ -110,13 +111,13 @@ public class SelectStage implements InputProcessor, IStage {
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart1p()) {
-			pressCenter1pImg.draw(batch, blank.getValue());
+			pressCenter1p.draw(batch);
 		}
 
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart2p()) {
-			pressCenter2pImg.draw(batch, blank.getValue());
+			pressCenter2p.draw(batch);
 		}
 
 	}
