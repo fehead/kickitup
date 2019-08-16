@@ -31,9 +31,9 @@ public class SelectStage implements InputProcessor, IStage {
 	private	Map<PlayMode, Texture>	modeIcon;
 
 	private	BlinkBase	blank = new BlinkBase();
-	private	Sprite freePlayImg= new Sprite(cFontImg, 0, 48, 220, 23);
-	private	BlinkAnimation pressCenter1p = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
-	private	BlinkAnimation pressCenter2p = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+	private BlinkAnimation freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);
+	private	BlinkAnimation pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+	private	BlinkAnimation pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
 	private	ZoomAnimation leftZoomAni;
 	private	ZoomAnimation rightZoomAni;
 
@@ -60,9 +60,9 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void getIn() {
-		freePlayImg.setPosition(220, 30);
-		pressCenter1p.setPosition(10, 30);
-		pressCenter2p.setPosition(410, 30);
+		freePlayBlink.setPosition(220, 30);
+		pressCenter1pBlink.setPosition(10, 30);
+		pressCenter2pBlink.setPosition(410, 30);
 
 		bgmSnd.loop();
 
@@ -107,17 +107,17 @@ public class SelectStage implements InputProcessor, IStage {
 			batch.draw(t, 320, 366);
 		}
 
-		freePlayImg.draw(batch, blank.getValue());
+		freePlayBlink.draw(batch);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart1p()) {
-			pressCenter1p.draw(batch);
+			pressCenter1pBlink.draw(batch);
 		}
 
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart2p()) {
-			pressCenter2p.draw(batch);
+			pressCenter2pBlink.draw(batch);
 		}
 
 	}

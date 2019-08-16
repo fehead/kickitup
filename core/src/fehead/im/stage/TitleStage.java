@@ -24,9 +24,9 @@ public class TitleStage implements InputProcessor, IStage {
 	private	BlinkBase	blank = new BlinkBase();
 
 	// Draw to screen "FREE PLAY!"
-	private	BlinkAnimation freePlayImg;
-	private	BlinkAnimation pressCenter1pImg;
-	private	BlinkAnimation pressCenter2pImg;
+	private	BlinkAnimation freePlayBlink;
+	private	BlinkAnimation pressCenter1pBlink;
+	private	BlinkAnimation pressCenter2pBlink;
 
 	private	Stages	stages;
 
@@ -36,13 +36,12 @@ public class TitleStage implements InputProcessor, IStage {
 		this.batch = batch;
 		this.stages = stages;
 
-
-		freePlayImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);
-		pressCenter1pImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
-		pressCenter2pImg = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
-		freePlayImg.setPosition(220, 30);
-		pressCenter1pImg.setPosition(10, 30);
-		pressCenter2pImg.setPosition(410, 30);
+		freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);
+		pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+		pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+		freePlayBlink.setPosition(220, 30);
+		pressCenter1pBlink.setPosition(10, 30);
+		pressCenter2pBlink.setPosition(410, 30);
 		openingSnd = SoundMgr.of("opening", "wave/opening.mp3");
 	}
 
@@ -70,17 +69,17 @@ public class TitleStage implements InputProcessor, IStage {
 
 		batch.draw(titleImg, 0, 0); // 타이틀
 
-		freePlayImg.draw(batch);
+		freePlayBlink.draw(batch);
 
 		// Draw to screen (10, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart1p()) {
-			pressCenter1pImg.draw(batch);
+			pressCenter1pBlink.draw(batch);
 		}
 
 		// pressCenter2pImg.setSize(440, 46); zoom
 		// Draw to screen (410, 450) "PRESS CENTER BUTTON"
 		if(!playerState.isStart2p()) {
-			pressCenter2pImg.draw(batch);
+			pressCenter2pBlink.draw(batch);
 		}
 	}
 
