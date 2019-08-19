@@ -1,21 +1,18 @@
 package fehead.im.graphics;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
+@Getter
 public class Region {
-	int	x, y;	// x, y
-	int w, h;	// width , height
+	private	Point	point;
+	private	Dimension dim;	// width , height
 	
-	private Region(int x, int y, int w, int h) {
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+	private Region(Point point, Dimension dim) {
+		this.point = point;
+		this.dim = dim;
 	}
 	
 	public static Region of(int x, int y, int w, int h) {
-		return new Region(x, y, w, h);
+		return new Region(Point.of(x, y), Dimension.of(w, h));
 	}
 }
