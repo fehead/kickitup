@@ -1,25 +1,28 @@
 package fehead.im.graphics;
 
-public class Dimension {
+/**
+ * Dimension class.
+ */
+public class Dim {
 	private	final	int w;	// width
 	private	final	int	h;	// height
 
-	private Dimension(int w, int h) {
+	private Dim(int w, int h) {
 		this.w = w;
 		this.h = h;
 	}
 	
-	public static Dimension of(int w, int h) {
-		return new Dimension(w, h);
+	public static Dim of(int w, int h) {
+		return new Dim(w, h);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj)
 			return true;
-		if(!(obj instanceof Dimension))
+		if(!(obj instanceof Dim))
 			return false;
-		Dimension o = (Dimension)obj;
+		Dim o = (Dim)obj;
 		return w == o.w && h == o.h;
 	}
 	
