@@ -1,8 +1,11 @@
 package fehead.im.graphics;
 
+import lombok.Getter;
+
 /**
  * Dimension class.
  */
+@Getter
 public class Dim {
 	private	final	int w;	// width
 	private	final	int	h;	// height

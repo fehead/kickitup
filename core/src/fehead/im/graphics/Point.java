@@ -1,5 +1,8 @@
 package fehead.im.graphics;
 
+import lombok.Getter;
+
+@Getter
 public class Point {
 	private	final	int x;
 	private	final	int	y;
