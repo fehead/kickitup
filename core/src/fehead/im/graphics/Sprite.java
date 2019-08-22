@@ -1,6 +1,7 @@
 package fehead.im.graphics;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sprite {
 	private	com.badlogic.gdx.graphics.g2d.Sprite	sprite;
@@ -19,4 +20,7 @@ public class Sprite {
 		return new Sprite(texture, p, d);
 	}
 	
+	public void draw(SpriteBatch batch) {
+		sprite.draw(batch);
+	}
 }
