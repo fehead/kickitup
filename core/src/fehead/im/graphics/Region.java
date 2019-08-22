@@ -15,4 +15,8 @@ public class Region {
 	public static Region of(int x, int y, int w, int h) {
 		return new Region(Point.of(x, y), Dim.of(w, h));
 	}
+
+	public static Region of(Point p, Dim d) {
+		return new Region(p, d);
+	}
 }

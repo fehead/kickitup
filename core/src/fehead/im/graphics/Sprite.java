@@ -5,14 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sprite {
 	private	com.badlogic.gdx.graphics.g2d.Sprite	sprite;
-	private	Point	point;
-	private	Dim		dim;
+	private	Region	region;
 	
 	public Sprite(Texture texture, Point p, Dim d) {
 		sprite = new com.badlogic.gdx.graphics.g2d.Sprite(texture
 				, p.getX(), p.getY(), d.getW(), d.getH());
-		point = p;
-		dim = d;
+		region = Region.of(p,  d);
 	}
 	
 	public static Sprite of(String imgFilePath, Point p, Dim d) {
@@ -22,5 +20,9 @@ public class Sprite {
 	
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
+	}
+	
+	public void setPosition(float x, float y) {
+		sprite.setPosition(x, y);
 	}
 }
