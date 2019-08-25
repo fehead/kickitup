@@ -12,13 +12,13 @@ import fehead.im.audio.Sound;
 import fehead.im.audio.SoundMgr;
 import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
+import fehead.im.graphics.Position;
 import fehead.im.player.PlayerState;
 import lombok.extern.java.Log;
 
 @Log
 public class TitleStage implements InputProcessor, IStage {
 	private	SpriteBatch batch;
-	private Texture titleImg = new Texture("images/title.png");
 	private Texture cFontImg = new Texture("images/cfont.png");
 	private Sound openingSnd;
 	private	BlinkBase	blank = new BlinkBase();
@@ -32,10 +32,13 @@ public class TitleStage implements InputProcessor, IStage {
 
 	private PlayerState playerState = PlayerState.getInstance();
 
+	private	fehead.im.graphics.Sprite	title;
 	public TitleStage(SpriteBatch batch, Stages	stages) {
 		this.batch = batch;
 		this.stages = stages;
 
+		title = fehead.im.graphics.Sprite.of("images/title.png");
+		title.setPosition(Position.of(0f, 0f));
 		freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);
 		pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
 		pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
@@ -67,7 +70,7 @@ public class TitleStage implements InputProcessor, IStage {
 	public void render() {
 		blank.update();
 
-		batch.draw(titleImg, 0, 0); // 타이틀
+		title.draw(batch);	// 타이틀
 
 		freePlayBlink.draw(batch);
 

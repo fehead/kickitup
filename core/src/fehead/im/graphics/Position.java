@@ -12,7 +12,7 @@ public class Position {
 		this.y = y;
 	}
 	
-	public Position of(float x, float y) {
+	public static Position of(float x, float y) {
 		return new Position(x, y);
 	}
 	

@@ -124,9 +124,10 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void getOut() {
-		if(introSnd != null)
+		if(introSnd != null) {
 			introSnd.stop();
-		introSnd.free();
+			introSnd.free();
+		}
 		selectedSong = null;
 		shiftMoveSnd.stop();
 		bgmSnd.stop();

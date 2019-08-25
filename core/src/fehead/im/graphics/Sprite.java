@@ -30,6 +30,15 @@ public class Sprite {
 		Texture texture = new Texture(imgFilePath);
 		return new Sprite(texture, region);
 	}
+
+	public static Sprite of(String imgFilePath) {
+		Texture texture = new Texture(imgFilePath);
+		return new Sprite(texture, Point.of(0, 0), Dim.of(texture.getWidth(), texture.getHeight()));
+	}
+
+	public static Sprite of(Texture texture) {
+		return new Sprite(texture, Point.of(0, 0), Dim.of(texture.getWidth(), texture.getHeight()));
+	}
 	
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
