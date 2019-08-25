@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Sprite {
 	private	com.badlogic.gdx.graphics.g2d.Sprite	sprite;
 	private	Region	region;
+	private	Position	position;
 	
 	public Sprite(Texture texture, Point p, Dim d) {
 		sprite = new com.badlogic.gdx.graphics.g2d.Sprite(texture
@@ -13,16 +14,29 @@ public class Sprite {
 		region = Region.of(p,  d);
 	}
 	
+	public Sprite(Texture texture, Region region) {
+		sprite = new com.badlogic.gdx.graphics.g2d.Sprite(texture
+				, region.getPoint().getX(), region.getPoint().getY()
+				, region.getDim().getW(), region.getDim().getH());
+		this.region = region;
+	}
+
 	public static Sprite of(String imgFilePath, Point p, Dim d) {
 		Texture texture = new Texture(imgFilePath);
 		return new Sprite(texture, p, d);
+	}
+	
+	public static Sprite of(String imgFilePath, Region	region) {
+		Texture texture = new Texture(imgFilePath);
+		return new Sprite(texture, region);
 	}
 	
 	public void draw(SpriteBatch batch) {
 		sprite.draw(batch);
 	}
 	
-	public void setPosition(float x, float y) {
-		sprite.setPosition(x, y);
+	public void setPosition(Position pos) {
+		position = pos;
+		sprite.setPosition(pos.getX(), pos.getY());
 	}
 }
