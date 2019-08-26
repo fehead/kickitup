@@ -1,6 +1,7 @@
 package fehead.im.graphics;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Sprite {
@@ -47,5 +48,9 @@ public class Sprite {
 	public void setPosition(Position pos) {
 		position = pos;
 		sprite.setPosition(pos.getX(), pos.getY());
+	}
+
+	public void draw(Batch batch, float alpha) {
+		sprite.draw(batch, alpha);
 	}
 }
