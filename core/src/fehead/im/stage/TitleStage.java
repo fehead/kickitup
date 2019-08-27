@@ -14,6 +14,7 @@ import fehead.im.effect.BlinkBase;
 import fehead.im.graphics.Dim;
 import fehead.im.graphics.Point;
 import fehead.im.graphics.Position;
+import fehead.im.graphics.Region;
 import fehead.im.graphics.Sprite;
 import fehead.im.player.PlayerState;
 import lombok.extern.java.Log;
@@ -41,9 +42,9 @@ public class TitleStage implements InputProcessor, IStage {
 
 		title = fehead.im.graphics.Sprite.of("images/title.png");
 		title.setPosition(Position.of(0f, 0f));
-		freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 48), Dim.of(220, 23)), blank);
-		pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 0), Dim.of(220, 23)), blank);
-		pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 0), Dim.of(220, 23)), blank);
+		freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 48, 220, 23)), blank);
+		pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
+		pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
 		freePlayBlink.setPosition(220, 30);
 		pressCenter1pBlink.setPosition(10, 30);
 		pressCenter2pBlink.setPosition(410, 30);
