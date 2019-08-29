@@ -16,6 +16,7 @@ import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
 import fehead.im.graphics.Dim;
 import fehead.im.graphics.Point;
+import fehead.im.graphics.Region;
 import fehead.im.graphics.Sprite;
 import fehead.im.player.PlayerState;
 import fehead.im.song.PlayMode;
@@ -33,9 +34,9 @@ public class SelectStage implements InputProcessor, IStage {
 	private	Map<PlayMode, Texture>	modeIcon;
 
 	private	BlinkBase	blank = new BlinkBase();
-	private BlinkAnimation freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 48), Dim.of(220, 23)), blank);
-	private	BlinkAnimation pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 0), Dim.of( 220, 23)), blank);
-	private	BlinkAnimation pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, Point.of(0, 0), Dim.of(220, 23)), blank);
+	private BlinkAnimation freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 48, 220, 23)), blank);
+	private	BlinkAnimation pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
+	private	BlinkAnimation pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
 	private	ZoomAnimation leftZoomAni;
 	private	ZoomAnimation rightZoomAni;
 
