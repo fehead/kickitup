@@ -221,8 +221,7 @@ public class NormalStage implements IStage, InputProcessor {
 			for (EButton key : aniStepArraws.keySet()) {
 				if (stepData.charAt(key.getKsfIdx()) == '1') {
 					FrameAnimation f = aniStepArraws.get(key);
-					// f.setCurrentFrame(0);
-					
+
 					final int stepArrowX[] = { 30, 80, 132, 185, 235};
 					Double y1 = SCREEN_HEIGHT - 60 - (distancePerStep * i + y);
 					f.setPosition(stepArrowX[key.getKsfIdx()], y1.floatValue());
