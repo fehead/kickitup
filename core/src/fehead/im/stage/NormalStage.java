@@ -70,11 +70,11 @@ public class NormalStage implements IStage, InputProcessor {
 		smallFont = new Texture("images/sfont.png");
 		
 		for(EButton b : EButton.values()) {
-			final Integer	PUSH_ARROW_WIDTH = 72;
-			final Integer	PUSH_ARROW_HEIGHT = 70;
-			final Integer	PUSH_ARROW_POSITION_Y = SCREEN_HEIGHT - PUSH_ARROW_HEIGHT -45;
-			final Integer	PUSH_ARROW_FRAME_CNT = 9;
-			final Integer	ARROW_FRAME_RATE = 30;
+			final Integer PUSH_ARROW_WIDTH = 72;
+			final Integer PUSH_ARROW_HEIGHT = 70;
+			final Integer PUSH_ARROW_POSITION_Y = SCREEN_HEIGHT - PUSH_ARROW_HEIGHT - 45;
+			final Integer PUSH_ARROW_FRAME_CNT = 9;
+			final Integer ARROW_FRAME_RATE = 30;
 			FrameAnimation aniPushArrow = FrameAnimation.of(new Texture(b.getPushFileName()), PUSH_ARROW_WIDTH, PUSH_ARROW_HEIGHT);
 			aniPushArrow.setPosition(b.getX(), PUSH_ARROW_POSITION_Y);
 			aniPushArrow.setMaxFrame(PUSH_ARROW_FRAME_CNT);
