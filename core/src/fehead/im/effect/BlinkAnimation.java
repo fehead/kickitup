@@ -4,7 +4,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import fehead.im.graphics.Position;
+import fehead.im.graphics.Sprite;
 
 public class BlinkAnimation {
 	private BlinkBase blinkBase;
@@ -28,7 +30,7 @@ public class BlinkAnimation {
 
 	
 	public void setPosition(float x, float y) {
-		this.sprite.setPosition(x, y);
+		sprite.setPosition(Position.of(x, y));
 	}
 	
 	public void draw(Batch batch) {

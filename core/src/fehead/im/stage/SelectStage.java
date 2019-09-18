@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import fehead.im.audio.Sound;
@@ -15,6 +14,10 @@ import fehead.im.audio.SoundMgr;
 import fehead.im.effect.BlinkAnimation;
 import fehead.im.effect.BlinkBase;
 import fehead.im.effect.ZoomAnimation;
+import fehead.im.graphics.Dim;
+import fehead.im.graphics.Point;
+import fehead.im.graphics.Region;
+import fehead.im.graphics.Sprite;
 import fehead.im.player.PlayerState;
 import fehead.im.song.PlayMode;
 import fehead.im.song.Song;
@@ -31,9 +34,9 @@ public class SelectStage implements InputProcessor, IStage {
 	private	Map<PlayMode, Texture>	modeIcon;
 
 	private	BlinkBase	blank = new BlinkBase();
-	private BlinkAnimation freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 48, 220, 23), blank);
-	private	BlinkAnimation pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
-	private	BlinkAnimation pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, 0, 0, 220, 23), blank);
+	private BlinkAnimation freePlayBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 48, 220, 23)), blank);
+	private	BlinkAnimation pressCenter1pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
+	private	BlinkAnimation pressCenter2pBlink = BlinkAnimation.of(new Sprite(cFontImg, Region.of(0, 0, 220, 23)), blank);
 	private	ZoomAnimation leftZoomAni;
 	private	ZoomAnimation rightZoomAni;
 
@@ -124,9 +127,10 @@ public class SelectStage implements InputProcessor, IStage {
 
 	@Override
 	public void getOut() {
-		if(introSnd != null)
+		if(introSnd != null) {
 			introSnd.stop();
-		introSnd.free();
+			introSnd.free();
+		}
 		selectedSong = null;
 		shiftMoveSnd.stop();
 		bgmSnd.stop();
