@@ -10,6 +10,7 @@ import lombok.extern.java.Log;
 public class OptionalTest {
 	@Test
 	public void test1() {
+		// Double a = null;
 		Double a = 10.09;
 		log.info(Optional.ofNullable(a)
 			.map(String::valueOf)
