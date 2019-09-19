@@ -8,7 +8,7 @@ import org.junit.Test;
 import lombok.extern.java.Log;
 
 @Log
-public class StremTest {
+public class StreamTest {
 	@Test
 	public void test() {
 		log.info("joinning : " + Arrays.asList(1, 2, 3,4, 5,6).stream()
