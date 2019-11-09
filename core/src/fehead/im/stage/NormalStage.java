@@ -51,6 +51,8 @@ public class NormalStage implements IStage, InputProcessor {
 	private	Texture	gaugeWaku;
 	private	Texture	gauge;
 	private	Texture	smallFont;
+	
+	private	Long judgedIdx; // 판정이 완료된 index
 
 	private List<Texture> backArrows = new ArrayList<>(2);
 	private	EnumMap<EButton, FrameAnimation>	aniPushArrows = new EnumMap<>(EButton.class);
@@ -131,6 +133,10 @@ public class NormalStage implements IStage, InputProcessor {
 		titleImg = new Texture(song.getTitleImgPath().getAbsolutePath());
 		
 		oldTime = System.currentTimeMillis();
+		
+		plaingPosition = 0L;
+		judgedIdx = 0L;
+		
 		bgm.play();
 	}
 
@@ -172,6 +178,9 @@ public class NormalStage implements IStage, InputProcessor {
 
 	@Override
 	public void think() {
+		// 판정
+		judge();
+		
 		plaingPosition = Math.max(bgm.getPosition() - startPosition, 0);
 		detailStepIdx = getIndexByTime(plaingPosition);
 		stepIdx = detailStepIdx.intValue() + 1;
@@ -356,4 +365,24 @@ public class NormalStage implements IStage, InputProcessor {
 			batch.draw(smallFont, x + i * FONT_WIDTH, y, FONT_WIDTH * fontIndex, 0, FONT_WIDTH, FONT_HEIGHT);
 		}
 	}
+	
+	
+	// 판정
+	private void judge() {
+		if(plaingPosition == 0)
+			return;
+		
+		// 검사할 index구간을 구한다.
+		Long judgeStartIdx = judgedIdx;
+		Long judgeEndIdx = getIndexByTime(plaingPosition).longValue();
+		
+		// 판정할 것이 없으면 끝.
+		if(judgeEndIdx.compareTo(judgeStartIdx) < 0)
+			return;
+		
+		
+		// 검사할 index구간을 판정
+		
+	}
+
 }
