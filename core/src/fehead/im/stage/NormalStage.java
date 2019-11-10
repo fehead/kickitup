@@ -382,6 +382,18 @@ public class NormalStage implements IStage, InputProcessor {
 		
 		
 		// 검사할 index구간을 판정
+		for(int i = judgeStartIdx.intValue() ; i <= judgeEndIdx.intValue() ; ++i) {
+	        // 검사할 index에 판정할 step이 있는지 검사한다.
+	        // 판정한 step이 있으면
+			String	currentStep = stepKsf.getStep(i);
+			if(!currentStep.startsWith("00000")) {
+				// 해당 버튼이 눌러져 있으면.
+//				if(isPress(currentStep)) {
+//					// 시간에 따라 판정을 한다.
+//					
+//				}
+			}
+		}
 		
 	}
 
